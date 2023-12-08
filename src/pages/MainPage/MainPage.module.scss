@@ -1,4 +1,5 @@
 @import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
 
 .main_page {
   display: flex;
@@ -6,9 +7,9 @@
   width: min(95%, 100em);
   margin: 0 auto;
   margin-top: 1em;
-  padding: 0.6em;
+  padding: 0.3em;
   border-radius: 0.6em;
-  color: $white_light;
+  color: $white;
   height: 95vh;
 }
 
@@ -17,7 +18,7 @@
   flex-direction: column;
   gap: 1em;
   width: 5em;
-  border-right: 0.1em solid $grey;
+  border-right: 0.1em solid $grey_light;
 }
 
 .menu_wrapper > * {
@@ -33,24 +34,34 @@
   height: auto;
 }
 
-.content {
+.content_wrapper {
   display: flex;
   gap: 1em;
-  width: min(95%, 95em);
+  width: min(100%, 95em);
 }
 
 .docs {
+  display: none;
+}
+
+.docs.active {
+  display: block;
   width: min(10em, 15em);
   padding: 0.5em;
+}
+
+.docs_title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
 
 .editor_wrapper {
   display: flex;
   gap: 1em;
-  width: min(95%, 95em);
-  border: 0.6em solid $grey_light;
+  width: min(100%, 95em);
+  border: 0.6em solid $grey;
   border-radius: 1.1em;
-  background-color: $grey_light;
+  background-color: $grey;
 }
 
 .query {
@@ -64,4 +75,10 @@
 .viewer {
   flex: 1;
   padding: 0.5em;
+}
+
+.query_title,
+.viewer_title {
+  font-size: 1.2em;
+  margin-bottom: 1em;
 }

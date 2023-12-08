@@ -1,17 +1,17 @@
-$grey_dark: #20293d;
-$grey_light: #2a3448;
-$grey: #6b758b;
-$white_dark: #949fb6;
-$white_light: #b6c1da;
+@use './variables.scss' as *;
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+:root {
+  color: $color-neutral;
+  background-color: $color-base;
+  font-family: 'Fira Code';
+  font-size: 16px;
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-:root {
-  color: $white_light;
-  background-color: $grey_dark;
-  font: 100% Helvetica, sans-serif;
 }
