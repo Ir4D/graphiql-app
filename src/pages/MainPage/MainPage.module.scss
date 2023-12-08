@@ -1,0 +1,67 @@
+@import '../../assets/styles/global.scss';
+
+.main_page {
+  display: flex;
+  gap: 1em;
+  width: min(95%, 100em);
+  margin: 0 auto;
+  margin-top: 1em;
+  padding: 0.6em;
+  border-radius: 0.6em;
+  color: $white_light;
+  height: 95vh;
+}
+
+.menu_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 5em;
+  border-right: 0.1em solid $grey;
+}
+
+.menu_wrapper > * {
+  width: 4em;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.menu_wrapper > * img {
+  width: 2.5em;
+  height: auto;
+}
+
+.content {
+  display: flex;
+  gap: 1em;
+  width: min(95%, 95em);
+}
+
+.docs {
+  width: min(10em, 15em);
+  padding: 0.5em;
+}
+
+.editor_wrapper {
+  display: flex;
+  gap: 1em;
+  width: min(95%, 95em);
+  border: 0.6em solid $grey_light;
+  border-radius: 1.1em;
+  background-color: $grey_light;
+}
+
+.query {
+  flex: 1;
+  border: 0.3em solid $grey_dark;
+  border-radius: 0.6em;
+  background-color: $grey_dark;
+  padding: 0.5em;
+}
+
+.viewer {
+  flex: 1;
+  padding: 0.5em;
+}
