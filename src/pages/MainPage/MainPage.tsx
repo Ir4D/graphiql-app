@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './MainPage.module.scss';
-import iconDocs from '../../assets/img/icons_docs3.png';
-import iconSettings from '../../assets/img/icons_settings3.png';
+import iconDocs from '../../assets/img/icons_docs.png';
+import iconSettings from '../../assets/img/icons_settings.png';
 
 const MainPage = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
