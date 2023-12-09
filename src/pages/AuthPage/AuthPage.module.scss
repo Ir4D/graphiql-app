@@ -1,0 +1,18 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.main {
+  display: flex;
+  height: 96vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper {
+    overflow: hidden;
+    max-width: 390px;
+    padding: 30px;
+    border-radius: $border-container-radius;
+    box-shadow: 0px 25px 30px rgba(0, 0, 0, 0.4);
+  }
+}
