@@ -82,3 +82,20 @@
   font-size: 1.2em;
   margin-bottom: 1em;
 }
+
+.query_field {
+  height: min(80%, 100em);
+}
+
+.query_wrapper {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  border-top: 0.1em solid $grey_light;
+}
+
+.variables,
+.headers {
+  flex: 1;
+  margin-top: 1em;
+}

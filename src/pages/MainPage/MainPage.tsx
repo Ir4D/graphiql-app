@@ -31,7 +31,17 @@ const MainPage = () => {
         </div>
         <div className={styles.editor_wrapper}>
           <div className={styles.query}>
-            <h3 className={styles.query_title}>Query editor section</h3>
+            <div className={styles.query_field}>
+              <h3 className={styles.query_title}>Query editor section</h3>
+            </div>
+            <div className={styles.query_wrapper}>
+              <div className={styles.variables}>
+                <h4>Variables</h4>
+              </div>
+              <div className={styles.headers}>
+                <h4>Headers</h4>
+              </div>
+            </div>
           </div>
           <div className={styles.viewer}>
             <h3 className={styles.viewer_title}>JSON viewer section</h3>
