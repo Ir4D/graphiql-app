@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 export const Header = () => {
+  /*isLogin будет пропсой, которая приходит откуда-то выше */
+  const isLogin = false;
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -17,7 +19,16 @@ export const Header = () => {
           <button className={styles.language_item}>LP</button>
         </div>
 
-        <button className={styles.button}>Sign out</button>
+        <div className={styles.sign_container}>
+          {isLogin ? (
+            <button className={styles.button}>Sign out</button>
+          ) : (
+            <>
+              <button className={styles.button}>Sign in</button>
+              <button className={styles.button}>Sign up</button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
