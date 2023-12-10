@@ -33,14 +33,14 @@ const SlideControls: React.FC<SlideControlsProps> = ({
         className={`${styles.slide} ${isLogin ? styles.login : styles.signup}`}
         onClick={handleLoginClick}
       >
-        Login
+        Sign In
       </label>
       <label
         htmlFor="signup"
         className={`${styles.slide} ${isLogin ? styles.signup : styles.login}`}
         onClick={handleSignupClick}
       >
-        Signup
+        Sign Up
       </label>
       <div
         className={`${styles.slide_tab} ${

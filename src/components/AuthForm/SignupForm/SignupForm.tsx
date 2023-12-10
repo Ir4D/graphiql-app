@@ -14,7 +14,7 @@ const SignupForm: React.FC = () => {
         <input type="password" placeholder="Confirm password" />
       </div>
       <div className={styles.field}>
-        <input type="submit" value="Signup" />
+        <input type="submit" value="Sign Up" />
       </div>
     </form>
   );

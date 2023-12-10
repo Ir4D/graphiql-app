@@ -18,12 +18,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         <a href="#">Forgot password?</a>
       </div>
       <div className={styles.field}>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Sign In" />
       </div>
       <div className={styles.signup_link}>
         Not a member?{' '}
         <a href="#" onClick={onClick}>
-          Signup now
+          Sign Up now
         </a>
       </div>
     </form>
