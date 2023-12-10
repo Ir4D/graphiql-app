@@ -1,0 +1,101 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.main_page {
+  display: flex;
+  gap: 1em;
+  width: min(95%, 100em);
+  margin: 0 auto;
+  margin-top: 1em;
+  padding: 0.3em;
+  border-radius: 0.6em;
+  color: $white;
+  height: 95vh;
+}
+
+.menu_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 5em;
+  border-right: 0.1em solid $grey_light;
+}
+
+.menu_wrapper > * {
+  width: 4em;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.menu_wrapper > * img {
+  width: 2.5em;
+  height: auto;
+}
+
+.content_wrapper {
+  display: flex;
+  gap: 1em;
+  width: min(100%, 95em);
+}
+
+.docs {
+  display: none;
+}
+
+.docs.active {
+  display: block;
+  width: min(10em, 15em);
+  padding: 0.5em;
+}
+
+.docs_title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.editor_wrapper {
+  display: flex;
+  gap: 1em;
+  width: min(100%, 95em);
+  border: 0.6em solid $grey;
+  border-radius: 1.1em;
+  background-color: $grey;
+}
+
+.query {
+  flex: 1;
+  border: 0.3em solid $grey_dark;
+  border-radius: 0.6em;
+  background-color: $grey_dark;
+  padding: 0.5em;
+}
+
+.viewer {
+  flex: 1;
+  padding: 0.5em;
+}
+
+.query_title,
+.viewer_title {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.query_field {
+  height: min(80%, 100em);
+}
+
+.query_wrapper {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  border-top: 0.1em solid $grey_light;
+}
+
+.variables,
+.headers {
+  flex: 1;
+  margin-top: 1em;
+}
