@@ -1,5 +1,10 @@
 @use '../../assets/styles/variables.scss' as *;
 
+$light: #d8dbe0;
+$dark: #28292c;
+$link: rgb(27, 129, 112);
+$link-hover: rgb(24, 94, 82);
+
 .header {
   width: 100%;
   display: flex;
@@ -11,6 +16,7 @@
 }
 
 .button {
+  cursor: pointer;
   border: 2px solid $color-neutral;
   font-family: inherit;
   font-size: inherit;
@@ -19,10 +25,34 @@
   padding: 5px;
   //Вынести этот border-radius в переменную?
   border-radius: 8px;
-  transition:Ц color, background-color 0.5s;
+  transition:
+    color,
+    background-color 0.5s;
 }
 
 .button:hover {
   color: $color-base;
   background-color: $color-neutral;
+}
+
+/* Language Switch */
+.language_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 4em;
+}
+
+.language_item {
+  cursor: pointer;
+  transition: color 0.5s;
+  border: transparent;
+  background: transparent;
+  color: $color-neutral;
+  font-size: 16px;
+  font: inherit;
+}
+
+.language_item:hover {
+  color: rgb(103, 111, 126);
 }
