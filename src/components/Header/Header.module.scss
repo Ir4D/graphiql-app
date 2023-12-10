@@ -24,6 +24,8 @@
 .sign_container {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 12em;
 }
 
 .button {
