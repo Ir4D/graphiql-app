@@ -3,7 +3,7 @@ import { Header } from '../../components/Header/Header';
 function MainPage() {
   return (
     //delete this after complete header
-    <div>
+    <div className="main-page-test">
       <Header></Header>
       <p>Hello Main Page!</p>
     </div>
