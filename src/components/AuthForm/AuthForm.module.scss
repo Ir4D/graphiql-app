@@ -5,59 +5,6 @@
   width: 100%;
   overflow: hidden;
 
-  .slide_controls {
-    position: relative;
-    display: flex;
-    height: 50px;
-    width: 95%;
-    margin: 30px 0 10px 5px;
-    justify-content: space-between;
-    border: 1px solid $white;
-    border-radius: $border-container-radius;
-    overflow: hidden;
-
-    .slide {
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-      font-size: 18px;
-      font-weight: 500;
-      text-align: center;
-      line-height: 48px;
-      cursor: pointer;
-      transition: all 0.6s ease;
-      color: $white_accent;
-
-      &.active {
-        background: $accent;
-      }
-    }
-
-    .slide_tab {
-      position: absolute;
-      height: 100%;
-      width: 50%;
-      left: 0;
-      z-index: 0;
-      border-radius: $border-container-radius;
-      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-      &.tab_login {
-        background: $accent;
-        left: 0;
-      }
-
-      &.tab_signup {
-        background: $accent;
-        left: 50%;
-      }
-    }
-
-    input[type='radio'] {
-      display: none;
-    }
-  }
-
   .form_inner {
     display: flex;
     width: 200%;
