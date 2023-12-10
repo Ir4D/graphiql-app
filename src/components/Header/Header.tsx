@@ -1,9 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
     <div className={styles.header}>
-      <span>Welcome page link</span>
+      <NavLink className={styles.link} to="/">
+        To welcome page
+      </NavLink>
 
       <div className={styles.language_container}>
         <button className={styles.language_item}>EN</button>
