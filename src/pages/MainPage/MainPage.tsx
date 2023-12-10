@@ -1,3 +1,4 @@
+import { Footer } from '../../components/Footer/Footer';
 import { Header } from '../../components/Header/Header';
 
 function MainPage() {
@@ -6,6 +7,7 @@ function MainPage() {
     <div className="main-page-test">
       <Header></Header>
       <p>Hello Main Page!</p>
+      <Footer></Footer>
     </div>
   );
 }
