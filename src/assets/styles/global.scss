@@ -13,3 +13,41 @@
 .main-page-test {
   height: 100em;
 }
+
+/* LINK & <a> */
+
+.link,
+a {
+  position: relative;
+  color: $color-neutral;
+  text-decoration: none;
+}
+
+.link:hover,
+a:hover {
+  color: $color-neutral-dark;
+}
+
+.link::before,
+.language_item::before,
+a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1.5px;
+  background-color: $color-neutral;
+}
+
+.link:hover:before,
+.language_item:hover:before,
+a:hover:before {
+  width: 100%;
+}
+
+.link::before,
+.language_item::before,
+a::before {
+  transition: width 0.35s;
+}
