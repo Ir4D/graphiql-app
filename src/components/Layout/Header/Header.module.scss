@@ -1,4 +1,4 @@
-@use '../../assets/styles/variables.scss' as *;
+@use '../../../assets/styles/variables.scss' as *;
 
 .header {
   width: 100%;
@@ -9,6 +9,7 @@
   align-items: center;
   font-size: 18px;
   padding: 10px;
+  border-bottom: 3px solid;
 }
 
 .container {
@@ -71,3 +72,20 @@
   color: $color-neutral-dark;
 }
 
+.language_item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1.5px;
+  background-color: $color-neutral;
+}
+
+.language_item:hover:before {
+  width: 100%;
+}
+
+.language_item::before {
+  transition: width 0.35s;
+}
