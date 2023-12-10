@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom';
 import styles from './WelcomePage.module.scss';
 
 function WelcomePage() {
+  const isAuthenticated = true;
+
   return (
     <div className={styles.welcome_page}>
       <div className={styles.welcome_heading}>
@@ -8,18 +11,21 @@ function WelcomePage() {
         <h3>GraphiQL is a playground/IDE for graphQL requests</h3>
       </div>
       <div className={styles.links_wrapper}>
-        <div>
-          <p>Create your account or sign in here:</p>
-          <button className={styles.btn}>
-            <a href="#">Sign in/ Sign up</a>
-          </button>
-        </div>
-        <div>
-          <p>Start making your requests now:</p>
-          <button className={styles.btn}>
-            <a href="#">Let&apos;s go!</a>
-          </button>
-        </div>
+        {isAuthenticated ? (
+          <div>
+            <p>Start making your requests now:</p>
+            <button className={styles.btn}>
+              <Link to="/main">Let&apos;s go!</Link>
+            </button>
+          </div>
+        ) : (
+          <div>
+            <p>Create your account or sign in here:</p>
+            <button className={styles.btn}>
+              <Link to="/auth">Sign in/ Sign up</Link>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
