@@ -1,0 +1,54 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.welcome_page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome_heading {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.welcome_heading h1 {
+  font-size: 3.3em;
+}
+
+.welcome_heading h3 {
+  font-size: 1.5em;
+}
+
+.links_wrapper {
+  max-width: 30em;
+  padding: 2em;
+  border-radius: $border-container-radius;
+  box-shadow: 0px 25px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.btn {
+  height: 2.5em;
+  width: 10em;
+  background: $grey;
+  color: $white;
+  font-size: 1.3em;
+  font-weight: 500;
+  border: 1px solid $accent;
+  border-radius: $border-container-radius;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+
+  &:hover {
+    background: $accent;
+    color: $white_accent;
+  }
+}
