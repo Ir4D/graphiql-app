@@ -9,6 +9,7 @@ import WelcomePage from '../pages/WelcomePage/WelcomePage';
 import AuthPage from '../pages/AuthPage/AuthPage';
 import MainPage from '../pages/MainPage/MainPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+import { Layout } from '../components/Layout/Layout';
 
 const AppRouter = () => {
   /* Чтобы посмотреть страницу авторизации, измени значение на false;
@@ -31,23 +32,25 @@ const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        {/* Приветственная страница */}
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/" element={<Layout />}>
+          {/* Приветственная страница */}
+          <Route path="/" element={<WelcomePage />} />
 
-        {/* Страница авторизации */}
-        <Route
-          path="/auth"
-          element={isAuthenticated ? <Navigate to="/main" /> : <AuthPage />}
-        />
+          {/* Страница авторизации */}
+          <Route
+            path="/auth"
+            element={isAuthenticated ? <Navigate to="/main" /> : <AuthPage />}
+          />
 
-        {/* Главная страница (требует авторизации) */}
-        <Route
-          path="/main"
-          element={isAuthenticated ? <MainPage /> : <Navigate to="/auth" />}
-        />
+          {/* Главная страница (требует авторизации) */}
+          <Route
+            path="/main"
+            element={isAuthenticated ? <MainPage /> : <Navigate to="/auth" />}
+          />
 
-        {/* Страница 404 */}
-        <Route path="*" element={<NotFoundPage />} />
+          {/* Страница 404 */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </Router>
   );

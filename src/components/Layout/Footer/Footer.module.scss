@@ -1,0 +1,48 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.footer {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 3px solid;
+}
+
+.authors_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 5em;
+}
+
+.data_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 3em;
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.rss_container {
+  display: flex;
+  width: 6em;
+  height: 5em;
+}
+
+a {
+    width: 100%;
+}
+
+.rss_school_img {
+  width: 100%;
+  height: 100%;
+  background-image: url(../../../assets/images/logo/rss_logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
