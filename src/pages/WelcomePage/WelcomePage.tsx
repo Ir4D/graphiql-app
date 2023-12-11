@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './WelcomePage.module.scss';
 import graphqlLogo from '../../assets/img/graphql_logo.png';
+import avatarMale from '../../assets/img/avatar_male.png';
+import avatarFemale1 from '../../assets/img/avatar_female1.png';
+import avatarFemale2 from '../../assets/img/avatar_female2.png';
 
 function WelcomePage() {
   const isAuthenticated = false;
@@ -38,12 +41,14 @@ function WelcomePage() {
         </div>
       </section>
       <section className={styles.course_wrapper}>
-        <div className={styles.course}>
-          <h3>About the course</h3>
+        <h3 className={styles.heading}>About the course</h3>
+        <div className={styles.text}>
           <p>
-            RS School React Course is a crash course through the most important
-            React topics, such as React Router, redux, hooks, context and
-            others.
+            <a className={styles.link} href="https://rs.school/react/">
+              RS School React Course
+            </a>{' '}
+            is a crash course through the most important React topics, such as
+            React Router, redux, hooks, context and others.
           </p>
           <p>
             RS School is free-of-charge and community-based education program
@@ -51,12 +56,52 @@ function WelcomePage() {
           </p>
         </div>
       </section>
-      <section className={styles.developers}>
-        <h3>Our team</h3>
-        <div>
-          <div>Irina Dedova</div>
-          <div>Yuliya Narkevich</div>
-          <div>Ilya Romanov</div>
+      <section className={styles.team_wrapper}>
+        <h3 className={styles.heading}>Our team</h3>
+        <div className={styles.developers}>
+          <div className={styles.developer}>
+            <img src={avatarFemale1} alt="avatar" />
+            <div className={styles.info}>
+              <p className={styles.name}>
+                <a href="https://github.com/Ir4D">
+                  Irina <br />
+                  Dedova
+                </a>
+              </p>
+              <p className={styles.role}>Team lead</p>
+              <p className={styles.contribution}>Welcome page, Main page</p>
+            </div>
+          </div>
+          <div className={styles.developer}>
+            <img src={avatarFemale2} alt="avatar" />
+            <div className={styles.info}>
+              <p className={styles.name}>
+                <a href="https://github.com/Yuliya0503">
+                  Yuliya <br />
+                  Narkevich
+                </a>
+              </p>
+              <p className={styles.role}>Team member</p>
+              <p className={styles.contribution}>
+                Sign in/ sign up page, routing, 404 page
+              </p>
+            </div>
+          </div>
+          <div className={styles.developer}>
+            <img src={avatarMale} alt="avatar" />
+            <div className={styles.info}>
+              <p className={styles.name}>
+                <a href="https://github.com/DragonRomeo">
+                  Ilya <br />
+                  Romanov
+                </a>
+              </p>
+              <p className={styles.role}>Team member</p>
+              <p className={styles.contribution}>
+                Header & footer, authentication
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

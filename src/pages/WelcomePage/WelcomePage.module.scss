@@ -10,14 +10,13 @@
 }
 
 section {
-  width: 94%;
+  width: 88%;
   padding: 4.5em 1em;
   border-bottom: 3px solid $grey;
 }
 
 .welcome_wrapper {
   display: flex;
-  text-align: center;
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -32,6 +31,7 @@ section {
     font-size: 3.3em;
     margin: 0.5em auto;
     padding-top: 1em;
+    text-align: center;
 
     @media (max-width: 768px) {
       font-size: 2.5em; 
@@ -49,6 +49,7 @@ section {
 
   .right_side {
     flex: 1;
+    text-align: center;
   }
 
   .right_side img {
@@ -60,7 +61,7 @@ section {
 }
 
 .btn {
-  height: 2em;
+  height: 2.1em;
   width: 10em;
   background: $grey;
   color: $white;
@@ -78,6 +79,95 @@ section {
 
   &:hover {
     background: $accent;
+  }
+
+  &:hover a {
     color: $white_accent;
+  }
+}
+
+.course_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .heading {
+    font-size: 2.8em;
+    text-align: center;
+  }
+
+  .text {
+    max-width: 45em;
+  }
+
+  .link {
+    text-decoration: none;
+    color: $accent;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.team_wrapper {
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em;
+
+  .heading {
+    font-size: 2.8em;
+    margin-bottom: 1.2em;
+  }
+
+  .developers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 50em;
+    margin: 0 auto;
+    padding-bottom: 2em;
+
+    .developer {
+      width: calc(28% - 1.4em);
+      margin: 0 0.6em 1.4em;
+      padding: 0.8em;
+      background-color: $grey;
+      border-radius: 10px;
+
+      img {
+        margin: 1em auto 1em;
+        width: 90%;
+        border-radius: 50%;
+      }
+
+      .info {
+        .name {
+          font-size: 1.2em;
+          font-weight: 900;
+        }
+
+        .name a {
+          text-decoration: none;
+          color: $white_accent;
+        }
+
+        .role {
+          font-size: 1em;
+        }
+
+        .contribution {
+          font-size: 0.9em;
+        }
+      }
+
+      @media (max-width: 600px) {
+        width: 50%;
+      }
+
+      @media (max-width: 480px) {
+        width: 70%;
+      }
+    }
   }
 }
