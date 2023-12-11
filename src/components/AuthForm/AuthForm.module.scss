@@ -1,0 +1,90 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.form_container {
+  width: 100%;
+  overflow: hidden;
+
+  .form_inner {
+    display: flex;
+    width: 200%;
+
+    form {
+      width: 50%;
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+      .field {
+        height: 50px;
+        width: 100%;
+        margin-top: 20px;
+
+        input {
+          height: 100%;
+          width: 100%;
+          outline: none;
+          padding-left: 15px;
+          font-size: 17px;
+          border-radius: $border-container-radius;
+          background-color: $grey;
+          border: 1px solid $white;
+          border-bottom-width: 2px;
+          transition: all 0.4s ease;
+
+          &:focus {
+            border-color: $accent;
+          }
+        }
+      }
+
+      .pass_link {
+        margin-top: 5px;
+
+        a,
+        .signup_link a {
+          color: $accent;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      a,
+      .signup_link a {
+        color: $accent;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .signup_link {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .pass_link a:hover,
+      .signup_link a:hover {
+        text-decoration: underline;
+      }
+
+      .field input[type='submit'] {
+        background: $grey;
+        width: 100%;
+        color: $white;
+        font-size: 20px;
+        font-weight: 500;
+        padding-left: 0;
+        border: 1px solid $accent;
+        cursor: pointer;
+
+        &:hover {
+          background: $accent;
+          color: $white_accent;
+        }
+      }
+    }
+  }
+}
