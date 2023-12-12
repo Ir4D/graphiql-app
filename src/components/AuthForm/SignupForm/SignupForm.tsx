@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSignupSchema } from './validationSignupSchema';
+import { IFormSignupData } from '../../../models/forms';
 
 const SignupForm: React.FC = () => {
   const navigate = useNavigate();
@@ -11,15 +12,11 @@ const SignupForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<IFormSignupData>({
     resolver: yupResolver(validationSignupSchema),
   });
 
-  const onSubmit = (data: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }) => {
+  const onSubmit = (data: IFormSignupData) => {
     /*создано исключительно для проверки*/
     console.log(data);
     /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
@@ -27,39 +24,31 @@ const SignupForm: React.FC = () => {
   };
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
+
+  const renderField = (
+    fieldName: keyof IFormSignupData,
+    type: string,
+    placeholder: string
+  ) => (
+    <div className={styles.field} key={fieldName}>
+      <input
+        type={type}
+        placeholder={placeholder}
+        {...register(fieldName, { required: true })}
+      />
+      <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
+    </div>
+  );
+
   return (
     <form
       className={`${styles.form} ${styles.signup}`}
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
-      <div className={styles.field}>
-        <input
-          type="text"
-          placeholder="Email Address"
-          {...register('email')}
-          required
-        />
-        <p className={styles.errorMess}>{errors?.email?.message}</p>
-      </div>
-      <div className={styles.field}>
-        <input
-          type="password"
-          placeholder="Password"
-          {...register('password')}
-          required
-        />
-        <p className={styles.errorMess}>{errors?.password?.message}</p>
-      </div>
-      <div className={styles.field}>
-        <input
-          type="password"
-          placeholder="Confirm password"
-          {...register('confirmPassword')}
-          required
-        />
-        <p className={styles.errorMess}>{errors?.confirmPassword?.message}</p>
-      </div>
+      {renderField('email', 'text', 'Email Address')}
+      {renderField('password', 'password', 'Password')}
+      {renderField('confirmPassword', 'password', 'Confirm password')}
       <div className={styles.field}>
         <input
           type="submit"
