@@ -71,7 +71,7 @@
         color: $accent;
       }
 
-      .field input[type='submit'] {
+      .field .submitButton {
         background: $grey;
         width: 100%;
         color: $white;
@@ -84,6 +84,22 @@
         &:hover {
           background: $accent;
           color: $white_accent;
+        }
+      }
+
+      .field .disabled {
+        background: $grey;
+        width: 100%;
+        color: $white;
+        font-size: 20px;
+        font-weight: 500;
+        padding-left: 0;
+        border: 1px solid $white;
+        cursor: not-allowed;
+
+        &:hover {
+          color: $white;
+          background: $grey;
         }
       }
     }
