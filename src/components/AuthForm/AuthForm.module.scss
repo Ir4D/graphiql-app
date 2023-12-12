@@ -16,7 +16,15 @@
       .field {
         height: 50px;
         width: 100%;
-        margin-top: 20px;
+        margin-top: 18%;
+
+        .errorMess {
+          color: $white;
+          font-size: 14px;
+          width: 100%;
+          text-align: center;
+          margin-top: 4px;
+        }
 
         input {
           height: 100%;
@@ -29,6 +37,7 @@
           border: 1px solid $white;
           border-bottom-width: 2px;
           transition: all 0.4s ease;
+          color: $white;
 
           &:focus {
             border-color: $accent;
@@ -37,16 +46,12 @@
       }
 
       .pass_link {
-        margin-top: 5px;
+        margin-top: 17%;
 
         a,
         .signup_link a {
           color: $accent;
           text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
         }
       }
 
@@ -54,10 +59,6 @@
       .signup_link a {
         color: $accent;
         text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
       }
 
       .signup_link {
@@ -67,7 +68,7 @@
 
       .pass_link a:hover,
       .signup_link a:hover {
-        text-decoration: underline;
+        color: $accent;
       }
 
       .field input[type='submit'] {

@@ -4,7 +4,7 @@ export const validationLoginSchema = yup.object().shape({
   email: yup
     .string()
     .required('Email is required')
-    .email('Invalid email format. Example: example@email.com'),
+    .email('Invalid email format'),
   password: yup
     .string()
     .required('Password is required')

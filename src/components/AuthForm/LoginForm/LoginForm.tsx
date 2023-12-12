@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
           {...register('email')}
           required
         />
-        <p>{errors.email?.message}</p>
+        <p className={styles.errorMess}>{errors.email?.message}</p>
       </div>
       <div className={styles.field}>
         <input
@@ -42,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
           {...register('password')}
           required
         />
-        <p>{errors.password?.message}</p>
+        <p className={styles.errorMess}>{errors.password?.message}</p>
       </div>
       <div className={styles.pass_link}>
         <a href="#">Forgot password?</a>
