@@ -1,9 +1,10 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
 import { validationLoginSchema } from './validationLoginSchema';
 import { useNavigate } from 'react-router-dom';
+import FormField from '../../FormField/FormField';
 
 interface LoginFormProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -32,24 +33,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
-      <div className={styles.field}>
-        <input
-          type="email"
-          placeholder="Email Address"
-          {...register('email')}
-          required
+      {['email', 'password'].map((fieldName) => (
+        <FormField
+          key={fieldName}
+          fieldName={fieldName as 'email' | 'password'}
+          register={register}
+          errors={errors as Record<string, FieldError>}
         />
-        <p className={styles.errorMess}>{errors.email?.message}</p>
-      </div>
-      <div className={styles.field}>
-        <input
-          type="password"
-          placeholder="Password"
-          {...register('password')}
-          required
-        />
-        <p className={styles.errorMess}>{errors.password?.message}</p>
-      </div>
+      ))}
       <div className={styles.pass_link}>
         <a href="#">Forgot password?</a>
       </div>
