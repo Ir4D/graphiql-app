@@ -4,9 +4,9 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.authors_container}>
-        <a href="https://github.com/Ir4D">Irina Dedova</a>
+        <a href="https://github.com/Ir4D">Irina_Dedova</a>
         <a href="https://github.com/Yuliya0503">Yuliya_Narkevich</a>
-        <a href="https://github.com/DragonRomeo">Ilya Romanov</a>
+        <a href="https://github.com/DragonRomeo">Ilya_Romanov</a>
       </div>
 
       <div className={styles.data_container}>
