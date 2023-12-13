@@ -8,23 +8,16 @@ export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    let timeout;
-
     window.onscroll = () => {
-      if (timeout) {
-        clearTimeout(timeout);
+      if (window.scrollY > 20) {
+        console.log(`window.scroll=${window.scrollY}`);
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
       }
-
-      timeout = setTimeout(() => {
-        if (window.scrollY > 20) {
-          console.log(`window.scroll=${window.scrollY}`);
-          setIsSticky(true);
-        } else {
-          setIsSticky(false);
-        }
-      }, 10);
     };
   }, []);
+
   const headerClassName = isSticky
     ? `${styles.header} ${styles.sticky}`
     : styles.header;

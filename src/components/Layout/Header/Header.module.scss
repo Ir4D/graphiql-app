@@ -3,7 +3,6 @@
 .header {
   width: 100%;
   background-color: $color-base;
-  // position: relative;
   position: fixed;
   top: 0;
   display: flex;
@@ -20,21 +19,10 @@
 }
 
 .header.sticky {
-  // position: sticky;
-  // top: 0;
   padding-bottom: 1px;
   padding-top: 1px;
   background-color: $color-base-dark;
   border-bottom: 1px solid;
-
-  .link {
-    // color: $color-neutral-dark;
-  }
-
-  .button {
-    // color: $color-neutral-dark;
-    // border-color: $color-neutral-dark;
-  }
 }
 
 .container {
