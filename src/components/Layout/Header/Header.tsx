@@ -9,7 +9,7 @@ export const Header = () => {
 
   useEffect(() => {
     let timeout;
-    let scroll = 0;
+    // let scroll = 0;
 
     window.onscroll = () => {
       if (timeout) {
@@ -18,22 +18,20 @@ export const Header = () => {
 
       timeout = setTimeout(() => {
         /*scroll >= window.scrollY && */
-        if (window.scrollY > 10) {
-          console.log(`scroll =${scroll}, window.scroll=${window.scrollY}`);
+        if (window.scrollY > 20) {
+          console.log(`window.scroll=${window.scrollY}`);
           setIsSticky(true);
         } else {
           setIsSticky(false);
         }
 
-        scroll = window.scrollY;
+        // scroll = window.scrollY;
       }, 10);
     };
   }, []);
   const headerClassName = isSticky
     ? `${styles.header} ${styles.sticky}`
     : styles.header;
-  console.log(headerClassName);
-  console.log(isSticky);
 
   return (
     <header className={headerClassName}>

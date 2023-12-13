@@ -2,8 +2,10 @@
 
 .header {
   width: 100%;
-  // background-color: $color-base;
-  position: relative;
+  background-color: $color-base;
+  // position: relative;
+  position: fixed;
+  top: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -13,14 +15,26 @@
   border-bottom: 3px solid;
   transition:
     background-color 1s,
-    border-bottom 0.5s;
+    border-bottom 0.3s,
+    padding 0.7s;
 }
 
 .header.sticky {
-  position: sticky;
-  top: 0;
-  background-color: black;
-  border-bottom: 3px solid $color-neutral-dark;
+  // position: sticky;
+  // top: 0;
+  padding-bottom: 1px;
+  padding-top: 1px;
+  background-color: $color-base-dark;
+  border-bottom: 1px solid;
+
+  .link {
+    // color: $color-neutral-dark;
+  }
+
+  .button {
+    // color: $color-neutral-dark;
+    // border-color: $color-neutral-dark;
+  }
 }
 
 .container {
