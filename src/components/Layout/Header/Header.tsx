@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 
@@ -42,8 +42,12 @@ export const Header = () => {
             <button className={styles.button}>Sign out</button>
           ) : (
             <>
-              <button className={styles.button}>Sign in</button>
-              <button className={styles.button}>Sign up</button>
+              <button className={styles.button}>
+                <Link to="/auth">Sign in</Link>
+              </button>
+              <button className={styles.button}>
+                <Link to="/auth">Sign up</Link>
+              </button>
             </>
           )}
         </div>
