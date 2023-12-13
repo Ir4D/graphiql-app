@@ -1,14 +1,6 @@
 import React, { ErrorInfo } from 'react';
 import styles from './ErrorBoundary.module.scss';
-
-interface IErrorBoundaryProps {
-  children: React.ReactNode;
-  errorMessage?: string;
-}
-
-interface IErrorBoundaryState {
-  hasError: boolean;
-}
+import { IErrorBoundaryProps, IErrorBoundaryState } from '../../models/errors';
 
 class ErrorBoundary extends React.Component<
   IErrorBoundaryProps,
