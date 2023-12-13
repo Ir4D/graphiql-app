@@ -4,7 +4,7 @@
 .main_page {
   display: flex;
   gap: 1em;
-  width: min(95%, 100em);
+  width: 100%;
   margin: 0 auto;
   margin-top: 1em;
   padding: 0.3em;
@@ -37,7 +37,9 @@
 .content_wrapper {
   display: flex;
   gap: 1em;
-  width: min(100%, 95em);
+  margin: 0 auto;
+  min-width: 0;
+  flex: 1;
 }
 
 .docs {
@@ -45,9 +47,11 @@
 }
 
 .docs.active {
-  display: block;
-  width: min(10em, 15em);
+  display: flex;
   padding: 0.5em;
+  min-width: 10em;
+  flex-direction: column;
+  flex: 0.333333 1 0%;
 }
 
 .docs_title {
@@ -58,10 +62,14 @@
 .editor_wrapper {
   display: flex;
   gap: 1em;
-  width: min(100%, 95em);
   border: 0.6em solid $grey;
   border-radius: 1.1em;
   background-color: $grey;
+  max-width: 95em;
+  margin: 0 auto;
+
+  flex: 1 1 0%;
+  min-width: 0;
 }
 
 .query {
@@ -70,11 +78,19 @@
   border-radius: 0.6em;
   background-color: $grey_dark;
   padding: 0.5em;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: 100%;
 }
 
 .viewer {
   flex: 1;
   padding: 0.5em;
+  overflow: auto;
+  white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: 100%;
 }
 
 .query_title,
@@ -84,7 +100,10 @@
 }
 
 .query_field {
-  height: min(80%, 100em);
+  flex-grow: 1;
+  flex-basis: 0;
+  max-height: 100em;
+  overflow: auto;
 }
 
 .query_wrapper {
