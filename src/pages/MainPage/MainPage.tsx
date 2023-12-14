@@ -2,26 +2,16 @@ import React, { useState } from 'react';
 import styles from './MainPage.module.scss';
 import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
-import Query from '../../utils/Query';
+import Query from '../../components/Graphql/Query';
 import { Header } from '../../components/Layout/Header/Header';
-
-interface CharacterData {
-  id: string;
-  name: string;
-}
 
 interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
-  const [jsonData, setJsonData] = useState<CharacterData | null>(null);
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
-  };
-
-  const handleDataFetched = (data: CharacterData) => {
-    setJsonData(data);
   };
 
   return (
@@ -63,8 +53,8 @@ const MainPage: React.FC<MainPageProps> = () => {
             </div>
             <div className={styles.viewer}>
               <h3 className={styles.viewer_title}>JSON viewer section</h3>
-              {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>}
-              <Query onDataFetched={handleDataFetched} />
+              {/* {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>} */}
+              <Query />
             </div>
           </div>
         </section>
