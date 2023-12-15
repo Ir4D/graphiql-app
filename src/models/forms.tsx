@@ -8,3 +8,9 @@ export interface IFormSignupData {
   password: string;
   confirmPassword: string;
 }
+
+export interface SlideControlsProps {
+  isLogin: boolean;
+  handleLoginClick: () => void;
+  handleSignupClick: () => void;
+}
