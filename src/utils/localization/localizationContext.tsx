@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from 'react';
 import en from './en.json';
 import ru from './ru.json';
 
@@ -36,4 +36,8 @@ export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
       {children}
     </LocalizationContext.Provider>
   );
+};
+
+export const useLocalization = () => {
+  return useContext(LocalizationContext);
 };
