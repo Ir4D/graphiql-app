@@ -5,8 +5,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSignupSchema } from './validationSignupSchema';
 import { IFormSignupData } from '../../../models/forms';
+import { useLocalization } from '../../../utils/localization/localizationContext';
 
 const SignupForm: React.FC = () => {
+  const { locale, messages } = useLocalization();
   const navigate = useNavigate();
   const {
     register,
@@ -46,13 +48,21 @@ const SignupForm: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
-      {renderField('email', 'text', 'Email Address')}
-      {renderField('password', 'password', 'Password')}
-      {renderField('confirmPassword', 'password', 'Confirm password')}
+      {renderField('email', 'text', `${messages[locale].placeholder_email}`)}
+      {renderField(
+        'password',
+        'password',
+        `${messages[locale].placeholder_password}`
+      )}
+      {renderField(
+        'confirmPassword',
+        'password',
+        `${messages[locale].placeholder_confirm_password}`
+      )}
       <div className={styles.field}>
         <input
           type="submit"
-          value="Sign In"
+          value={messages[locale].Sign_up}
           disabled={isDisabled}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
