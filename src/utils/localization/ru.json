@@ -1,8 +1,8 @@
 {
   "header_navigate": "На страницу приветствия",
-  "Sign_out": "Выйти",
-  "Sign_in": "Войти",
-  "Sign_up": "Зарегистрироваться",
+  "Sign_out": "Выход",
+  "Sign_in": "Вход",
+  "Sign_up": "Регистрация",
   "welcome_heading": "Добро пожаловать в GraphiQL",
   "welcome_description": "GraphiQL - это инструмент в браузере для написания, валидации и тестирования запросов GraphQL.",
   "start_btn": "Начнем!",
