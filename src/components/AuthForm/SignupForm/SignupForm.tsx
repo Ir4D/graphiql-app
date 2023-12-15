@@ -10,12 +10,13 @@ import { useLocalization } from '../../../utils/localization/localizationContext
 const SignupForm: React.FC = () => {
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
+  const validationSchema = validationSignupSchema(messages[locale]);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<IFormSignupData>({
-    resolver: yupResolver(validationSignupSchema),
+    resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = (data: IFormSignupData) => {

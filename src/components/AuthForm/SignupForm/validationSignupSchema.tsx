@@ -1,15 +1,31 @@
 import * as yup from 'yup';
-import { validationLoginSchema as baseSchema } from '../LoginForm/validationLoginSchema';
+import { Messages } from '../../../models/localization';
 
-export const validationSignupSchema = baseSchema.shape({
-  confirmPassword: yup
-    .string()
-    .required('Password confirmation is required')
-    .min(8, 'Password must be at least 8 characters long')
-    .matches(/\p{L}/u, 'Password must contain at least 1 letter')
-    .matches(/\d/u, 'Password must contain at least 1 number')
-    .matches(/[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u, {
-      message: 'Password must contain at least 1 special character',
-    })
-    .oneOf([yup.ref('password')], 'Passwords must match'),
-});
+export const validationSignupSchema = (messages: Messages) => {
+  return yup.object().shape({
+    email: yup
+      .string()
+      .required(messages.email_required)
+      .email(messages.email_mess),
+    password: yup
+      .string()
+      .required(messages.password_required)
+      .min(8, messages.pass_mess_min)
+      .matches(/\p{L}/u, messages.pass_mess_letter)
+      .matches(/\d/u, messages.pass_mess_number)
+      .matches(
+        /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u,
+        messages.pass_mess_special_character
+      ),
+    confirmPassword: yup
+      .string()
+      .required(messages.pass_confirm_required)
+      .min(8, messages.pass_mess_min)
+      .matches(/\p{L}/u, messages.pass_mess_letter)
+      .matches(/\d/u, messages.pass_mess_number)
+      .matches(/[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u, {
+        message: messages.pass_mess_special_character,
+      })
+      .oneOf([yup.ref('password')], messages.pass_confirm_oneOf),
+  });
+};
