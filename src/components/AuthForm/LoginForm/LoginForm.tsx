@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
-import { validationLoginSchema } from './validationLoginSchema';
+import validationLoginSchema from './validationLoginSchema';
 import { useNavigate } from 'react-router-dom';
 import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
@@ -14,12 +14,13 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
+  const validationSchema = validationLoginSchema(messages[locale]);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<IFormLoginData>({
-    resolver: yupResolver(validationLoginSchema),
+    resolver: yupResolver(validationSchema),
   });
 
   const onSubmit = (data: IFormLoginData) => {
