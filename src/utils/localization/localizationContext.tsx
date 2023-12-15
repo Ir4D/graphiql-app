@@ -1,19 +1,12 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import en from './en.json';
 import ru from './ru.json';
-
-type Locale = 'en' | 'ru';
-type Messages = Record<string, string>;
-
-interface LocalizationContextProps {
-  locale: Locale;
-  messages: Record<Locale, Messages>;
-  changeLocale: (newLocale: Locale) => void;
-}
-
-interface LocalizationProviderProps {
-  children: ReactNode;
-}
+import {
+  Locale,
+  Messages,
+  LocalizationContextProps,
+  LocalizationProviderProps,
+} from '../../models/localization';
 
 const LocalizationContext = createContext<LocalizationContextProps>({
   locale: 'en',
@@ -27,7 +20,7 @@ export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
   const [locale, setLocale] = useState<Locale>('en');
   const messages: Record<Locale, Messages> = { en, ru };
 
-  const changeLocale = (newLocale: Locale) => {
+  const changeLocale = (newLocale: Locale): void => {
     setLocale(newLocale);
   };
 
@@ -38,6 +31,6 @@ export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
   );
 };
 
-export const useLocalization = () => {
+export const useLocalization = (): LocalizationContextProps => {
   return useContext(LocalizationContext);
 };
