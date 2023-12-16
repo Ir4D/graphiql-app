@@ -15,7 +15,7 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState(' ');
   const [password, setPassword] = useState(' ');
   const [user, loading, error] = useAuthState(auth);
 
@@ -37,6 +37,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
     navigate('/');
   };
 
+  const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+    setPassword(event.target.value);
+  };
+
   const renderField = (
     fieldName: keyof IFormLoginData,
     type: string,
@@ -47,12 +52,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         type={type}
         placeholder={placeholder}
         {...register(fieldName, { required: true })}
+        onChange={(e) => joinEmailPassFunc(e)}
       />
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate('/dashboard');
+  }, [user, loading]);
+
   return (
     <form
       className={`${styles.form} ${styles.login}`}
@@ -66,13 +81,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         `${messages[locale].placeholder_password}`
       )}
       <div className={styles.pass_link}>
-        <a href="#">{messages[locale].pass_link}</a>
+        <Link to="/reset">{messages[locale].pass_link}</Link>
       </div>
       <div className={styles.field}>
         <input
           type="submit"
           value={messages[locale].Sign_in}
           disabled={isDisabled}
+          onClick={() => signInWithEmailAndPassword(auth, email, password)}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}
