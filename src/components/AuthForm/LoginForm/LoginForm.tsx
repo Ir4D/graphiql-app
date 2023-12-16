@@ -15,6 +15,10 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState(' ');
+  const [user, loading, error] = useAuthState(auth);
+
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
   const validationSchema = validationLoginSchema(messages[locale]);
