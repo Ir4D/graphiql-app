@@ -8,7 +8,7 @@ import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
 import { auth } from '../../../utils/firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 interface LoginFormProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
