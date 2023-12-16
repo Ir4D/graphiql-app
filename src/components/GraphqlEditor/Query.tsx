@@ -17,6 +17,16 @@ const Query: React.FC<QueryProps> = ({ query }) => {
   //   }
   // `;
 
+  // const apiUrl = 'https://swapi-graphql.netlify.app/.netlify/functions/index';
+  // {
+  //   allPlanets {
+  //     planets {
+  //       name
+  //       population
+  //     }
+  //   }
+  // }
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
