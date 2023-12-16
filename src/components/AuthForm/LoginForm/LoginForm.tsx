@@ -1,11 +1,14 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
 import validationLoginSchema from './validationLoginSchema';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import { auth } from '../../../utils/firebase/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks';
 
 interface LoginFormProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
