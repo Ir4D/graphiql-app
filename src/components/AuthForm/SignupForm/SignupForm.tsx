@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../AuthForm.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -14,7 +14,7 @@ import {
 
 const SignupForm: React.FC = () => {
   const [name, setName] = useState('user');
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
@@ -31,8 +31,6 @@ const SignupForm: React.FC = () => {
     console.log(data);
     /*Отправка валидных данных в Firebase */
     registerWithEmailAndPassword(name, data.email, data.password);
-    /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    if (user) navigate('/dashboard');
   };
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
@@ -51,6 +49,14 @@ const SignupForm: React.FC = () => {
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate('/dashboard');
+  }, [user, loading]);
 
   return (
     <form

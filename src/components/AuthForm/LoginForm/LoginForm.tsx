@@ -8,13 +8,14 @@ import { useLocalization } from '../../../utils/localization/localizationContext
 import { auth } from '../../../utils/firebase/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
 
 interface LoginFormProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
@@ -32,8 +33,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
     console.log(data);
     /*Вход через валидные данные */
     signInWithEmailAndPassword(auth, data.email, data.password);
-    /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    if (user) navigate('/dashboard');
   };
 
   const renderField = (
@@ -52,6 +51,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   );
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate('/dashboard');
+  }, [user, loading]);
 
   return (
     <form
