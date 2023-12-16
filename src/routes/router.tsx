@@ -27,7 +27,7 @@ const AppRouter = () => {
   // );
 
   // Здесь логика проверки авторизации
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <Router>
