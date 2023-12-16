@@ -30,15 +30,11 @@ const SignupForm: React.FC = () => {
   });
 
   const onSubmit = (data: IFormSignupData) => {
-    /*Передача валидных данных в стейт*/
     console.log(data);
-    setEmail(data.email);
-    setPassword(data.confirmPassword);
-    console.log(auth);
     /*Отправка валидных данных в Firebase */
-    // registerWithEmailAndPassword(name, email, password);
+    registerWithEmailAndPassword(name, data.email, data.password);
     /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    // navigate('/');
+    if (user) navigate('/dashboard');
   };
 
   const fakeRegister = () => {
@@ -102,7 +98,7 @@ const SignupForm: React.FC = () => {
           type="submit"
           value={messages[locale].Sign_up}
           disabled={isDisabled}
-          onClick={() => fakeRegister()}
+          // onClick={() => fakeRegister()}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}
