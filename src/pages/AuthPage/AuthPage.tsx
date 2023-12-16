@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './AuthPage.module.scss';
 import AuthForm from '../../components/AuthForm/AuthForm';
+import { Header } from '../../components/Layout/Header/Header';
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,16 +20,19 @@ function AuthPage() {
   };
 
   return (
-    <main className={styles.main}>
-      <div className={styles.wrapper}>
-        <AuthForm
-          isLogin={isLogin}
-          handleLoginClick={handleLoginClick}
-          handleSignupClick={handleSignupClick}
-          handleSignupLinkClick={handleSignupLinkClick}
-        />
-      </div>
-    </main>
+    <>
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.wrapper}>
+          <AuthForm
+            isLogin={isLogin}
+            handleLoginClick={handleLoginClick}
+            handleSignupClick={handleSignupClick}
+            handleSignupLinkClick={handleSignupLinkClick}
+          />
+        </div>
+      </main>
+    </>
   );
 }
 

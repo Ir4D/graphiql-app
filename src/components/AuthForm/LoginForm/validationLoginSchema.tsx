@@ -1,17 +1,23 @@
 import * as yup from 'yup';
+import { Messages } from '../../../models/localization';
 
-export const validationLoginSchema = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email is required')
-    .email('Invalid email format'),
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(8, 'Password must be at least 8 characters long')
-    .matches(/\p{L}/u, 'Password must contain at least 1 letter')
-    .matches(/\d/u, 'Password must contain at least 1 number')
-    .matches(/[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u, {
-      message: 'Password must contain at least 1 special character',
-    }),
-});
+const validationLoginSchema = (messages: Messages) => {
+  return yup.object().shape({
+    email: yup
+      .string()
+      .required(messages.email_required)
+      .email(messages.email_mess),
+    password: yup
+      .string()
+      .required(messages.password_required)
+      .min(8, messages.pass_mess_min)
+      .matches(/\p{L}/u, messages.pass_mess_letter)
+      .matches(/\d/u, messages.pass_mess_number)
+      .matches(
+        /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u,
+        messages.pass_mess_special_character
+      ),
+  });
+};
+
+export default validationLoginSchema;
