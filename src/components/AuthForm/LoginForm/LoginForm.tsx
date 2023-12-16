@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
@@ -15,9 +14,7 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
-  const [email, setEmail] = useState(' ');
-  const [password, setPassword] = useState(' ');
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
@@ -33,16 +30,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   const onSubmit = (data: IFormLoginData) => {
     /*создано исключительно для проверки*/
     console.log(data);
+    /*Вход через валидные данные */
     signInWithEmailAndPassword(auth, data.email, data.password);
     /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
     if (user) navigate('/dashboard');
-    // navigate('/');
   };
-
-  // const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setEmail(event.target.value);
-  //   setPassword(event.target.value);
-  // };
 
   const renderField = (
     fieldName: keyof IFormLoginData,
@@ -54,21 +46,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         type={type}
         placeholder={placeholder}
         {...register(fieldName, { required: true })}
-        // onChange={(e) => joinEmailPassFunc(e)}
       />
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
-
-  // useEffect(() => {
-  //   if (loading) {
-  //     // maybe trigger a loading screen
-  //     return;
-  //   }
-  //   if (user) navigate('/dashboard');
-  // }, [user, loading]);
 
   return (
     <form
