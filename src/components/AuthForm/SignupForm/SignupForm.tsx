@@ -1,13 +1,23 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../AuthForm.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSignupSchema } from './validationSignupSchema';
 import { IFormSignupData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {
+  auth,
+  registerWithEmailAndPassword,
+} from '../../../utils/firebase/firebase';
 
 const SignupForm: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('testName');
+  const [user, loading, error] = useAuthState(auth);
+
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
   const validationSchema = validationSignupSchema(messages[locale]);
@@ -28,6 +38,11 @@ const SignupForm: React.FC = () => {
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
 
+  const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+    setPassword(event.target.value);
+  };
+
   const renderField = (
     fieldName: keyof IFormSignupData,
     type: string,
@@ -37,11 +52,17 @@ const SignupForm: React.FC = () => {
       <input
         type={type}
         placeholder={placeholder}
+        onChange={(e) => joinEmailPassFunc(e)}
         {...register(fieldName, { required: true })}
       />
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
+
+  useEffect(() => {
+    if (loading) return;
+    if (user) navigate('/dashboard');
+  }, [user, loading]);
 
   return (
     <form
@@ -65,6 +86,7 @@ const SignupForm: React.FC = () => {
           type="submit"
           value={messages[locale].Sign_up}
           disabled={isDisabled}
+          onClick={() => registerWithEmailAndPassword(name, email, password)}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}
