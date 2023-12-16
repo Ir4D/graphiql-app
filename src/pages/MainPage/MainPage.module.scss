@@ -118,3 +118,21 @@
   flex: 1;
   margin-top: 1em;
 }
+
+.query_text {
+  width: 100%;
+  min-height: 20em;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  color: $white;
+  padding: 0.3em;
+  outline: none;
+  vertical-align: top;
+  overflow: auto;
+}
+
+.query_text::placeholder {
+  color: $white;
+  opacity: 0.5;
+}

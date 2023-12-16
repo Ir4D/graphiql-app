@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-const Query = () => {
+interface QueryProps {
+  query: string;
+}
+
+const Query: React.FC<QueryProps> = ({ query }) => {
   const apiUrl = 'https://rickandmortyapi.com/graphql';
-  const query = `
-    query {
-      characters {
-        results {
-          id
-          name
-        }
-      }
-    }
-  `;
+  // const query = `
+  //   query {
+  //     characters {
+  //       results {
+  //         id
+  //         name
+  //       }
+  //     }
+  //   }
+  // `;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);

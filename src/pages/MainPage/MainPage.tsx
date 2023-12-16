@@ -2,16 +2,26 @@ import React, { useState } from 'react';
 import styles from './MainPage.module.scss';
 import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
-import Query from '../../components/Graphql/Query';
+import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
 
 interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
+  const [queryText, setQueryText] = useState('');
+  const [queryResult, setQueryResult] = useState(false);
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setQueryText(event.target.value);
+  };
+
+  const handleClick = () => {
+    setQueryResult(true);
   };
 
   return (
@@ -41,6 +51,15 @@ const MainPage: React.FC<MainPageProps> = () => {
             <div className={styles.query}>
               <div className={styles.query_field}>
                 <h3 className={styles.query_title}>Query editor section</h3>
+                <textarea
+                  className={styles.query_text}
+                  value={queryText}
+                  onChange={handleInputChange}
+                  placeholder="Enter your GraphQL query here"
+                />
+              </div>
+              <div>
+                <button onClick={handleClick}>Start</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
@@ -53,8 +72,7 @@ const MainPage: React.FC<MainPageProps> = () => {
             </div>
             <div className={styles.viewer}>
               <h3 className={styles.viewer_title}>JSON viewer section</h3>
-              {/* {jsonData && <pre>{JSON.stringify(jsonData, null, 2)}</pre>} */}
-              <Query />
+              {queryResult && <Query query={queryText} />}
             </div>
           </div>
         </section>
