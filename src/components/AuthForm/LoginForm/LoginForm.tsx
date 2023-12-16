@@ -33,14 +33,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   const onSubmit = (data: IFormLoginData) => {
     /*создано исключительно для проверки*/
     console.log(data);
+    signInWithEmailAndPassword(auth, data.email, data.password);
     /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    navigate('/');
+    if (user) navigate('/dashboard');
+    // navigate('/');
   };
 
-  const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-    setPassword(event.target.value);
-  };
+  // const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setEmail(event.target.value);
+  //   setPassword(event.target.value);
+  // };
 
   const renderField = (
     fieldName: keyof IFormLoginData,
@@ -52,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         type={type}
         placeholder={placeholder}
         {...register(fieldName, { required: true })}
-        onChange={(e) => joinEmailPassFunc(e)}
+        // onChange={(e) => joinEmailPassFunc(e)}
       />
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
@@ -60,13 +62,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
 
-  useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
-    if (user) navigate('/dashboard');
-  }, [user, loading]);
+  // useEffect(() => {
+  //   if (loading) {
+  //     // maybe trigger a loading screen
+  //     return;
+  //   }
+  //   if (user) navigate('/dashboard');
+  // }, [user, loading]);
 
   return (
     <form
@@ -88,7 +90,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
           type="submit"
           value={messages[locale].Sign_in}
           disabled={isDisabled}
-          onClick={() => signInWithEmailAndPassword(auth, email, password)}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}

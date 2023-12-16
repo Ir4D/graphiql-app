@@ -10,6 +10,7 @@ import AuthPage from '../pages/AuthPage/AuthPage';
 import MainPage from '../pages/MainPage/MainPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from '../components/Layout/Layout';
+import { Dashboard } from '../components/AuthForm/Dashboard/Dashboard';
 
 const AppRouter = () => {
   /* Чтобы посмотреть страницу авторизации, измени значение на false;
@@ -35,6 +36,9 @@ const AppRouter = () => {
         <Route path="/" element={<Layout />}>
           {/* Приветственная страница */}
           <Route path="/" element={<WelcomePage />} />
+
+          {/* Компонент логина */}
+          <Route path="/dashboard" element={<Dashboard />} />
 
           {/* Страница авторизации */}
           <Route

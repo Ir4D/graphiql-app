@@ -30,18 +30,26 @@ const SignupForm: React.FC = () => {
   });
 
   const onSubmit = (data: IFormSignupData) => {
-    /*создано исключительно для проверки*/
+    /*Передача валидных данных в стейт*/
     console.log(data);
+    setEmail(data.email);
+    setPassword(data.confirmPassword);
+    console.log(auth);
+    /*Отправка валидных данных в Firebase */
+    // registerWithEmailAndPassword(name, email, password);
     /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    navigate('/');
+    // navigate('/');
+  };
+
+  const fakeRegister = () => {
+    const email = 'fguiragiaccas@hotmail.com';
+    const name = 'Vasya';
+    const password = '11223344qq?';
+
+    registerWithEmailAndPassword(name, email, password);
   };
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
-
-  const joinEmailPassFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-    setPassword(event.target.value);
-  };
 
   const renderField = (
     fieldName: keyof IFormSignupData,
@@ -52,12 +60,20 @@ const SignupForm: React.FC = () => {
       <input
         type={type}
         placeholder={placeholder}
-        onChange={(e) => joinEmailPassFunc(e)}
         {...register(fieldName, { required: true })}
       />
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
+
+  // const registerData = () => {
+  //   const data = {
+  //     name: name,
+  //     email: email,
+  //     password: password,
+  //   };
+  //   console.log(data);
+  // };
 
   useEffect(() => {
     if (loading) return;
@@ -86,7 +102,7 @@ const SignupForm: React.FC = () => {
           type="submit"
           value={messages[locale].Sign_up}
           disabled={isDisabled}
-          onClick={() => registerWithEmailAndPassword(name, email, password)}
+          onClick={() => fakeRegister()}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}
