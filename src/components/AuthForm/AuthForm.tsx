@@ -19,7 +19,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   handleSignupLinkClick,
 }) => {
   const isLogin2 = ({ isLogin } = useFirebaseContext());
-  console.log(isLogin2);
 
   return (
     <div className={styles.form_container}>
