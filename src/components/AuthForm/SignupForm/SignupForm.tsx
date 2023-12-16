@@ -13,10 +13,8 @@ import {
 } from '../../../utils/firebase/firebase';
 
 const SignupForm: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('testName');
-  const [user, loading, error] = useAuthState(auth);
+  const [name, setName] = useState('user');
+  const [user] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
@@ -37,14 +35,6 @@ const SignupForm: React.FC = () => {
     if (user) navigate('/dashboard');
   };
 
-  const fakeRegister = () => {
-    const email = 'fguiragiaccas@hotmail.com';
-    const name = 'Vasya';
-    const password = '11223344qq?';
-
-    registerWithEmailAndPassword(name, email, password);
-  };
-
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
 
   const renderField = (
@@ -61,20 +51,6 @@ const SignupForm: React.FC = () => {
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
-
-  // const registerData = () => {
-  //   const data = {
-  //     name: name,
-  //     email: email,
-  //     password: password,
-  //   };
-  //   console.log(data);
-  // };
-
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate('/dashboard');
-  }, [user, loading]);
 
   return (
     <form
@@ -98,7 +74,6 @@ const SignupForm: React.FC = () => {
           type="submit"
           value={messages[locale].Sign_up}
           disabled={isDisabled}
-          // onClick={() => fakeRegister()}
           className={`${styles.submitButton} ${
             isDisabled ? styles.disabled : ''
           }`}
