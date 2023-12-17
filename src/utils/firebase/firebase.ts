@@ -33,7 +33,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    if (err instanceof Error) alert(err.message);
   }
 };
 const registerWithEmailAndPassword = async (
@@ -52,7 +52,7 @@ const registerWithEmailAndPassword = async (
     });
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    if (err instanceof Error) alert(err.message);
   }
 };
 const sendPasswordReset = async (email: string) => {
@@ -61,7 +61,7 @@ const sendPasswordReset = async (email: string) => {
     alert('Password reset link sent!');
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    if (err instanceof Error) alert(err.message);
   }
 };
 const logout = () => {
