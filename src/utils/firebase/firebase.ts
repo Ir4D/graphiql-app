@@ -1,20 +1,12 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
-  signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
 } from 'firebase/auth';
-import {
-  getFirestore,
-  query,
-  getDocs,
-  collection,
-  where,
-  addDoc,
-} from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: 'AIzaSyDIXJ5YT7hoNbBFqK3TBcV41-TzIO-7n7w',
   authDomain: 'fir-auth-6edd8.firebaseapp.com',

@@ -6,7 +6,7 @@ import { auth, db, logout } from '../../../utils/firebase/firebase';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 
 export const Dashboard = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [name, setName] = useState('');
   const navigate = useNavigate();
   const fetchUserName = async () => {
