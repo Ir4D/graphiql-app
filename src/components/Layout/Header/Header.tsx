@@ -6,7 +6,7 @@ import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
 
 export const Header = () => {
   /*isLogin будет пропсой, которая приходит откуда-то выше */
-  const isLogin = true;
+  const isLogin = false;
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
 
