@@ -7,11 +7,10 @@ import { auth } from '../../../utils/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const Header = () => {
-  /*isLogin будет пропсой, которая приходит откуда-то выше */
-  const isLogin = true;
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
-  const [user, loading] = useAuthState(auth);
+  /* User - по нему определяется залогинен ли пользователь */
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     window.onscroll = () => {
