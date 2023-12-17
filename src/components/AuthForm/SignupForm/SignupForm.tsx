@@ -57,7 +57,7 @@ const SignupForm: React.FC = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/dashboard');
+    if (user) navigate('/main');
   }, [user, loading]);
 
   return (
