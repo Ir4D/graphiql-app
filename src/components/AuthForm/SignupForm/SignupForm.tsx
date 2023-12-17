@@ -13,7 +13,9 @@ import {
 } from '../../../utils/firebase/firebase';
 
 const SignupForm: React.FC = () => {
-  const [name, setName] = useState('user');
+  /* Заглушка для имени, скорее всего имя будет храниться в data
+  где и другие данные, а не здесь */
+  const [name] = useState('user');
   const [user, loading] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
