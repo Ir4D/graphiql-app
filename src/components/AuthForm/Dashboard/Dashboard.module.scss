@@ -1,25 +1,29 @@
+@use '../../../assets/styles/variables.scss' as *;
+
 .dashboard {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .dashboard__container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color: #dcdcdc;
-    padding: 30px;
-  }
-  .dashboard__btn {
-    padding: 10px;
-    font-size: 18px;
-    margin-top: 10px;
-    border: none;
-    color: white;
-    background-color: black;
-  }
-  .dashboard div {
-    margin-top: 7px;
-  }
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.dashboard__container {
+  width: 100%;
+}
+.dashboard__btn {
+  border: 2px solid $color-neutral;
+  background-color: $color-neutral;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 5px;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
+}
+
+.dashboard__btn:hover {
+  background-color: $color-base;
+  color: $color-neutral;
+}

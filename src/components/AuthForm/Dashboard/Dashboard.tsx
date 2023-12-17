@@ -31,10 +31,10 @@ export const Dashboard = () => {
         Logged in as
         <div>{name}</div>
         <div>{user?.email}</div>
-        <button className={styles.dashboard__btn} onClick={logout}>
-          Logout
-        </button>
       </div>
+      <button className={styles.dashboard__btn} onClick={logout}>
+        Logout
+      </button>
     </div>
   );
 };

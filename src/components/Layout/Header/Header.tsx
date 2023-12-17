@@ -2,10 +2,11 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
 
 export const Header = () => {
   /*isLogin будет пропсой, которая приходит откуда-то выше */
-  const isLogin = false;
+  const isLogin = true;
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
 
@@ -50,9 +51,10 @@ export const Header = () => {
 
         <div className={styles.sign_container}>
           {isLogin ? (
-            <button className={styles.button}>
-              {messages[locale].Sign_out}
-            </button>
+            // <button className={styles.button}>
+            //   {messages[locale].Sign_out}
+            // </button>
+            <Dashboard />
           ) : (
             <>
               <button className={styles.button}>
