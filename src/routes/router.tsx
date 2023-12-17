@@ -37,9 +37,6 @@ const AppRouter = () => {
           {/* Приветственная страница */}
           <Route path="/" element={<WelcomePage />} />
 
-          {/* Компонент логина */}
-          <Route path="/dashboard" element={<Dashboard />} />
-
           {/* Страница авторизации */}
           <Route
             path="/auth"
