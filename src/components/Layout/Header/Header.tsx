@@ -3,12 +3,15 @@ import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import { useLocalization } from '../../../utils/localization/localizationContext';
 import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
+import { auth } from '../../../utils/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const Header = () => {
   /*isLogin будет пропсой, которая приходит откуда-то выше */
-  const isLogin = false;
+  const isLogin = true;
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     window.onscroll = () => {
@@ -50,7 +53,7 @@ export const Header = () => {
         </div>
 
         <div className={styles.sign_container}>
-          {isLogin ? (
+          {user ? (
             // <button className={styles.button}>
             //   {messages[locale].Sign_out}
             // </button>

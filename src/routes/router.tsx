@@ -10,7 +10,6 @@ import AuthPage from '../pages/AuthPage/AuthPage';
 import MainPage from '../pages/MainPage/MainPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from '../components/Layout/Layout';
-import { Dashboard } from '../components/AuthForm/Dashboard/Dashboard';
 
 const AppRouter = () => {
   /* Чтобы посмотреть страницу авторизации, измени значение на false;
@@ -29,6 +28,7 @@ const AppRouter = () => {
 
   // Здесь логика проверки авторизации
   const isAuthenticated = false;
+  //TODO: эта переменная после аунтефикации должна меняться на true из редакс-стора?
 
   return (
     <Router>

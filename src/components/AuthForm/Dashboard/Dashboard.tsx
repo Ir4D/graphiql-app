@@ -28,7 +28,6 @@ export const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.dashboard__container}>
-        Logged in as
         <div>{name}</div>
         <div>{user?.email}</div>
       </div>
