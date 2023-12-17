@@ -5,8 +5,11 @@ import validationLoginSchema from './validationLoginSchema';
 import { Link, useNavigate } from 'react-router-dom';
 import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
-import { auth } from '../../../utils/firebase/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  auth,
+  logInWithEmailAndPassword,
+} from '../../../utils/firebase/firebase';
+// import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
 
@@ -32,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
     /*создано исключительно для проверки*/
     console.log(data);
     /*Вход через валидные данные */
-    signInWithEmailAndPassword(auth, data.email, data.password);
+    logInWithEmailAndPassword(data.email, data.password);
   };
 
   const renderField = (
