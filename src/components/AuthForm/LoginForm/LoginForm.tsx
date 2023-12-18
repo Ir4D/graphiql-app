@@ -9,7 +9,6 @@ import {
   auth,
   logInWithEmailAndPassword,
 } from '../../../utils/firebase/firebase';
-// import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
 

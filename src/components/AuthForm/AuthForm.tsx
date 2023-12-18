@@ -3,7 +3,6 @@ import styles from './AuthForm.module.scss';
 import LoginForm from './LoginForm/LoginForm';
 import SignupForm from './SignupForm/SignupForm';
 import SlideControls from '../SlideControls/SlideControls';
-// import { useFirebaseContext } from '../../utils/firebase/FirebaseContext';
 
 interface AuthFormProps {
   isLogin: boolean;
@@ -18,8 +17,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
   handleSignupClick,
   handleSignupLinkClick,
 }) => {
-  // const isLogin2 = ({ isLogin } = useFirebaseContext());
-
   return (
     <div className={styles.form_container}>
       <SlideControls
