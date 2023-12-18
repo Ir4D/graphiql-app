@@ -1,16 +1,29 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './MainPage.module.scss';
 import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
+import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 
-const MainPage = () => {
+interface MainPageProps {}
+
+const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
+  const [queryText, setQueryText] = useState('');
+  const [queryResult, setQueryResult] = useState(false);
   const { locale, messages } = useLocalization();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setQueryText(event.target.value);
+  };
+
+  const handleClick = () => {
+    setQueryResult(true);
   };
 
   return (
@@ -39,9 +52,16 @@ const MainPage = () => {
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
               <div className={styles.query_field}>
-                <h3 className={styles.query_title}>
-                  {messages[locale].query_title}
-                </h3>
+                <h3 className={styles.query_title}>{messages[locale].query_title}</h3>
+                <textarea
+                  className={styles.query_text}
+                  value={queryText}
+                  onChange={handleInputChange}
+                  placeholder="Enter your GraphQL query here"
+                />
+              </div>
+              <div>
+                <button onClick={handleClick}>Start</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
@@ -53,9 +73,8 @@ const MainPage = () => {
               </div>
             </div>
             <div className={styles.viewer}>
-              <h3 className={styles.viewer_title}>
-                {messages[locale].viewer_title}
-              </h3>
+              <h3 className={styles.viewer_title}>{messages[locale].viewer_title}</h3>
+              {queryResult && <Query query={queryText} />}
             </div>
           </div>
         </section>
