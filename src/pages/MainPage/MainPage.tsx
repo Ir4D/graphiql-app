@@ -5,24 +5,28 @@ import iconSettings from '../../assets/img/icons_settings.png';
 import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
+import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 
 interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
-  const [queryText, setQueryText] = useState('');
+  const [queryInput, setQueryInput] = useState('');
   const [queryResult, setQueryResult] = useState(false);
   const { locale, messages } = useLocalization();
+  const { setQuery, changeQuery } = useQueryContext();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQueryText(event.target.value);
+    setQueryInput(() => event.target.value);
   };
 
-  const handleClick = () => {
+  const handleStartClick = async () => {
+    await setQuery(queryInput);
+    await changeQuery(queryInput);
     setQueryResult(true);
   };
 
@@ -52,16 +56,18 @@ const MainPage: React.FC<MainPageProps> = () => {
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
               <div className={styles.query_field}>
-                <h3 className={styles.query_title}>{messages[locale].query_title}</h3>
+                <h3 className={styles.query_title}>
+                  {messages[locale].query_title}
+                </h3>
                 <textarea
                   className={styles.query_text}
-                  value={queryText}
+                  value={queryInput}
                   onChange={handleInputChange}
                   placeholder="Enter your GraphQL query here"
                 />
               </div>
               <div>
-                <button onClick={handleClick}>Start</button>
+                <button onClick={handleStartClick}>Start</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
@@ -73,8 +79,10 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
             </div>
             <div className={styles.viewer}>
-              <h3 className={styles.viewer_title}>{messages[locale].viewer_title}</h3>
-              {queryResult && <Query query={queryText} />}
+              <h3 className={styles.viewer_title}>
+                {messages[locale].viewer_title}
+              </h3>
+              {queryResult && <Query />}
             </div>
           </div>
         </section>
