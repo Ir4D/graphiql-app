@@ -4,6 +4,7 @@ import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
 import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
+import { useLocalization } from '../../utils/localization/localizationContext';
 
 interface MainPageProps {}
 
@@ -11,6 +12,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
   const [queryText, setQueryText] = useState('');
   const [queryResult, setQueryResult] = useState(false);
+  const { locale, messages } = useLocalization();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -40,7 +42,7 @@ const MainPage: React.FC<MainPageProps> = () => {
           <div
             className={`${styles.docs} ${docsPanelOpen ? styles.active : ''}`}
           >
-            <h3 className={styles.docs_title}>Docs</h3>
+            <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
@@ -50,7 +52,7 @@ const MainPage: React.FC<MainPageProps> = () => {
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
               <div className={styles.query_field}>
-                <h3 className={styles.query_title}>Query editor section</h3>
+                <h3 className={styles.query_title}>{messages[locale].query_title}</h3>
                 <textarea
                   className={styles.query_text}
                   value={queryText}
@@ -63,15 +65,15 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
-                  <h4>Variables</h4>
+                  <h4>{messages[locale].variables}</h4>
                 </div>
                 <div className={styles.headers}>
-                  <h4>Headers</h4>
+                  <h4>{messages[locale].headers}</h4>
                 </div>
               </div>
             </div>
             <div className={styles.viewer}>
-              <h3 className={styles.viewer_title}>JSON viewer section</h3>
+              <h3 className={styles.viewer_title}>{messages[locale].viewer_title}</h3>
               {queryResult && <Query query={queryText} />}
             </div>
           </div>

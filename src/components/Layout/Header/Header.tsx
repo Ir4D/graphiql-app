@@ -1,31 +1,67 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
+import { useEffect, useState } from 'react';
+import { useLocalization } from '../../../utils/localization/localizationContext';
 
 export const Header = () => {
   /*isLogin будет пропсой, которая приходит откуда-то выше */
   const isLogin = false;
+  const [isSticky, setIsSticky] = useState(false);
+  const { locale, messages, changeLocale } = useLocalization();
+
+  useEffect(() => {
+    window.onscroll = () => {
+      if (window.scrollY > 20) {
+        //console.log(`window.scroll=${window.scrollY}`);
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+  }, []);
+
+  const headerClassName = isSticky
+    ? `${styles.header} ${styles.sticky}`
+    : styles.header;
+
   return (
-    <header className={styles.header}>
+    <header className={headerClassName}>
       <div className={styles.container}>
         <nav>
           <NavLink className={styles.link} to="/">
-            To welcome page
+            {messages[locale].header_navigate}
           </NavLink>
         </nav>
 
         <div className={styles.language_container}>
-          <button className={styles.language_item}>EN</button>
+          <button
+            className={styles.language_item}
+            onClick={() => changeLocale('en')}
+          >
+            EN
+          </button>
           <span>/</span>
-          <button className={styles.language_item}>LP</button>
+          <button
+            className={styles.language_item}
+            onClick={() => changeLocale('ru')}
+          >
+            RU
+          </button>
         </div>
 
         <div className={styles.sign_container}>
           {isLogin ? (
-            <button className={styles.button}>Sign out</button>
+            <button className={styles.button}>
+              {messages[locale].Sign_out}
+            </button>
           ) : (
             <>
-              <button className={styles.button}>Sign in</button>
-              <button className={styles.button}>Sign up</button>
+              <button className={styles.button}>
+                <Link to="/auth">{messages[locale].Sign_in}</Link>
+              </button>
+              <button className={styles.button}>
+                <Link to="/auth">{messages[locale].Sign_up}</Link>
+              </button>
             </>
           )}
         </div>
