@@ -39,5 +39,9 @@
   "pass_mess_number": "Пароль должен содержать как минимум 1 цифру",
   "pass_mess_special_character": "Пароль должен содержать как минимум 1 специальный символ",
   "pass_confirm_required": "Требуется подтверждение пароля",
-  "pass_confirm_oneOf": "Пароли должны совпадать"
+  "pass_confirm_oneOf": "Пароли должны совпадать",
+  "query_placeholder": "Введите свой запрос здесь",
+  "settings_title": "Настройки",
+  "settings_submit": "Подтвердить",
+  "settings_cancel": "Отмена"
 }

@@ -6,6 +6,7 @@ import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
+import SettingsModal from '../../components/SettingsModal/SettingsModal';
 
 interface MainPageProps {}
 
@@ -13,6 +14,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
   const [queryInput, setQueryInput] = useState('');
   const [queryResult, setQueryResult] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const { locale, messages } = useLocalization();
   const { setQuery, changeQuery } = useQueryContext();
 
@@ -30,6 +32,19 @@ const MainPage: React.FC<MainPageProps> = () => {
     setQueryResult(true);
   };
 
+  const handleShowSettings = () => {
+    setShowSettings(true);
+  };
+
+  const closeSettings = () => {
+    setShowSettings(false);
+  };
+
+  const submitSeetings = () => {
+    console.log('submit');
+    setShowSettings(false);
+  };
+
   return (
     <>
       <Header />
@@ -39,7 +54,11 @@ const MainPage: React.FC<MainPageProps> = () => {
             <img src={iconDocs} alt="Docs" />
           </button>
           <button className={styles.menu_settings}>
-            <img src={iconSettings} alt="Settings" />
+            <img
+              src={iconSettings}
+              alt="Settings"
+              onClick={handleShowSettings}
+            />
           </button>
         </aside>
         <section className={styles.content_wrapper}>
@@ -63,7 +82,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                   className={styles.query_text}
                   value={queryInput}
                   onChange={handleInputChange}
-                  placeholder="Enter your GraphQL query here"
+                  placeholder={messages[locale].query_placeholder}
                 />
               </div>
               <div>
@@ -87,6 +106,13 @@ const MainPage: React.FC<MainPageProps> = () => {
           </div>
         </section>
       </main>
+      <SettingsModal
+        active={showSettings}
+        onSubmit={submitSeetings}
+        onClose={closeSettings}
+      >
+        <div>Content here</div>
+      </SettingsModal>
     </>
   );
 };
