@@ -1,12 +1,7 @@
 import styles from './SettingsModal.module.scss';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { PropsWithChildren } from 'react';
-
-interface SettingsModalProps {
-  active: boolean;
-  onSubmit: () => void;
-  onClose: () => void;
-}
+import { SettingsModalProps } from '../../models/settings';
 
 const SettingsModal = ({
   active,

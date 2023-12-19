@@ -5,19 +5,29 @@ export const QueryContext = createContext<QueryContextType>({
   query: '',
   setQuery: () => {},
   changeQuery: () => {},
+  apiUrl: '',
+  setApiUrl: () => {},
+  changeApiUrl: () => {},
 });
 
 export const QueryContextProvider: React.FC<QueryContextProps> = ({
   children,
 }) => {
   const [query, setQuery] = useState('');
+  const [apiUrl, setApiUrl] = useState('https://rickandmortyapi.com/graphql');
 
   const changeQuery = (value: string) => {
     setQuery(value);
   };
 
+  const changeApiUrl = (value: string) => {
+    setApiUrl(value);
+  };
+
   return (
-    <QueryContext.Provider value={{ query, setQuery, changeQuery }}>
+    <QueryContext.Provider
+      value={{ query, setQuery, changeQuery, apiUrl, setApiUrl, changeApiUrl }}
+    >
       {children}
     </QueryContext.Provider>
   );

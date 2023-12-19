@@ -43,5 +43,9 @@
   "query_placeholder": "Введите свой запрос здесь",
   "settings_title": "Настройки",
   "settings_submit": "Подтвердить",
-  "settings_cancel": "Отмена"
+  "settings_cancel": "Отмена",
+  "settings_current": "Текущий GraphQL API",
+  "settings_choose": "Выберите новый GraphQL API",
+  "settings_other": "Другой",
+  "settings_yours": "или укажите свой"
 }

@@ -43,5 +43,9 @@
   "query_placeholder": "Enter your GraphQL query here",
   "settings_title": "Settings",
   "settings_submit": "Sumbit",
-  "settings_cancel": "Cancel"
+  "settings_cancel": "Cancel",
+  "settings_current": "Current GraphQL API",
+  "settings_choose": "Choose a new GraphQL API",
+  "settings_other": "Other",
+  "settings_yours": "or input yours"
 }

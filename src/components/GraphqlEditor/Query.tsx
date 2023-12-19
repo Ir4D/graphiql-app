@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 
 const Query = () => {
-  const apiUrl = 'https://rickandmortyapi.com/graphql';
+  // const apiUrl = 'https://rickandmortyapi.com/graphql';
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { query } = useQueryContext();
+  const { query, apiUrl } = useQueryContext();
 
   useEffect(() => {
     const fetchData = async () => {

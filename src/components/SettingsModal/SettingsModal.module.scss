@@ -15,6 +15,7 @@
 
 .settings_content {
   width: 25em;
+  max-width: 86%;
   background-color: $grey;
   border-radius: 8px;
 }
@@ -25,13 +26,14 @@
 }
 
 .settings_body {
-  padding: 1.6em;
+  padding: 1em;
   text-align: center;
 }
 
 .settings_header {
   text-align: center;
   font-size: 1.4em;
+  font-weight: 900;
 }
 
 .settings_footer {

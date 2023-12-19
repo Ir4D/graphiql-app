@@ -15,8 +15,12 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [queryInput, setQueryInput] = useState('');
   const [queryResult, setQueryResult] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [selectedApi, setSelectedApi] = useState('');
+  const [customApi, setCustomApi] = useState('');
+  const [isCustom, setIsCustom] = useState(false);
   const { locale, messages } = useLocalization();
-  const { setQuery, changeQuery } = useQueryContext();
+  const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
+    useQueryContext();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -40,9 +44,29 @@ const MainPage: React.FC<MainPageProps> = () => {
     setShowSettings(false);
   };
 
-  const submitSeetings = () => {
-    console.log('submit');
+  const submitSettings = async () => {
+    if (isCustom) {
+      await setApiUrl(customApi);
+      await changeApiUrl(customApi);
+    } else {
+      await setApiUrl(selectedApi);
+      await changeApiUrl(selectedApi);
+    }
     setShowSettings(false);
+  };
+
+  const handleSelectApiChange = async (event: {
+    target: { value: string };
+  }) => {
+    const selectedValue = event.target.value;
+    await setSelectedApi(selectedValue);
+    await setIsCustom(selectedValue === 'other');
+  };
+
+  const handleCustomApiChange = async (event: {
+    target: { value: string };
+  }) => {
+    await setCustomApi(event.target.value);
   };
 
   return (
@@ -108,10 +132,40 @@ const MainPage: React.FC<MainPageProps> = () => {
       </main>
       <SettingsModal
         active={showSettings}
-        onSubmit={submitSeetings}
+        onSubmit={submitSettings}
         onClose={closeSettings}
       >
-        <div>Content here</div>
+        <div className={styles.settings_current_api}>
+          {messages[locale].settings_current}:<span> {apiUrl}</span>
+        </div>
+        <div className={styles.settings_new_api}>
+          <label>
+            {messages[locale].settings_choose}:
+            <select
+              className={styles.settings_select_api}
+              value={selectedApi}
+              onChange={handleSelectApiChange}
+            >
+              <option value="https://rickandmortyapi.com/graphql">
+                Rick and Morty API
+              </option>
+              <option value="https://swapi-graphql.netlify.app/.netlify/functions/index">
+                Star Wars API
+              </option>
+              <option value="other">{messages[locale].settings_other}</option>
+            </select>
+          </label>
+          {isCustom && (
+            <div className={styles.settings_other_api}>
+              {messages[locale].settings_yours}:
+              <input
+                type="text"
+                value={customApi}
+                onChange={handleCustomApiChange}
+              />
+            </div>
+          )}
+        </div>
       </SettingsModal>
     </>
   );
