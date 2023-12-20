@@ -27,7 +27,8 @@ const AppRouter = () => {
   // );
 
   // Здесь логика проверки авторизации
-  const isAuthenticated = true;
+  const isAuthenticated = false;
+  //TODO: эта переменная после аунтефикации должна меняться на true из редакс-стора?
 
   return (
     <Router>

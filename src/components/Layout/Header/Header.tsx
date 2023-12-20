@@ -2,17 +2,19 @@ import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useEffect, useState } from 'react';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
+import { auth } from '../../../utils/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export const Header = () => {
-  /*isLogin будет пропсой, которая приходит откуда-то выше */
-  const isLogin = false;
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
+  /* User - по нему определяется залогинен ли пользователь */
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     window.onscroll = () => {
       if (window.scrollY > 20) {
-        //console.log(`window.scroll=${window.scrollY}`);
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -50,10 +52,11 @@ export const Header = () => {
         </div>
 
         <div className={styles.sign_container}>
-          {isLogin ? (
-            <button className={styles.button}>
-              {messages[locale].Sign_out}
-            </button>
+          {user ? (
+            // <button className={styles.button}>
+            //   {messages[locale].Sign_out}
+            // </button>
+            <Dashboard />
           ) : (
             <>
               <button className={styles.button}>

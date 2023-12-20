@@ -1,17 +1,24 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
 import validationLoginSchema from './validationLoginSchema';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import {
+  auth,
+  logInWithEmailAndPassword,
+} from '../../../utils/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
 
 interface LoginFormProps {
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
+  const [user, loading] = useAuthState(auth);
+
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
   const validationSchema = validationLoginSchema(messages[locale]);
@@ -26,8 +33,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   const onSubmit = (data: IFormLoginData) => {
     /*создано исключительно для проверки*/
     console.log(data);
-    /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    navigate('/');
+    /*Вход через валидные данные */
+    logInWithEmailAndPassword(data.email, data.password);
   };
 
   const renderField = (
@@ -46,6 +53,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   );
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate('/');
+  }, [user, loading]);
+
   return (
     <form
       className={`${styles.form} ${styles.login}`}
@@ -59,7 +75,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         `${messages[locale].placeholder_password}`
       )}
       <div className={styles.pass_link}>
-        <a href="#">{messages[locale].pass_link}</a>
+        <Link to="/reset">{messages[locale].pass_link}</Link>
       </div>
       <div className={styles.field}>
         <input

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './AuthPage.module.scss';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import { Header } from '../../components/Layout/Header/Header';
-
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
 

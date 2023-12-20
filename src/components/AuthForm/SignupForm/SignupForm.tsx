@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../AuthForm.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -6,8 +6,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSignupSchema } from './validationSignupSchema';
 import { IFormSignupData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {
+  auth,
+  registerWithEmailAndPassword,
+} from '../../../utils/firebase/firebase';
 
 const SignupForm: React.FC = () => {
+  /* Заглушка для имени, скорее всего имя будет храниться в data
+  где и другие данные, а не здесь */
+  const [name] = useState('user');
+  const [user, loading] = useAuthState(auth);
+
   const { locale, messages } = useLocalization();
   const navigate = useNavigate();
   const validationSchema = validationSignupSchema(messages[locale]);
@@ -20,10 +30,9 @@ const SignupForm: React.FC = () => {
   });
 
   const onSubmit = (data: IFormSignupData) => {
-    /*создано исключительно для проверки*/
     console.log(data);
-    /*сюда можно добавить ссылку на нужную страницу, или просто удалить*/
-    navigate('/');
+    /*Отправка валидных данных в Firebase */
+    registerWithEmailAndPassword(name, data.email, data.password);
   };
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
@@ -42,6 +51,14 @@ const SignupForm: React.FC = () => {
       <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
     </div>
   );
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) navigate('/');
+  }, [user, loading]);
 
   return (
     <form
