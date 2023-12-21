@@ -17,15 +17,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setIsLogin((prev) => !prev);
   };
 
-  const setLoginStatus: React.Dispatch<React.SetStateAction<boolean>> = (
-    status
-  ) => {
-    setIsLogin(status);
-  };
-
   return (
     <AuthContext.Provider
-      value={{ isLogin, toggleLoginStatus, setLoginStatus }}
+      value={{ isLogin, toggleLoginStatus, setLoginStatus: setIsLogin }}
     >
       {children}
     </AuthContext.Provider>
@@ -38,8 +32,7 @@ export const useAuth = (): AuthContextType => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
 
-  const { isLogin, toggleLoginStatus } = context;
-  const setLoginStatus = context.setLoginStatus!;
+  const { isLogin, toggleLoginStatus, setLoginStatus } = context;
 
   return { isLogin, toggleLoginStatus, setLoginStatus };
 };
