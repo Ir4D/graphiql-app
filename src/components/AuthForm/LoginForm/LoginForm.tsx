@@ -68,7 +68,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
-      {renderField('name', 'text', `${messages[locale].name_in_form}`)}
       {renderField('email', 'text', `${messages[locale].placeholder_email}`)}
       {renderField(
         'password',
