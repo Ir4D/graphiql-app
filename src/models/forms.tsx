@@ -8,6 +8,7 @@ export interface IFormSignupData {
   email: string;
   password: string;
   confirmPassword: string;
+  name: string;
 }
 
 export interface SlideControlsProps {
