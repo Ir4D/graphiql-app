@@ -10,25 +10,11 @@ import AuthPage from '../pages/AuthPage/AuthPage';
 import MainPage from '../pages/MainPage/MainPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from '../components/Layout/Layout';
+import { auth } from '../utils/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const AppRouter = () => {
-  /* Чтобы посмотреть страницу авторизации, измени значение на false;
-  или закомментируй код и используй раскомментируй вот этот:*/
-
-  // return (
-  //   <Router>
-  //     <Routes>
-  //       <Route path="/" element={<WelcomePage />} />
-  //       <Route path="/auth" element={<AuthPage />} />
-  //       <Route path="/main" element={<MainPage />} />
-  //       <Route path="*" element={<NotFoundPage />} />
-  //     </Routes>
-  //   </Router>
-  // );
-
-  // Здесь логика проверки авторизации
-  const isAuthenticated = false;
-  //TODO: эта переменная после аунтефикации должна меняться на true из редакс-стора?
+  const [user] = useAuthState(auth);
 
   return (
     <Router>
@@ -40,13 +26,13 @@ const AppRouter = () => {
           {/* Страница авторизации */}
           <Route
             path="/auth"
-            element={isAuthenticated ? <Navigate to="/main" /> : <AuthPage />}
+            element={user ? <Navigate to="/main" /> : <AuthPage />}
           />
 
           {/* Главная страница (требует авторизации) */}
           <Route
             path="/main"
-            element={isAuthenticated ? <MainPage /> : <Navigate to="/auth" />}
+            element={user ? <MainPage /> : <Navigate to="/auth" />}
           />
 
           {/* Страница 404 */}

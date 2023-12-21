@@ -59,7 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/');
+    if (user) navigate('/main');
   }, [user, loading, navigate]);
 
   return (
