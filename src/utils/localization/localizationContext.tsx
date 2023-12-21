@@ -17,11 +17,15 @@ const LocalizationContext = createContext<LocalizationContextProps>({
 export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
   children,
 }) => {
-  const [locale, setLocale] = useState<Locale>('en');
+  const storedLocale = localStorage.getItem('locale');
+  const initialLocale: Locale = storedLocale ? (storedLocale as Locale) : 'en';
+
+  const [locale, setLocale] = useState<Locale>(initialLocale);
   const messages: Record<Locale, Messages> = { en, ru };
 
   const changeLocale = (newLocale: Locale): void => {
     setLocale(newLocale);
+    localStorage.setItem('locale', newLocale);
   };
 
   return (
