@@ -39,5 +39,13 @@
   "pass_mess_number": "Password must contain at least 1 number",
   "pass_mess_special_character": "Password must contain at least 1 special character",
   "pass_confirm_required": "Password confirmation is required",
-  "pass_confirm_oneOf": "Passwords must match"
+  "pass_confirm_oneOf": "Passwords must match",
+  "query_placeholder": "Enter your GraphQL query here",
+  "settings_title": "Settings",
+  "settings_submit": "Sumbit",
+  "settings_cancel": "Cancel",
+  "settings_current": "Current GraphQL API",
+  "settings_choose": "Choose a new GraphQL API",
+  "settings_other": "Other",
+  "settings_yours": "or input yours"
 }

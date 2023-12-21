@@ -4,12 +4,15 @@ import './assets/styles/global.scss';
 import AppRouter from './routes/router.tsx';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary.tsx';
 import { LocalizationProvider } from './utils/localization/localizationContext.tsx';
+import { QueryContextProvider } from './utils/QueryContext/QueryContext.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <LocalizationProvider>
-        <AppRouter />
+        <QueryContextProvider>
+          <AppRouter />
+        </QueryContextProvider>
       </LocalizationProvider>
     </ErrorBoundary>
   </React.StrictMode>

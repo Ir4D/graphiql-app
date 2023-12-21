@@ -5,25 +5,68 @@ import iconSettings from '../../assets/img/icons_settings.png';
 import Query from '../../components/GraphqlEditor/Query';
 import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
+import { useQueryContext } from '../../utils/QueryContext/QueryContext';
+import SettingsModal from '../../components/SettingsModal/SettingsModal';
 
 interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = () => {
   const [docsPanelOpen, setDocsPanelOpen] = useState(false);
-  const [queryText, setQueryText] = useState('');
+  const [queryInput, setQueryInput] = useState('');
   const [queryResult, setQueryResult] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [selectedApi, setSelectedApi] = useState('');
+  const [customApi, setCustomApi] = useState('');
+  const [isCustom, setIsCustom] = useState(false);
   const { locale, messages } = useLocalization();
+  const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
+    useQueryContext();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setQueryText(event.target.value);
+    setQueryInput(() => event.target.value);
   };
 
-  const handleClick = () => {
+  const handleStartClick = async () => {
+    await setQuery(queryInput);
+    await changeQuery(queryInput);
     setQueryResult(true);
+  };
+
+  const handleShowSettings = () => {
+    setShowSettings(true);
+  };
+
+  const closeSettings = () => {
+    setShowSettings(false);
+  };
+
+  const submitSettings = async () => {
+    if (isCustom) {
+      await setApiUrl(customApi);
+      await changeApiUrl(customApi);
+    } else {
+      await setApiUrl(selectedApi);
+      await changeApiUrl(selectedApi);
+    }
+    setShowSettings(false);
+  };
+
+  const handleSelectApiChange = async (event: {
+    target: { value: string };
+  }) => {
+    const selectedValue = event.target.value;
+    await setSelectedApi(selectedValue);
+    await setIsCustom(selectedValue === 'other');
+  };
+
+  const handleCustomApiChange = async (event: {
+    target: { value: string };
+  }) => {
+    await setCustomApi(event.target.value);
   };
 
   return (
@@ -35,7 +78,11 @@ const MainPage: React.FC<MainPageProps> = () => {
             <img src={iconDocs} alt="Docs" />
           </button>
           <button className={styles.menu_settings}>
-            <img src={iconSettings} alt="Settings" />
+            <img
+              src={iconSettings}
+              alt="Settings"
+              onClick={handleShowSettings}
+            />
           </button>
         </aside>
         <section className={styles.content_wrapper}>
@@ -52,16 +99,18 @@ const MainPage: React.FC<MainPageProps> = () => {
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
               <div className={styles.query_field}>
-                <h3 className={styles.query_title}>{messages[locale].query_title}</h3>
+                <h3 className={styles.query_title}>
+                  {messages[locale].query_title}
+                </h3>
                 <textarea
                   className={styles.query_text}
-                  value={queryText}
+                  value={queryInput}
                   onChange={handleInputChange}
-                  placeholder="Enter your GraphQL query here"
+                  placeholder={messages[locale].query_placeholder}
                 />
               </div>
               <div>
-                <button onClick={handleClick}>Start</button>
+                <button onClick={handleStartClick}>Start</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
@@ -73,12 +122,51 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
             </div>
             <div className={styles.viewer}>
-              <h3 className={styles.viewer_title}>{messages[locale].viewer_title}</h3>
-              {queryResult && <Query query={queryText} />}
+              <h3 className={styles.viewer_title}>
+                {messages[locale].viewer_title}
+              </h3>
+              {queryResult && <Query />}
             </div>
           </div>
         </section>
       </main>
+      <SettingsModal
+        active={showSettings}
+        onSubmit={submitSettings}
+        onClose={closeSettings}
+      >
+        <div className={styles.settings_current_api}>
+          {messages[locale].settings_current}:<span> {apiUrl}</span>
+        </div>
+        <div className={styles.settings_new_api}>
+          <label>
+            {messages[locale].settings_choose}:
+            <select
+              className={styles.settings_select_api}
+              value={selectedApi}
+              onChange={handleSelectApiChange}
+            >
+              <option value="https://rickandmortyapi.com/graphql">
+                Rick and Morty API
+              </option>
+              <option value="https://swapi-graphql.netlify.app/.netlify/functions/index">
+                Star Wars API
+              </option>
+              <option value="other">{messages[locale].settings_other}</option>
+            </select>
+          </label>
+          {isCustom && (
+            <div className={styles.settings_other_api}>
+              {messages[locale].settings_yours}:
+              <input
+                type="text"
+                value={customApi}
+                onChange={handleCustomApiChange}
+              />
+            </div>
+          )}
+        </div>
+      </SettingsModal>
     </>
   );
 };
