@@ -136,3 +136,34 @@
   color: $white;
   opacity: 0.5;
 }
+
+.settings_current_api {
+  margin-bottom: 1em;
+
+  span {
+    display: block;
+    word-break: break-all;
+    color: $accent;
+  }
+}
+
+.settings_select_api {
+  width: 60%;
+  height: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.settings_other_api {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+
+  input  {
+    width: 60%;
+    height: 2em;
+    margin: 0 auto;
+    margin-top: 0.5em;
+  }
+}

@@ -1,34 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 
-interface QueryProps {
-  query: string;
-}
-
-const Query: React.FC<QueryProps> = ({ query }) => {
-  const apiUrl = 'https://rickandmortyapi.com/graphql';
-  // const query = `
-  //   query {
-  //     characters {
-  //       results {
-  //         id
-  //         name
-  //       }
-  //     }
-  //   }
-  // `;
-
-  // const apiUrl = 'https://swapi-graphql.netlify.app/.netlify/functions/index';
-  // {
-  //   allPlanets {
-  //     planets {
-  //       name
-  //       population
-  //     }
-  //   }
-  // }
+const Query = () => {
+  // const apiUrl = 'https://rickandmortyapi.com/graphql';
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const { query, apiUrl } = useQueryContext();
 
   useEffect(() => {
     const fetchData = async () => {
