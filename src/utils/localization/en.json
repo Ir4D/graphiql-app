@@ -39,5 +39,7 @@
   "pass_mess_number": "Password must contain at least 1 number",
   "pass_mess_special_character": "Password must contain at least 1 special character",
   "pass_confirm_required": "Password confirmation is required",
-  "pass_confirm_oneOf": "Passwords must match"
+  "pass_confirm_oneOf": "Passwords must match",
+  "placeholder_name": "Name",
+  "name_required": "Name is required"
 }

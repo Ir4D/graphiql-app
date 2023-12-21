@@ -63,7 +63,7 @@ const SignupForm: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
-      {renderField('name', 'text', `${messages[locale].name_in_form}`)}
+      {renderField('name', 'text', `${messages[locale].placeholder_name}`)}
       {renderField('email', 'text', `${messages[locale].placeholder_email}`)}
       {renderField(
         'password',
