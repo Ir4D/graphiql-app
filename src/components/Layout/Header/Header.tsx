@@ -12,7 +12,7 @@ export const Header = () => {
   const { locale, messages, changeLocale } = useLocalization();
   /* User - по нему определяется залогинен ли пользователь */
   const [user] = useAuthState(auth);
-  const { toggleLoginStatus } = useAuth();
+  const { setLoginStatus } = useAuth();
 
   useEffect(() => {
     window.onscroll = () => {
@@ -27,14 +27,6 @@ export const Header = () => {
   const headerClassName = isSticky
     ? `${styles.header} ${styles.sticky}`
     : styles.header;
-
-  const handleLoginClick = () => {
-    toggleLoginStatus();
-  };
-
-  const handleSignupClick = () => {
-    toggleLoginStatus();
-  };
 
   return (
     <header className={headerClassName}>
@@ -69,10 +61,16 @@ export const Header = () => {
             <Dashboard />
           ) : (
             <>
-              <button className={styles.button} onClick={handleLoginClick}>
+              <button
+                className={styles.button}
+                onClick={() => setLoginStatus(true)}
+              >
                 <Link to="/auth">{messages[locale].Sign_in}</Link>
               </button>
-              <button className={styles.button} onClick={handleSignupClick}>
+              <button
+                className={styles.button}
+                onClick={() => setLoginStatus(false)}
+              >
                 <Link to="/auth">{messages[locale].Sign_up}</Link>
               </button>
             </>
