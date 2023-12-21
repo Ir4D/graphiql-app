@@ -1,6 +1,7 @@
 export interface IFormLoginData {
   email: string;
   password: string;
+  name: string;
 }
 
 export interface IFormSignupData {

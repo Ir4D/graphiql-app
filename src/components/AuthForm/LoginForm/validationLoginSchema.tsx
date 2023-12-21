@@ -17,6 +17,7 @@ const validationLoginSchema = (messages: Messages) => {
         /[!"#$%&'()*+,./:;<=>?@[\]^_`{|}~\\-]/u,
         messages.pass_mess_special_character
       ),
+    name: yup.string().required(messages.name_in_form),
   });
 };
 
