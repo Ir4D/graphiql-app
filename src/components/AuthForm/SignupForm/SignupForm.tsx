@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from '../AuthForm.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -13,9 +13,6 @@ import {
 } from '../../../utils/firebase/firebase';
 
 const SignupForm: React.FC = () => {
-  /* Заглушка для имени, скорее всего имя будет храниться в data
-  где и другие данные, а не здесь */
-  const [name] = useState('user');
   const [user, loading] = useAuthState(auth);
 
   const { locale, messages } = useLocalization();
@@ -32,7 +29,7 @@ const SignupForm: React.FC = () => {
   const onSubmit = (data: IFormSignupData) => {
     console.log(data);
     /*Отправка валидных данных в Firebase */
-    registerWithEmailAndPassword(name, data.email, data.password);
+    registerWithEmailAndPassword(data.name, data.email, data.password);
   };
 
   const isDisabled = isSubmitting || !!Object.keys(errors).length;
@@ -57,8 +54,8 @@ const SignupForm: React.FC = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/');
-  }, [user, loading]);
+    if (user) navigate('/main');
+  }, [user, loading, navigate]);
 
   return (
     <form
@@ -66,6 +63,7 @@ const SignupForm: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       action="#"
     >
+      {renderField('name', 'text', `${messages[locale].placeholder_name}`)}
       {renderField('email', 'text', `${messages[locale].placeholder_email}`)}
       {renderField(
         'password',

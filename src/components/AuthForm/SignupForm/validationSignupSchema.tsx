@@ -27,5 +27,6 @@ export const validationSignupSchema = (messages: Messages) => {
         message: messages.pass_mess_special_character,
       })
       .oneOf([yup.ref('password')], messages.pass_confirm_oneOf),
+    name: yup.string().required(messages.name_required),
   });
 };

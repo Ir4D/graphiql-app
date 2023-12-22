@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
 import styles from './AuthPage.module.scss';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import { Header } from '../../components/Layout/Header/Header';
+import { useAuth } from '../../utils/Auth/AuthContext';
+
 function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const { isLogin, toggleLoginStatus } = useAuth();
 
   const handleLoginClick = () => {
-    setIsLogin(true);
+    toggleLoginStatus();
   };
 
   const handleSignupClick = () => {
-    setIsLogin(false);
+    toggleLoginStatus();
   };
 
   const handleSignupLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

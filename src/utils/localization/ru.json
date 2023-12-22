@@ -47,5 +47,7 @@
   "settings_current": "Текущий GraphQL API",
   "settings_choose": "Выберите новый GraphQL API",
   "settings_other": "Другой",
-  "settings_yours": "или укажите свой"
+  "settings_yours": "или укажите свой",
+  "placeholder_name": "Имя",
+  "name_required": "Требуется имя"
 }
