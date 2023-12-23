@@ -7,6 +7,7 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import { lazy, Suspense } from 'react';
 
 interface MainPageProps {}
 
@@ -21,6 +22,8 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { locale, messages } = useLocalization();
   const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
     useQueryContext();
+
+  const Docs = lazy(() => import('../../components/GraphqlEditor/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -95,6 +98,9 @@ const MainPage: React.FC<MainPageProps> = () => {
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
               sunt corrupti minima laudantium eveniet modi!
             </p>
+            <Suspense fallback={<p>Loading...</p>}>
+              <Docs />
+            </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
