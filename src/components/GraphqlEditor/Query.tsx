@@ -12,9 +12,7 @@ const Query = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Input Variables:', variables);
         const parsedVariables = variables ? JSON.parse(variables) : null;
-        console.log('Parsed Variables:', parsedVariables);
 
         const response = await fetch(apiUrl, {
           method: 'POST',
