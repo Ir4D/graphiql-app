@@ -19,6 +19,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [selectedApi, setSelectedApi] = useState('');
   const [customApi, setCustomApi] = useState('');
   const [isCustom, setIsCustom] = useState(false);
+  const [variableInput, setVariableInput] = useState('');
   const { locale, messages } = useLocalization();
   const {
     apiUrl,
@@ -26,7 +27,6 @@ const MainPage: React.FC<MainPageProps> = () => {
     changeApiUrl,
     setQuery,
     changeQuery,
-    variables,
     setVariables,
   } = useQueryContext();
 
@@ -35,7 +35,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handleVariablesChange = (value: string) => {
-    setVariables(value);
+    setVariableInput(value);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -45,6 +45,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const handleStartClick = async () => {
     await setQuery(queryInput);
     await changeQuery(queryInput);
+    await setVariables(variableInput);
     setQueryResult(true);
   };
 
@@ -127,7 +128,7 @@ const MainPage: React.FC<MainPageProps> = () => {
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
                   <VariableInput
-                    variables={variables}
+                    variables={variableInput}
                     onChange={handleVariablesChange}
                   />
                 </div>
