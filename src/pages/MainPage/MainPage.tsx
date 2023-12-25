@@ -126,7 +126,6 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
-                  <h4>{messages[locale].variables}</h4>
                   <VariableInput
                     variables={variables}
                     onChange={handleVariablesChange}
