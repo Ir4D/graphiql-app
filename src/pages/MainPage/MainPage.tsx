@@ -7,6 +7,7 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import VariableInput from '../../components/VariableInput/VariableInput';
 
 interface MainPageProps {}
 
@@ -19,11 +20,22 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [customApi, setCustomApi] = useState('');
   const [isCustom, setIsCustom] = useState(false);
   const { locale, messages } = useLocalization();
-  const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
-    useQueryContext();
+  const {
+    apiUrl,
+    setApiUrl,
+    changeApiUrl,
+    setQuery,
+    changeQuery,
+    variables,
+    setVariables,
+  } = useQueryContext();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
+  };
+
+  const handleVariablesChange = (value: string) => {
+    setVariables(value);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -115,6 +127,10 @@ const MainPage: React.FC<MainPageProps> = () => {
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
                   <h4>{messages[locale].variables}</h4>
+                  <VariableInput
+                    variables={variables}
+                    onChange={handleVariablesChange}
+                  />
                 </div>
                 <div className={styles.headers}>
                   <h4>{messages[locale].headers}</h4>
