@@ -23,7 +23,8 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
     useQueryContext();
 
-  const Docs = lazy(() => import('../../components/GraphqlEditor/Docs'));
+  // const Docs = lazy(() => import('../../components/GraphqlEditor/Docs'));
+  const Docs = lazy(() => import('create-graphql-docs/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -99,7 +100,7 @@ const MainPage: React.FC<MainPageProps> = () => {
               sunt corrupti minima laudantium eveniet modi!
             </p>
             <Suspense fallback={<p>Loading...</p>}>
-              <Docs />
+              <Docs url={apiUrl} />
             </Suspense>
           </div>
           <div className={styles.editor_wrapper}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import { getIntrospectionQuery, IntrospectionQuery } from 'graphql';
 
+
 function Docs() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
