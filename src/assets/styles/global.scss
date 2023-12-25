@@ -32,19 +32,18 @@ a:hover {
 .docs-type {
   font-family: inherit;
   font-size: inherit;
-  background-color: transparent;
-  color: $color-warning;
-  border: transparent;
+  background-color: transparent !important;
+  color: $color-warning !important;
+  border: transparent !important;
 }
 
 .docs-base {
   font-family: inherit;
   font-size: inherit;
-  background-color: transparent;
+  background-color: transparent !important;
   border: transparent;
-  color: $color-info;
+  color: $color-info !important;
 }
-
 
 .docs {
   overflow-y: scroll;

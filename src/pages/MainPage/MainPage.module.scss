@@ -42,11 +42,11 @@
   flex: 1;
 }
 
-.docs {
+.docsMain {
   display: none;
 }
 
-.docs.active {
+.docsMain.active {
   display: flex;
   padding: 0.5em;
   min-width: 10em;

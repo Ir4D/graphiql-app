@@ -91,7 +91,9 @@ const MainPage: React.FC<MainPageProps> = () => {
         </aside>
         <section className={styles.content_wrapper}>
           <div
-            className={`${styles.docs} ${docsPanelOpen ? styles.active : ''}`}
+            className={`${styles.docsMain} ${
+              docsPanelOpen ? styles.active : ''
+            }`}
           >
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
