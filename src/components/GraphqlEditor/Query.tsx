@@ -7,15 +7,19 @@ const Query = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { query, apiUrl } = useQueryContext();
+  const { query, apiUrl, variables } = useQueryContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log('Input Variables:', variables);
+        const parsedVariables = variables ? JSON.parse(variables) : null;
+        console.log('Parsed Variables:', parsedVariables);
+
         const response = await fetch(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query }),
+          body: JSON.stringify({ query, variables: parsedVariables }),
         });
 
         const result = await response.json();
@@ -27,7 +31,7 @@ const Query = () => {
     };
 
     fetchData();
-  }, [apiUrl, query]);
+  }, [apiUrl, query, variables]);
 
   return (
     <div>
