@@ -95,10 +95,6 @@ const MainPage: React.FC<MainPageProps> = () => {
           >
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              sunt corrupti minima laudantium eveniet modi!
-            </p>
             <Suspense fallback={<p>Loading...</p>}>
               <Docs url={apiUrl} />
             </Suspense>

@@ -28,3 +28,24 @@ a {
 a:hover {
   color: $color-neutral-dark;
 }
+
+.docs-type {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  color: $color-warning;
+  border: transparent;
+}
+
+.docs-base {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  border: transparent;
+  color: $color-info;
+}
+
+
+.docs {
+  overflow-y: scroll;
+}
