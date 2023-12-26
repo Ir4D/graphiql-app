@@ -7,8 +7,7 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
-import VariableInput from '../../components/VariableInput/VariableInput';
-import HeaderEditor from '../../components/HeaderInput/HeaderInput';
+import InputEditor from '../../components/InputEditor/InputEditor';
 
 interface MainPageProps {}
 
@@ -135,15 +134,25 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
-                  <VariableInput
-                    variables={variableInput}
+                  <InputEditor
+                    value={variableInput}
                     onChange={handleVariablesChange}
+                    placeholder={
+                      useLocalization().messages[useLocalization().locale]
+                        .enter_variables_placeholder
+                    }
+                    title="variables"
                   />
                 </div>
                 <div className={styles.headers}>
-                  <HeaderEditor
-                    headers={headersInput}
+                  <InputEditor
+                    value={headersInput}
                     onChange={handleHeadersChange}
+                    placeholder={
+                      useLocalization().messages[useLocalization().locale]
+                        .enter_headers_placeholder
+                    }
+                    title="headers"
                   />
                 </div>
               </div>
