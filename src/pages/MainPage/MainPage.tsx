@@ -7,6 +7,7 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import VariableInput from '../../components/VariableInput/VariableInput';
 
 interface MainPageProps {}
 
@@ -18,12 +19,23 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [selectedApi, setSelectedApi] = useState('');
   const [customApi, setCustomApi] = useState('');
   const [isCustom, setIsCustom] = useState(false);
+  const [variableInput, setVariableInput] = useState('');
   const { locale, messages } = useLocalization();
-  const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
-    useQueryContext();
+  const {
+    apiUrl,
+    setApiUrl,
+    changeApiUrl,
+    setQuery,
+    changeQuery,
+    setVariables,
+  } = useQueryContext();
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
+  };
+
+  const handleVariablesChange = (value: string) => {
+    setVariableInput(value);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,6 +45,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const handleStartClick = async () => {
     await setQuery(queryInput);
     await changeQuery(queryInput);
+    await setVariables(variableInput);
     setQueryResult(true);
   };
 
@@ -114,7 +127,10 @@ const MainPage: React.FC<MainPageProps> = () => {
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
-                  <h4>{messages[locale].variables}</h4>
+                  <VariableInput
+                    variables={variableInput}
+                    onChange={handleVariablesChange}
+                  />
                 </div>
                 <div className={styles.headers}>
                   <h4>{messages[locale].headers}</h4>

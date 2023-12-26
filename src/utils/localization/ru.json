@@ -49,5 +49,6 @@
   "settings_other": "Другой",
   "settings_yours": "или укажите свой",
   "placeholder_name": "Имя",
-  "name_required": "Требуется имя"
+  "name_required": "Требуется имя",
+  "enter_variables_placeholder": "Введите переменные здесь"
 }

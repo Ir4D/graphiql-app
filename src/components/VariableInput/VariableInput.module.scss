@@ -1,0 +1,46 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.variable_text {
+  width: 100%;
+  min-height: 20em;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  color: $white;
+  padding: 0.3em;
+  outline: none;
+  vertical-align: top;
+  overflow: auto;
+
+  &::placeholder {
+    color: $white;
+    opacity: 0.5;
+  }
+}
+
+.variable_item {
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.5s;
+
+  &:hover {
+    color: $color-neutral-dark;
+
+    &:before {
+      width: 100%;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 1.5px;
+    background-color: $color-neutral;
+    transition: width 0.35s;
+  }
+}

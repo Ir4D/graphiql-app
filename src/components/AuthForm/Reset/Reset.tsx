@@ -8,12 +8,12 @@ import styles from './Reset.module.scss';
 
 export const Reset = () => {
   const [email, setEmail] = useState('');
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
     if (user) navigate('/dashboard');
-  }, [user, loading]);
+  }, [user, loading, navigate]);
   return (
     <div className={styles.reset}>
       <div className={styles.reset__container}>
