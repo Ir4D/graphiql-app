@@ -1,7 +1,7 @@
 @import '../../assets/styles/global.scss';
 @import '../../assets/styles/variables.scss';
 
-.variable_text {
+.inputEditor_text {
   width: 100%;
   min-height: 20em;
   height: 100%;
@@ -19,7 +19,7 @@
   }
 }
 
-.variable_item {
+.inputEditor_item {
   margin-bottom: 10px;
   position: relative;
   cursor: pointer;
