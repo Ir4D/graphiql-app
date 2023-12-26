@@ -23,11 +23,8 @@ const Query = () => {
           headers: headersObject,
           body: JSON.stringify({ query, variables: parsedVariables }),
         });
-        console.log('Headers:', headersObject);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
 
+        console.log('Headers:', headersObject);
         const result = await response.json();
         setData(result.data);
         setLoading(false);
