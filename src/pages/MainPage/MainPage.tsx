@@ -8,6 +8,7 @@ import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import VariableInput from '../../components/VariableInput/VariableInput';
+import HeaderEditor from '../../components/HeaderInput/HeaderInput';
 
 interface MainPageProps {}
 
@@ -20,6 +21,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [customApi, setCustomApi] = useState('');
   const [isCustom, setIsCustom] = useState(false);
   const [variableInput, setVariableInput] = useState('');
+  const [headersInput, setHesdersInput] = useState('');
   const { locale, messages } = useLocalization();
   const {
     apiUrl,
@@ -28,6 +30,7 @@ const MainPage: React.FC<MainPageProps> = () => {
     setQuery,
     changeQuery,
     setVariables,
+    setHeaders,
   } = useQueryContext();
 
   const toggleDocsPanel = () => {
@@ -38,6 +41,10 @@ const MainPage: React.FC<MainPageProps> = () => {
     setVariableInput(value);
   };
 
+  const handleHeadersChange = (value: string) => {
+    setHesdersInput(value);
+  };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setQueryInput(() => event.target.value);
   };
@@ -46,6 +53,7 @@ const MainPage: React.FC<MainPageProps> = () => {
     await setQuery(queryInput);
     await changeQuery(queryInput);
     await setVariables(variableInput);
+    await setHeaders(headersInput);
     setQueryResult(true);
   };
 
@@ -133,7 +141,10 @@ const MainPage: React.FC<MainPageProps> = () => {
                   />
                 </div>
                 <div className={styles.headers}>
-                  <h4>{messages[locale].headers}</h4>
+                  <HeaderEditor
+                    headers={headersInput}
+                    onChange={handleHeadersChange}
+                  />
                 </div>
               </div>
             </div>
