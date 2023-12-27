@@ -1,4 +1,5 @@
 export const ReturnDocsType = (props) => {
+  //TODO: типизировать Props, он не должен быть Any
   const { type } = props;
 
   if (type.kind === 'LIST') {

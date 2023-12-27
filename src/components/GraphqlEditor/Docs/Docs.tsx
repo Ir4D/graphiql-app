@@ -10,7 +10,8 @@ import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
 
 function Docs() {
-  const { query, apiUrl } = useQueryContext();
+  //TODO: добавить классы в один файл, а потом style раздать зависимым и заменить все классы на style.что-то там
+  const { apiUrl } = useQueryContext();
   const [openTypes, setOpenTypes] = useState<boolean>(false);
   const [openQueries, setOpenQueries] = useState<boolean>(false);
   const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
