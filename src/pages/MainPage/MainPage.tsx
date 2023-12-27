@@ -23,8 +23,8 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
     useQueryContext();
 
-  // const Docs = lazy(() => import('../../components/GraphqlEditor/Docs'));
-  const Docs = lazy(() => import('create-graphql-docs/Docs'));
+  const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
+  // const Docs = lazy(() => import('create-graphql-docs/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -98,7 +98,7 @@ const MainPage: React.FC<MainPageProps> = () => {
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
             <Suspense fallback={<p>Loading...</p>}>
-              <Docs url={apiUrl} />
+              <Docs />
             </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
