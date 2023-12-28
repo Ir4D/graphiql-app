@@ -23,8 +23,9 @@ function Docs() {
   useEffect(() => {
     (async () => {
       setSchema(await getSchema(apiUrl));
+      console.log(await schema);
     })();
-  }, []);
+  }, [apiUrl]);
 
   return (
     schema && (

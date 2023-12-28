@@ -1,11 +1,13 @@
-export const ReturnDocsType = (props) => {
-  //TODO: типизировать Props, он не должен быть Any
+import { Props } from '../../../../models/docsType';
+
+export const ReturnDocsType = (props: Props) => {
   const { type } = props;
 
+  console.log(props);
   if (type.kind === 'LIST') {
     return (
       <span>
-        [<span className="docs-type">{type.ofType.name}</span>]
+        [<span className="docs-type">{type?.ofType?.name}</span>]
       </span>
     );
   }
@@ -14,7 +16,7 @@ export const ReturnDocsType = (props) => {
     return <span className="docs-type">{type.name}</span>;
   }
 
-  if (type.ofType.name) {
+  if (type?.ofType?.name) {
     if (type.kind === 'NON_NULL') {
       return (
         <span>
@@ -25,7 +27,7 @@ export const ReturnDocsType = (props) => {
     return <span className="docs-type">{type.ofType.name}</span>;
   }
 
-  if (type.ofType.ofType.name) {
+  if (type?.ofType?.ofType?.name) {
     if (type.ofType.kind === 'NON_NULL') {
       return (
         <span>
@@ -40,7 +42,7 @@ export const ReturnDocsType = (props) => {
     );
   }
 
-  if (type.ofType.ofType.ofType.name) {
+  if (type?.ofType?.ofType?.ofType?.name) {
     if (type.ofType.ofType.kind === 'NON_NULL') {
       return (
         <span>
