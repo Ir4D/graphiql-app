@@ -3,7 +3,6 @@ import { Props } from '../../../../models/docsType';
 export const ReturnDocsType = (props: Props) => {
   const { type } = props;
 
-  console.log(props);
   if (type.kind === 'LIST') {
     return (
       <span>

@@ -15,15 +15,17 @@ function Docs() {
   const [openTypes, setOpenTypes] = useState<boolean>(false);
   const [openQueries, setOpenQueries] = useState<boolean>(false);
   const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
-  const queryType = schema?.types.find(({ name }) => name === 'Query');
+
+  const queryRootName = schema?.queryType.name;
+  const queryType = schema?.types.find(({ name }) => name === queryRootName);
   const mainTypes = schema?.types.filter(
-    ({ name }) => name !== 'Query' && !name.startsWith('__')
+    ({ name }) => name !== queryRootName && !name.startsWith('__')
   );
 
   useEffect(() => {
     (async () => {
       setSchema(await getSchema(apiUrl));
-      console.log(await schema);
+      console.log(await schema?.types);
     })();
   }, [apiUrl]);
 

@@ -7,6 +7,7 @@ interface Props {
 
 export const DocsQueries = (props: Props) => {
   const { queries } = props;
+  console.log(queries);
 
   return (
     queries && (
