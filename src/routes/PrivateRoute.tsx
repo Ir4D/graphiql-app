@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import LoadingComponent from '../components/loading/Loading';
@@ -11,14 +11,35 @@ interface PrivateRouteProps {
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const [user, loading] = useAuthState(auth);
   const [authChecked, setAuthChecked] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading) {
-      setAuthChecked(true);
-    }
-  }, [loading]);
+    const checkAuth = async () => {
+      try {
+        await auth.currentUser;
+        setAuthChecked(true);
+      } catch (error) {
+        console.error('Authentication check failed:', error);
+        setAuthChecked(true);
+      }
+    };
 
-  if (!authChecked) {
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onIdTokenChanged((user) => {
+      if (!user) {
+        navigate('/', { replace: true });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigate]);
+
+  if (!authChecked || loading) {
     return <LoadingComponent />;
   }
 
