@@ -4,6 +4,7 @@ import WelcomePage from '../pages/WelcomePage/WelcomePage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from '../components/Layout/Layout';
 import PrivateRoute from './PrivateRoute';
+import LoadingComponent from '../components/loading/Loading';
 
 const AuthPage = lazy(() => import('../pages/AuthPage/AuthPage'));
 const MainPage = lazy(() => import('../pages/MainPage/MainPage'));
@@ -13,11 +14,7 @@ interface AuthSuspenseProps {
 }
 
 const AuthSuspense = ({ children }: AuthSuspenseProps) => {
-  return (
-    <Suspense fallback={<div>Loading authentication...</div>}>
-      {children}
-    </Suspense>
-  );
+  return <Suspense fallback={<LoadingComponent />}>{children}</Suspense>;
 };
 
 const AppRouter = () => {
@@ -39,9 +36,9 @@ const AppRouter = () => {
             element={
               <AuthSuspense>
                 <PrivateRoute>
-                  <Suspense fallback={<div>Loading main page...</div>}>
+                  <AuthSuspense>
                     <MainPage />
-                  </Suspense>
+                  </AuthSuspense>
                 </PrivateRoute>
               </AuthSuspense>
             }
