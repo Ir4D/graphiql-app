@@ -1,7 +1,21 @@
 
-.loading_wrapper {
+.img_loading_conatiner {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.img_loading {
+  width: min(20em, 70%);
+  max-width: 40%;
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
