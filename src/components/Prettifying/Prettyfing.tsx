@@ -8,6 +8,7 @@ const Prettify = (inputString: string) => {
   for (let i = 0; i < initialArray!.length; i++) {
     const char = initialArray![i];
     const nextChar = initialArray![i + 1];
+    const prevChar = initialArray![i - 1];
 
     if (char === '(') {
       insideParentheses = true;
@@ -21,13 +22,18 @@ const Prettify = (inputString: string) => {
       !insideCurlyParentheses
     ) {
       res.push(char, ' ');
+    } else if ((char === ':' || char === ',') && insideParentheses) {
+      if (nextChar !== '{') {
+        res.push(char, ' ');
+      }
     } else if (char === '{') {
       if (!insideParentheses) {
         level++;
         insideCurlyParentheses = true;
-        i === 0
-          ? res.push(char, '\n', '  '.repeat(level))
-          : res.push(' ', char, '\n', '  '.repeat(level));
+        if (i !== 0 && prevChar !== ':') {
+          res.push(' ');
+        }
+        res.push(char, '\n', '  '.repeat(level));
       } else {
         res.push(' ', char);
       }
