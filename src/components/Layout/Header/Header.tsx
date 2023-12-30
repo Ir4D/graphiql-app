@@ -5,12 +5,14 @@ import { useLocalization } from '../../../utils/localization/localizationContext
 import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
 import { auth } from '../../../utils/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuth } from '../../../utils/Auth/AuthContext';
 
 export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
   /* User - по нему определяется залогинен ли пользователь */
   const [user] = useAuthState(auth);
+  const { setLoginStatus } = useAuth();
 
   useEffect(() => {
     window.onscroll = () => {
@@ -59,10 +61,16 @@ export const Header = () => {
             <Dashboard />
           ) : (
             <>
-              <button className={styles.button}>
+              <button
+                className={styles.button}
+                onClick={() => setLoginStatus(true)}
+              >
                 <Link to="/auth">{messages[locale].Sign_in}</Link>
               </button>
-              <button className={styles.button}>
+              <button
+                className={styles.button}
+                onClick={() => setLoginStatus(false)}
+              >
                 <Link to="/auth">{messages[locale].Sign_up}</Link>
               </button>
             </>

@@ -6,10 +6,11 @@ import avatarFemale1 from '../../assets/img/avatar_female1.png';
 import avatarFemale2 from '../../assets/img/avatar_female2.png';
 import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
+import { auth } from '../../utils/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 function WelcomePage() {
-  const isAuthenticated = false;
   const { locale, messages } = useLocalization();
-
+  const [user] = useAuthState(auth);
   return (
     <>
       <Header />
@@ -22,7 +23,7 @@ function WelcomePage() {
             <div className={styles.description}>
               <p>{messages[locale].welcome_description}</p>
               <div className={styles.links_wrapper}>
-                {isAuthenticated ? (
+                {user ? (
                   <div>
                     <button className={styles.btn}>
                       <Link to="/main">{messages[locale].start_btn}</Link>

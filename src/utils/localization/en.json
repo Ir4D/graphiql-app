@@ -47,5 +47,9 @@
   "settings_current": "Current GraphQL API",
   "settings_choose": "Choose a new GraphQL API",
   "settings_other": "Other",
-  "settings_yours": "or input yours"
+  "settings_yours": "or input yours",
+  "placeholder_name": "Name",
+  "name_required": "Name is required",
+  "enter_variables_placeholder": "Enter variables here",
+  "enter_headers_placeholder": "Enter headers here (one per line)"
 }
