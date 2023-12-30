@@ -3,6 +3,7 @@
     "module": "ESNext",
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
+    "types": ["@testing-library/jest-dom", "vitest", "jest"],
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "esModuleInterop": true,
