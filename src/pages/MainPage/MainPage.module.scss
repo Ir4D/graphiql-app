@@ -137,6 +137,30 @@
   opacity: 0.5;
 }
 
+.query_btns {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+
+  button {
+    height: 2em;
+    width: 5em;
+    background: $grey;
+    color: $white;
+    font-size: 0.8em;
+    font-weight: 500;
+    border: 1px solid $white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:hover {
+      background: $accent;
+      color: $white_accent;
+    }
+  }
+}
+
 .settings_current_api {
   margin-bottom: 1em;
 

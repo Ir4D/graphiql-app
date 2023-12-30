@@ -3,8 +3,6 @@ import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import parseHeaders from '../../utils/helpers/ParseHeaders';
 
 const Query = () => {
-  // const apiUrl = 'https://rickandmortyapi.com/graphql';
-
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
