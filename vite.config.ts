@@ -15,7 +15,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       all: true,
-      include: ['src/components/**/*', 'src/pages/**/*'],
+      include: ['src/components/**/**/*', 'src/pages/**/*'],
       exclude: ['**/*.d.ts'],
       reporter: ['text'],
       provider: 'v8',

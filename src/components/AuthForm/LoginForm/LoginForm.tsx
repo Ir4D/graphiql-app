@@ -47,8 +47,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         type={type}
         placeholder={placeholder}
         {...register(fieldName, { required: true })}
+        id={fieldName}
       />
-      <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
+      <p className={styles.errorMess} data-testid={`${fieldName}-error`}>
+        {errors?.[fieldName]?.message}
+      </p>
     </div>
   );
 
@@ -74,12 +77,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         'password',
         `${messages[locale].placeholder_password}`
       )}
-      <div className={styles.pass_link}>
+      <div className={styles.pass_link} data-testid="pass_link">
         <Link to="/reset">{messages[locale].pass_link}</Link>
       </div>
       <div className={styles.field}>
         <input
           type="submit"
+          data-testid="submit-button"
           value={messages[locale].Sign_in}
           disabled={isDisabled}
           className={`${styles.submitButton} ${
@@ -87,7 +91,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
           }`}
         />
       </div>
-      <div className={styles.signup_link}>
+      <div className={styles.signup_link} data-testid="signup-link">
         {messages[locale].not_a_member}{' '}
         <a href="#" onClick={onClick}>
           {messages[locale].Sign_Up_now}
