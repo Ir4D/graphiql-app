@@ -10,7 +10,7 @@ import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
 import { IntrospectionType } from 'graphql';
 
-interface DocsSсhema {
+interface DocsSchema {
   queryType: { name: string };
   types: Array<DocsMainType>;
 }
@@ -25,7 +25,7 @@ function Docs() {
   const { apiUrl } = useQueryContext();
   const [openTypes, setOpenTypes] = useState<boolean>(false);
   const [openQueries, setOpenQueries] = useState<boolean>(false);
-  const [schema, setSchema] = useState<DocsSсhema | null>(null);
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
 
   const queryRootName = schema?.queryType.name;
   const queryType = schema?.types.find(({ name }) => name === queryRootName);
