@@ -29,7 +29,6 @@ function Docs() {
 
   const queryRootName = schema?.queryType.name;
   const queryType = schema?.types.find(({ name }) => name === queryRootName);
-  console.log(queryType);
   const mainTypes = schema?.types.filter(
     ({ name }) => name !== queryRootName && !name.startsWith('__')
   );
@@ -37,7 +36,6 @@ function Docs() {
   useEffect(() => {
     (async () => {
       setSchema(await getSchema(apiUrl));
-      console.log(await schema);
     })();
   }, [apiUrl]);
 

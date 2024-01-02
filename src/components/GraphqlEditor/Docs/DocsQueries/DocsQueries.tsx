@@ -37,8 +37,6 @@ interface DocsType {
 
 export const DocsQueries = (props: DocsProps) => {
   const { queries } = props;
-  console.log(queries);
-  console.log(1);
 
   return (
     queries && (
