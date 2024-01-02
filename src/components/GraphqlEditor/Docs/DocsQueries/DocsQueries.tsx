@@ -1,11 +1,11 @@
 import { ReturnDocsType } from '../ReturnDocsType/ReturnDocsType';
 import { ofType } from '../../../../models/docsType';
 
-interface DocsProps {
+export interface DocsProps {
   queries: DocsQueries;
 }
 
-interface DocsQueries {
+export interface DocsQueries {
   description: string;
   enumValues: null | number;
   fields: Array<DocsFields>;
