@@ -8,6 +8,7 @@ import { useQueryContext } from '../../../utils/QueryContext/QueryContext';
 import getSchema from '../../../utils/getSchema/getSchema';
 import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
+import { DocsQueriesType } from '../../../models/docsQueriesType';
 import { IntrospectionType } from 'graphql';
 
 interface DocsSchema {
@@ -73,7 +74,7 @@ function Docs() {
 
         {openQueries && (
           <div className="docs-nested">
-            <DocsQueries queries={queryType as DocsQueries} />
+            <DocsQueries queries={queryType as DocsQueriesType} />
           </div>
         )}
       </div>
