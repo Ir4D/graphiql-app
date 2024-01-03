@@ -24,7 +24,6 @@ const MainPage: React.FC<MainPageProps> = () => {
     useQueryContext();
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
-  // const Docs = lazy(() => import('create-graphql-docs/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
