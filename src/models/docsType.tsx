@@ -1,5 +1,6 @@
 export interface Props {
   type: Type;
+  style: CSSModuleClasses;
 }
 
 interface Type {
@@ -8,7 +9,7 @@ interface Type {
   ofType: ofType | null;
 }
 
-interface ofType {
+export interface ofType {
   kind: string;
   name: string;
   ofType: null | ofType;

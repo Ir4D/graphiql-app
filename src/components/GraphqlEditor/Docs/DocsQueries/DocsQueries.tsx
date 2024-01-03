@@ -1,34 +1,30 @@
-import { IntrospectionObjectType } from 'graphql';
 import { ReturnDocsType } from '../ReturnDocsType/ReturnDocsType';
+import { DocsProps } from '../../../../models/docsQueriesType';
 
-interface Props {
-  queries: IntrospectionObjectType;
-}
-
-export const DocsQueries = (props: Props) => {
+export const DocsQueries = (props: DocsProps) => {
   const { queries } = props;
-  console.log(queries);
+  const { style } = props;
 
   return (
     queries && (
-      <div className="docs-queries">
+      <div className={style.docs_queries}>
         {queries.fields.map((query) => (
           <div key={query.name}>
             <div>
-              <span className="docs-query">{query.name}</span>
+              <span className={style.docs_query}>{query.name}</span>
               <span>(</span>
 
               <span>
                 {query.args &&
                   query.args.map((arg) => (
                     <div key={arg.name}>
-                      <span className="docs-args">{arg.name}</span>:{' '}
-                      <ReturnDocsType type={arg.type} />
+                      <span className={style.docs_args}>{arg.name}</span>:{' '}
+                      <ReturnDocsType style={style} type={arg.type} />
                       {arg.defaultValue && (
                         <span>
                           {' '}
                           ={' '}
-                          <span className="docs-defaultValue">
+                          <span className={style.docs_defaultValue}>
                             {arg.defaultValue}
                           </span>
                         </span>
@@ -38,7 +34,7 @@ export const DocsQueries = (props: Props) => {
               </span>
 
               <span>
-                ): <ReturnDocsType type={query.type} />
+                ): <ReturnDocsType style={style} type={query.type} />
               </span>
             </div>
             <div>{query.description}</div>

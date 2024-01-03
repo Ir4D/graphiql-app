@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../../utils/QueryContext/QueryContext';
-import {
-  IntrospectionObjectType,
-  IntrospectionSchema,
-  IntrospectionType,
-} from 'graphql';
 import getSchema from '../../../utils/getSchema/getSchema';
 import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
+import { DocsQueriesType } from '../../../models/docsQueriesType';
+import { IntrospectionType } from 'graphql';
+import style from './Docs.module.scss';
+
+interface DocsSchema {
+  queryType: { name: string };
+  types: Array<DocsMainType>;
+}
+
+interface DocsMainType {
+  kind: string;
+  name: string;
+}
 
 function Docs() {
-  //TODO: добавить классы в один файл, а потом style раздать зависимым и заменить все классы на style.что-то там
   const { apiUrl } = useQueryContext();
   const [openTypes, setOpenTypes] = useState<boolean>(false);
   const [openQueries, setOpenQueries] = useState<boolean>(false);
-  const [schema, setSchema] = useState<IntrospectionSchema | null>(null);
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
 
   const queryRootName = schema?.queryType.name;
   const queryType = schema?.types.find(({ name }) => name === queryRootName);
@@ -25,45 +32,47 @@ function Docs() {
   useEffect(() => {
     (async () => {
       setSchema(await getSchema(apiUrl));
-      console.log(await schema?.types);
     })();
   }, [apiUrl]);
 
   return (
     schema && (
-      <div className="docs">
+      <div className={style.docs}>
         <span>
           <button
-            className="docs-link docs-base"
+            className={`${style.docs_link} ${style.docs_base}`}
             onClick={() => {
               setOpenTypes(!openTypes);
             }}
           >
             Types
           </button>
-          {!openTypes && <span className="docs-symbol"> ▼</span>}
+          {!openTypes && <span className={style.docs_symbol}> ▼</span>}
         </span>
 
         {openTypes && (
-          <div className="docs-nested">
-            <DocsTypes types={mainTypes as ReadonlyArray<IntrospectionType>} />
+          <div className={style.docs_nested}>
+            <DocsTypes
+              style={style}
+              types={mainTypes as ReadonlyArray<IntrospectionType>}
+            />
           </div>
         )}
         <span>
           <button
-            className="docs-link docs-base"
+            className={`${style.docs_link} ${style.docs_base}`}
             onClick={() => {
               setOpenQueries(!openQueries);
             }}
           >
             Query
           </button>
-          {!openQueries && <span className="docs-symbol"> ▼</span>}
+          {!openQueries && <span className={style.docs_symbol}> ▼</span>}
         </span>
 
         {openQueries && (
-          <div className="docs-nested">
-            <DocsQueries queries={queryType as IntrospectionObjectType} />
+          <div className={style.docs_nested}>
+            <DocsQueries style={style} queries={queryType as DocsQueriesType} />
           </div>
         )}
       </div>

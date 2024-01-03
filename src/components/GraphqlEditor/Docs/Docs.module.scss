@@ -1,0 +1,55 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.docs_type {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  color: $color-warning;
+  border: transparent;
+}
+
+.docs_base {
+  font-family: inherit;
+  font-size: 20px;
+  background-color: transparent;
+  border: transparent;
+  color: #ff5794;
+}
+
+.docs {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.docs_link {
+  color: $color-warning;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.docs_link:hover {
+  color: $color-warning-dark;
+}
+
+.docs_symbol {
+  color: $color-neutral;
+}
+
+.docs_nested {
+  color: $color-neutral;
+  padding: 10px;
+}
+
+.docs_queries {
+  color: $color-neutral;
+}
+
+.docs_args {
+  color: $color-info;
+}
+
+.docs_defaultValue {
+  color: blue;
+}
