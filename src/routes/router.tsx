@@ -1,25 +1,69 @@
-import React from 'react';
+import React, { ReactNode, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WelcomePage from '../pages/WelcomePage/WelcomePage';
-import AuthPage from '../pages/AuthPage/AuthPage';
-import MainPage from '../pages/MainPage/MainPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import { Layout } from '../components/Layout/Layout';
 import PrivateRoute from './PrivateRoute';
+import LoadingComponent from '../components/loading/Loading';
+
+// Загружаем страницы асинхронно
+const AuthPage = React.lazy(() => import('../pages/AuthPage/AuthPage'));
+const MainPage = React.lazy(() => import('../pages/MainPage/MainPage'));
+
+interface AuthSuspenseProps {
+  children: ReactNode;
+}
+
+const AuthSuspense = ({ children }: AuthSuspenseProps) => {
+  return <>{children}</>;
+};
 
 const AppRouter = () => {
+  const [isAuthLoaded, setAuthLoaded] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      // Вместо этого нужно реализовать логику проверки аутентификации
+      setTimeout(() => {
+        setAuthLoaded(true);
+      }, 3500);
+    };
+
+    checkAuth();
+  }, []);
+
+  if (!isAuthLoaded) {
+    return <LoadingComponent />;
+  }
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/main" element={<MainPage />} />
+      <Suspense fallback={<LoadingComponent />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<WelcomePage />} />
+            <Route
+              path="/auth"
+              element={
+                <AuthSuspense>
+                  <AuthPage />
+                </AuthSuspense>
+              }
+            />
+            <Route
+              path="/main"
+              element={
+                <AuthSuspense>
+                  <PrivateRoute>
+                    <MainPage />
+                  </PrivateRoute>
+                </AuthSuspense>
+              }
+            />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
