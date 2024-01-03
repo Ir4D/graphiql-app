@@ -4,7 +4,7 @@ import ErrorBoundary from './ErrorBoundary';
 import { vi } from 'vitest';
 
 describe('ErrorBoundary Component', () => {
-  test('renders children when there is no error', () => {
+  it('renders children when there is no error', () => {
     render(
       <ErrorBoundary>
         <div>Rendered without errors</div>

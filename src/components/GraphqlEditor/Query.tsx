@@ -24,7 +24,6 @@ const Query = () => {
           body: JSON.stringify({ query, variables: parsedVariables }),
         });
 
-        console.log('Headers:', headersObject);
         const result = await response.json();
         setData(result.data);
         setLoading(false);
