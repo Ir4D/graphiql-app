@@ -18,7 +18,6 @@ interface DocsMainType {
 }
 
 function Docs() {
-  //TODO: добавить классы в один файл, а потом style раздать зависимым и заменить все классы на style.что-то там
   const { apiUrl } = useQueryContext();
   const [openTypes, setOpenTypes] = useState<boolean>(false);
   const [openQueries, setOpenQueries] = useState<boolean>(false);
