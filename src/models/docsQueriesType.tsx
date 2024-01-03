@@ -2,6 +2,7 @@ import { ofType } from './docsType';
 
 export interface DocsProps {
   queries: DocsQueriesType;
+  style: CSSModuleClasses;
 }
 
 export interface DocsQueriesType {

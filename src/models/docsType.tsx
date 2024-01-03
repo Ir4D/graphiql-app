@@ -1,5 +1,6 @@
 export interface Props {
   type: Type;
+  style: CSSModuleClasses;
 }
 
 interface Type {

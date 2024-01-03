@@ -5,6 +5,7 @@ import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
 import { DocsQueriesType } from '../../../models/docsQueriesType';
 import { IntrospectionType } from 'graphql';
+import style from './Docs.module.scss';
 
 interface DocsSchema {
   queryType: { name: string };
@@ -37,39 +38,42 @@ function Docs() {
 
   return (
     schema && (
-      <div className="docs">
+      <div className={style.docs}>
         <span>
           <button
-            className="docs-link docs-base"
+            className={`${style.docs_link} ${style.docs_base}`}
             onClick={() => {
               setOpenTypes(!openTypes);
             }}
           >
             Types
           </button>
-          {!openTypes && <span className="docs-symbol"> ▼</span>}
+          {!openTypes && <span className={style.docs_symbol}> ▼</span>}
         </span>
 
         {openTypes && (
-          <div className="docs-nested">
-            <DocsTypes types={mainTypes as ReadonlyArray<IntrospectionType>} />
+          <div className={style.docs_nested}>
+            <DocsTypes
+              style={style}
+              types={mainTypes as ReadonlyArray<IntrospectionType>}
+            />
           </div>
         )}
         <span>
           <button
-            className="docs-link docs-base"
+            className={`${style.docs_link} ${style.docs_base}`}
             onClick={() => {
               setOpenQueries(!openQueries);
             }}
           >
             Query
           </button>
-          {!openQueries && <span className="docs-symbol"> ▼</span>}
+          {!openQueries && <span className={style.docs_symbol}> ▼</span>}
         </span>
 
         {openQueries && (
-          <div className="docs-nested">
-            <DocsQueries queries={queryType as DocsQueriesType} />
+          <div className={style.docs_nested}>
+            <DocsQueries style={style} queries={queryType as DocsQueriesType} />
           </div>
         )}
       </div>
