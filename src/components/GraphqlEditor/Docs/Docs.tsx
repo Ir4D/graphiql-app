@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../../utils/QueryContext/QueryContext';
-// import {
-//   IntrospectionObjectType,
-//   IntrospectionSchema,
-//   IntrospectionType,
-// } from 'graphql';
 import getSchema from '../../../utils/getSchema/getSchema';
 import { DocsTypes } from './DocsTypes/DocsTypes';
 import { DocsQueries } from './DocsQueries/DocsQueries';
