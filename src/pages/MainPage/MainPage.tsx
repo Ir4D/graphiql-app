@@ -41,6 +41,7 @@ const MainPage: React.FC<MainPageProps> = () => {
 
   const handleShowSettings = () => {
     setShowSettings(true);
+    docsPanelOpen && toggleDocsPanel();
   };
 
   const closeSettings = () => {
