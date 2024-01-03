@@ -26,10 +26,10 @@ export const Dashboard = () => {
     fetchUserName();
   }, [user, loading, navigate]);
   return (
-    <div className={styles.dashboard}>
+    <div className={styles.dashboard} data-testid="dashboard-component">
       <div className={styles.dashboard__container}>
-        <div>{name}</div>
-        <div>{user?.email}</div>
+        <div data-testid="dashboard-user-name">{name}</div>
+        <div data-testid="dashboard-email">{user?.email}</div>
       </div>
       <button className={styles.dashboard__btn} onClick={logout}>
         Logout
