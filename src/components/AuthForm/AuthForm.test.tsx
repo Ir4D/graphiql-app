@@ -5,19 +5,29 @@ import { vi } from 'vitest';
 
 vi.mock('./LoginForm/LoginForm', () => ({
   __esModule: true,
-  default: vi.fn((props) => <div data-testid="login-form" {...props}></div>),
-}));
-
-vi.mock('./SignupForm/SignupForm', () => ({
-  __esModule: true,
-  default: vi.fn((props) => <div data-testid="signup-form" {...props}></div>),
+  default: vi.fn((props) => {
+    if (props) {
+    }
+    return <div data-testid="login-form"></div>;
+  }),
 }));
 
 vi.mock('../SlideControls/SlideControls', () => ({
   __esModule: true,
-  default: vi.fn((props) => (
-    <div data-testid="slide-controls" {...props}></div>
-  )),
+  default: vi.fn((props) => {
+    if (props) {
+    }
+    return <div data-testid="slide-controls"></div>;
+  }),
+}));
+
+vi.mock('./SignupForm/SignupForm', () => ({
+  __esModule: true,
+  default: vi.fn((props) => {
+    if (props) {
+    }
+    return <div data-testid="signup-form"></div>;
+  }),
 }));
 
 describe('AuthForm Component', () => {

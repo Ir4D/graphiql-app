@@ -1,7 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import LoginForm from './LoginForm';
 import { vi } from 'vitest';
-import userEvent from '@testing-library/user-event';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -46,7 +45,7 @@ describe('LoginForm Component', () => {
   it('displays validation errors for invalid input', async () => {
     render(<LoginForm onClick={() => {}} />);
 
-    userEvent.click(screen.getByTestId('submit-button'));
+    fireEvent.submit(screen.getByTestId('submit-button'));
 
     expect(await screen.findByTestId('email-error')).toBeInTheDocument();
     expect(await screen.findByTestId('password-error')).toBeInTheDocument();

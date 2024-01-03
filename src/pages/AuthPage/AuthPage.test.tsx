@@ -5,7 +5,7 @@ import { vi } from 'vitest';
 
 vi.mock('../../components/AuthForm/AuthForm', () => ({
   __esModule: true,
-  default: vi.fn((props) => <div data-testid="auth-form" {...props}></div>),
+  default: vi.fn(() => <div data-testid="auth-form"></div>),
 }));
 
 vi.mock('../../components/Layout/Header/Header', () => ({
@@ -13,13 +13,15 @@ vi.mock('../../components/Layout/Header/Header', () => ({
   Header: vi.fn(() => <div data-testid="header"></div>),
 }));
 
+const mockUseAuth = {
+  isLogin: false,
+  toggleLoginStatus: vi.fn(),
+  setLoginStatus: vi.fn(),
+};
+
 vi.mock('../../utils/Auth/AuthContext', () => ({
   __esModule: true,
-  useAuth: vi.fn(() => ({
-    isLogin: false,
-    toggleLoginStatus: vi.fn(),
-    setLoginStatus: vi.fn(),
-  })),
+  useAuth: vi.fn(() => mockUseAuth),
 }));
 
 describe('AuthPage Component', () => {
