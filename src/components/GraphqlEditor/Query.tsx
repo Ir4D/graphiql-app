@@ -22,12 +22,15 @@ const Query = () => {
           body: JSON.stringify({ query, variables: parsedVariables }),
         });
 
-        console.log('Headers:', headersObject);
         const result = await response.json();
-        setData(result.data);
+        setData(result);
         setLoading(false);
+
+        if (!response.ok) {
+          throw new Error('No response for this query. Try something else.');
+        }
       } catch (error) {
-        console.error('GraphQL request error:', error);
+        console.error((error as Error).message);
       }
     };
 
