@@ -16,7 +16,11 @@ const SettingsModal = ({
   }
 
   return (
-    <div onClick={onClose} className={styles.settings_modal}>
+    <div
+      data-testid="settings-modal"
+      onClick={onClose}
+      className={styles.settings_modal}
+    >
       <div
         onClick={(event) => event.stopPropagation()}
         className={styles.settings_content}

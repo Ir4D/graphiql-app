@@ -28,12 +28,17 @@ const InputEditor: React.FC<InputEditorProps> = ({
 
   return (
     <div>
-      <h4 className={styles.inputEditor_item} onClick={handleToggle}>
+      <h4
+        className={styles.inputEditor_item}
+        data-testid="title-test-id"
+        onClick={handleToggle}
+      >
         {messages[locale][title]}
       </h4>
       {isOpen && (
         <textarea
           className={styles.inputEditor_text}
+          data-testid="textarea-test-id"
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
