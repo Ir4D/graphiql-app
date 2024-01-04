@@ -16,6 +16,7 @@ const requestSchema = async (url: string) => {
     return schema;
   } catch (error) {
     console.error('GraphQL schema request error:', error);
+    if (error instanceof Error) alert(error);
   }
 };
 

@@ -75,7 +75,6 @@ const MainPage: React.FC<MainPageProps> = () => {
   }) => {
     await setCustomApi(event.target.value);
   };
-  //TODO: кнопка должна быть неактивной, пока не придет респонс из DOCS
 
   useEffect(() => {
     (async () => {
@@ -88,7 +87,6 @@ const MainPage: React.FC<MainPageProps> = () => {
       <Header />
       <main className={styles.main_page}>
         <aside className={styles.menu_wrapper}>
-          {/* та самая кнопка */}
           {schema ? (
             <button className={styles.menu_docs} onClick={toggleDocsPanel}>
               <img src={iconDocs} alt="Docs" />
@@ -113,7 +111,7 @@ const MainPage: React.FC<MainPageProps> = () => {
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
             <Suspense fallback={<p>Loading...</p>}>
-              <Docs />
+              <Docs schema={schema} />
             </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
