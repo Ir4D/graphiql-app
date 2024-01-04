@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import parseHeaders from '../../utils/helpers/ParseHeaders';
+import Toast from '../../components/Toast/Toast';
 
 const Query = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   const { query, apiUrl, variables, headers } = useQueryContext();
 
@@ -27,22 +30,48 @@ const Query = () => {
         setLoading(false);
 
         if (!response.ok) {
-          throw new Error('No response for this query. Try something else.');
+          let errorMsg;
+          if (response.status === 400) {
+            errorMsg = 'Shomethis wrong with this query. Try something else';
+          } else if (response.status !== 404) {
+            errorMsg = `Can't fetch this API, please check that your URL is correct`;
+          }
+          throw new Error(errorMsg);
         }
       } catch (error) {
-        console.error((error as Error).message);
+        if (
+          (error instanceof SyntaxError &&
+            error.message === 'Unexpected end of JSON input') ||
+          (error instanceof TypeError && error.message === 'Failed to fetch')
+        ) {
+          setError(
+            `Can't fetch this API, please check that your URL is correct`
+          );
+        } else {
+          setError((error as Error).message);
+        }
+        setShowToast(true);
       }
     };
 
     fetchData();
   }, [apiUrl, headers, query, variables]);
 
+  const handleHideToast = () => {
+    setShowToast(false);
+  };
+
   return (
     <div>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <>
+          {error && showToast && (
+            <Toast message={`Error: ${error}`} onClose={handleHideToast} />
+          )}
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </>
       )}
     </div>
   );
