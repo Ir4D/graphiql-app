@@ -27,8 +27,6 @@ const SignupForm: React.FC = () => {
   });
 
   const onSubmit = (data: IFormSignupData) => {
-    console.log(data);
-    /*Отправка валидных данных в Firebase */
     registerWithEmailAndPassword(data.name, data.email, data.password);
   };
 
@@ -54,7 +52,6 @@ const SignupForm: React.FC = () => {
 
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) navigate('/main');

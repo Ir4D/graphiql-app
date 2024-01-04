@@ -31,9 +31,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
   });
 
   const onSubmit = (data: IFormLoginData) => {
-    /*создано исключительно для проверки*/
-    console.log(data);
-    /*Вход через валидные данные */
     logInWithEmailAndPassword(data.email, data.password);
   };
 
@@ -59,7 +56,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
 
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) navigate('/main');
