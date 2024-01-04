@@ -7,7 +7,7 @@ import { DocsQueriesType } from '../../../models/docsQueriesType';
 import { IntrospectionType } from 'graphql';
 import style from './Docs.module.scss';
 
-interface DocsSchema {
+export interface DocsSchema {
   queryType: { name: string };
   types: Array<DocsMainType>;
 }

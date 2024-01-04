@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './MainPage.module.scss';
 import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
@@ -8,6 +8,8 @@ import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
+import requestSchema from '../../utils/getSchema/getSchema';
+import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
 
 interface MainPageProps {}
 
@@ -22,6 +24,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const { locale, messages } = useLocalization();
   const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
     useQueryContext();
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
@@ -41,7 +44,7 @@ const MainPage: React.FC<MainPageProps> = () => {
 
   const handleShowSettings = () => {
     setShowSettings(true);
-    docsPanelOpen && toggleDocsPanel();
+    if (docsPanelOpen) toggleDocsPanel();
   };
 
   const closeSettings = () => {
@@ -72,15 +75,27 @@ const MainPage: React.FC<MainPageProps> = () => {
   }) => {
     await setCustomApi(event.target.value);
   };
+  //TODO: кнопка должна быть неактивной, пока не придет респонс из DOCS
+
+  useEffect(() => {
+    (async () => {
+      setSchema(await requestSchema(apiUrl));
+    })();
+  }, [apiUrl]);
 
   return (
     <>
       <Header />
       <main className={styles.main_page}>
         <aside className={styles.menu_wrapper}>
-          <button className={styles.menu_docs} onClick={toggleDocsPanel}>
-            <img src={iconDocs} alt="Docs" />
-          </button>
+          {/* та самая кнопка */}
+          {schema ? (
+            <button className={styles.menu_docs} onClick={toggleDocsPanel}>
+              <img src={iconDocs} alt="Docs" />
+            </button>
+          ) : (
+            <div></div>
+          )}
           <button className={styles.menu_settings}>
             <img
               src={iconSettings}
