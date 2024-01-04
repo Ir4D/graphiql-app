@@ -7,6 +7,7 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import Prettify from '../../components/Prettifying/Prettyfing';
 import InputEditor from '../../components/InputEditor/InputEditor';
 
 interface MainPageProps {}
@@ -54,6 +55,13 @@ const MainPage: React.FC<MainPageProps> = () => {
     await setVariables(variableInput);
     await setHeaders(headersInput);
     setQueryResult(true);
+  };
+
+  const handlePrettifyClick = () => {
+    const newQueryInput = Prettify(queryInput);
+    setQuery(newQueryInput);
+    changeQuery(newQueryInput);
+    setQueryInput(newQueryInput);
   };
 
   const handleShowSettings = () => {
@@ -129,8 +137,9 @@ const MainPage: React.FC<MainPageProps> = () => {
                   placeholder={messages[locale].query_placeholder}
                 />
               </div>
-              <div>
+              <div className={styles.query_btns}>
                 <button onClick={handleStartClick}>Start</button>
+                <button onClick={handlePrettifyClick}>Prettify</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
