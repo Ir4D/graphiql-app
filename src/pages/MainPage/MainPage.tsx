@@ -66,8 +66,11 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    if (queryInput) {
-      const newQueryInput = Prettify(queryInput);
+    const initialArray = queryInput.match(/[a-zA-Z]+|[^\s\w]/g);
+    if (!initialArray) {
+      return;
+    } else {
+      const newQueryInput = Prettify(initialArray);
       setQuery(newQueryInput!);
       changeQuery(newQueryInput!);
       setQueryInput(newQueryInput!);

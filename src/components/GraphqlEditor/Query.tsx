@@ -31,7 +31,9 @@ const Query = () => {
 
         if (!response.ok) {
           let errorMsg;
-          if (response.status === 400) {
+          if (response.status === 400 && !query) {
+            errorMsg = 'Shomethis wrong with this query. Try something else';
+          } else if (response.status === 400) {
             errorMsg = 'Shomethis wrong with this query. Try something else';
           }
           throw new Error(errorMsg);
