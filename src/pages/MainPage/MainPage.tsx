@@ -66,10 +66,12 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    const newQueryInput = Prettify(queryInput);
-    setQuery(newQueryInput);
-    changeQuery(newQueryInput);
-    setQueryInput(newQueryInput);
+    if (queryInput) {
+      const newQueryInput = Prettify(queryInput);
+      setQuery(newQueryInput!);
+      changeQuery(newQueryInput!);
+      setQueryInput(newQueryInput!);
+    }
   };
 
   const handleShowSettings = () => {

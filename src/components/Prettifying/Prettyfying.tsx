@@ -1,5 +1,8 @@
 const Prettify = (inputString: string) => {
   const initialArray = inputString.match(/[a-zA-Z]+|[^\s\w]/g);
+  if (!initialArray) {
+    return;
+  }
   let level = 0;
   let insideParentheses = false;
   let insideCurlyParentheses = false;
