@@ -1,6 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import LoginForm from './LoginForm';
 import { vi } from 'vitest';
+import * as yupResolverModule from '@hookform/resolvers/yup';
+import * as hookFormModule from 'react-hook-form';
+import * as authModule from 'react-firebase-hooks/auth';
+import * as localizationContextModule from '../../../utils/localization/localizationContext';
+import * as routerDomModule from 'react-router-dom';
+import * as firebaseModule from '../../../utils/firebase/firebase';
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -13,7 +19,7 @@ vi.mock('@hookform/resolvers/yup', () => ({
 vi.mock('react-hook-form', () => ({
   useForm: vi.fn(() => ({
     register: vi.fn(),
-    handleSubmit: vi.fn(),
+    handleSubmit: (onSubmit: void) => onSubmit,
     formState: { errors: {}, isSubmitting: false },
   })),
 }));
@@ -29,6 +35,11 @@ vi.mock('../../../utils/localization/localizationContext', () => ({
 vi.mock('react-router-dom', () => ({
   Link: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   useNavigate: vi.fn(),
+}));
+
+vi.mock('../../../utils/firebase/firebase', () => ({
+  auth: {},
+  logInWithEmailAndPassword: vi.fn(),
 }));
 
 describe('LoginForm Component', () => {
@@ -49,5 +60,17 @@ describe('LoginForm Component', () => {
 
     expect(await screen.findByTestId('email-error')).toBeInTheDocument();
     expect(await screen.findByTestId('password-error')).toBeInTheDocument();
+  });
+
+  it('calls onSubmit function when form is submitted', () => {
+    render(<LoginForm onClick={() => {}} />);
+
+    fireEvent.submit(screen.getByTestId('submit-button'));
+    expect(yupResolverModule.yupResolver).toHaveBeenCalled();
+    expect(hookFormModule.useForm).toHaveBeenCalled();
+    expect(authModule.useAuthState).toHaveBeenCalled();
+    expect(localizationContextModule.useLocalization).toHaveBeenCalled();
+    expect(routerDomModule.useNavigate).toHaveBeenCalled();
+    expect(firebaseModule.logInWithEmailAndPassword).toHaveBeenCalled();
   });
 });
