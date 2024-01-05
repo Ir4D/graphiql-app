@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
+import parseHeaders from '../../utils/helpers/ParseHeaders';
 
 const Query = () => {
-  // const apiUrl = 'https://rickandmortyapi.com/graphql';
-
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { query, apiUrl } = useQueryContext();
+  const { query, apiUrl, variables, headers } = useQueryContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const parsedVariables = variables ? JSON.parse(variables) : null;
+        const headersObject = headers ? parseHeaders(headers) : {};
+        if (!headersObject['Content-Type']) {
+          headersObject['Content-Type'] = 'application/json';
+        }
         const response = await fetch(apiUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query }),
+          headers: headersObject,
+          body: JSON.stringify({ query, variables: parsedVariables }),
         });
 
         const result = await response.json();
@@ -27,7 +31,7 @@ const Query = () => {
     };
 
     fetchData();
-  }, [apiUrl, query]);
+  }, [apiUrl, headers, query, variables]);
 
   return (
     <div>

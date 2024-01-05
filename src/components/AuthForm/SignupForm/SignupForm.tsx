@@ -27,8 +27,6 @@ const SignupForm: React.FC = () => {
   });
 
   const onSubmit = (data: IFormSignupData) => {
-    console.log(data);
-    /*Отправка валидных данных в Firebase */
     registerWithEmailAndPassword(data.name, data.email, data.password);
   };
 
@@ -44,14 +42,16 @@ const SignupForm: React.FC = () => {
         type={type}
         placeholder={placeholder}
         {...register(fieldName, { required: true })}
+        id={fieldName}
       />
-      <p className={styles.errorMess}>{errors?.[fieldName]?.message}</p>
+      <p className={styles.errorMess} data-testid={`${fieldName}-error`}>
+        {errors?.[fieldName]?.message}
+      </p>
     </div>
   );
 
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) navigate('/main');
@@ -78,6 +78,7 @@ const SignupForm: React.FC = () => {
       <div className={styles.field}>
         <input
           type="submit"
+          data-testid="submit-button"
           value={messages[locale].Sign_up}
           disabled={isDisabled}
           className={`${styles.submitButton} ${

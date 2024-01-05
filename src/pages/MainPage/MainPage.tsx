@@ -10,6 +10,8 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
 import requestSchema from '../../utils/getSchema/getSchema';
 import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
+import Prettify from '../../components/Prettifying/Prettyfing';
+import InputEditor from '../../components/InputEditor/InputEditor';
 
 interface MainPageProps {}
 
@@ -21,15 +23,32 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [selectedApi, setSelectedApi] = useState('');
   const [customApi, setCustomApi] = useState('');
   const [isCustom, setIsCustom] = useState(false);
+  const [variableInput, setVariableInput] = useState('');
+  const [headersInput, setHesdersInput] = useState('');
   const { locale, messages } = useLocalization();
-  const { apiUrl, setApiUrl, changeApiUrl, setQuery, changeQuery } =
-    useQueryContext();
+  const {
+    apiUrl,
+    setApiUrl,
+    changeApiUrl,
+    setQuery,
+    changeQuery,
+    setVariables,
+    setHeaders,
+  } = useQueryContext();
   const [schema, setSchema] = useState<DocsSchema | null>(null);
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
+  };
+
+  const handleVariablesChange = (value: string) => {
+    setVariableInput(value);
+  };
+
+  const handleHeadersChange = (value: string) => {
+    setHesdersInput(value);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,7 +58,16 @@ const MainPage: React.FC<MainPageProps> = () => {
   const handleStartClick = async () => {
     await setQuery(queryInput);
     await changeQuery(queryInput);
+    await setVariables(variableInput);
+    await setHeaders(headersInput);
     setQueryResult(true);
+  };
+
+  const handlePrettifyClick = () => {
+    const newQueryInput = Prettify(queryInput);
+    setQuery(newQueryInput);
+    changeQuery(newQueryInput);
+    setQueryInput(newQueryInput);
   };
 
   const handleShowSettings = () => {
@@ -127,15 +155,32 @@ const MainPage: React.FC<MainPageProps> = () => {
                   placeholder={messages[locale].query_placeholder}
                 />
               </div>
-              <div>
+              <div className={styles.query_btns}>
                 <button onClick={handleStartClick}>Start</button>
+                <button onClick={handlePrettifyClick}>Prettify</button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
-                  <h4>{messages[locale].variables}</h4>
+                  <InputEditor
+                    value={variableInput}
+                    onChange={handleVariablesChange}
+                    placeholder={
+                      useLocalization().messages[useLocalization().locale]
+                        .enter_variables_placeholder
+                    }
+                    title="variables"
+                  />
                 </div>
                 <div className={styles.headers}>
-                  <h4>{messages[locale].headers}</h4>
+                  <InputEditor
+                    value={headersInput}
+                    onChange={handleHeadersChange}
+                    placeholder={
+                      useLocalization().messages[useLocalization().locale]
+                        .enter_headers_placeholder
+                    }
+                    title="headers"
+                  />
                 </div>
               </div>
             </div>

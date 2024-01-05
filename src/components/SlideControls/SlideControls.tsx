@@ -12,6 +12,7 @@ const SlideControls: React.FC<SlideControlsProps> = ({
   return (
     <div className={styles.slide_controls}>
       <input
+        data-testid="login"
         type="radio"
         name="slider"
         id="login"
@@ -19,6 +20,7 @@ const SlideControls: React.FC<SlideControlsProps> = ({
         onChange={handleLoginClick}
       />
       <input
+        data-testid="signup"
         type="radio"
         name="slider"
         id="signup"
