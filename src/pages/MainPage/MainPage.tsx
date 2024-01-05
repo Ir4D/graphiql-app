@@ -207,6 +207,7 @@ const MainPage: React.FC<MainPageProps> = () => {
                 type="text"
                 value={customApi}
                 onChange={handleCustomApiChange}
+                data-testid="custom-api-input"
               />
             </div>
           )}
