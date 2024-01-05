@@ -10,7 +10,7 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
 import requestSchema from '../../utils/getSchema/getSchema';
 import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
-import Prettify from '../../components/Prettifying/Prettyfing';
+import Prettify from '../../components/Prettifying/Prettyfying';
 import InputEditor from '../../components/InputEditor/InputEditor';
 import Toast from '../../components/Toast/Toast';
 

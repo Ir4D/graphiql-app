@@ -25,6 +25,8 @@ const Prettify = (inputString: string) => {
     } else if ((char === ':' || char === ',') && insideParentheses) {
       if (nextChar !== '{') {
         res.push(char, ' ');
+      } else {
+        res.push(char);
       }
     } else if (char === '{') {
       if (!insideParentheses) {
