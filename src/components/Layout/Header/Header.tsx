@@ -55,9 +55,6 @@ export const Header = () => {
 
         <div className={styles.sign_container}>
           {user ? (
-            // <button className={styles.button}>
-            //   {messages[locale].Sign_out}
-            // </button>
             <Dashboard />
           ) : (
             <>
