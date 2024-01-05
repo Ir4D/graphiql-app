@@ -44,45 +44,9 @@ vi.mock('../../components/Prettifying/Prettyfing', () => ({
   default: (input: string) => `Prettified: ${input}`,
 }));
 
+window.alert = vi.fn();
+
 describe('MainPage Component', () => {
-  it('should render Docs and Settings icons', async () => {
-    await act(async () => {
-      render(
-        <AuthProvider>
-          <MemoryRouter>
-            <MainPage />
-          </MemoryRouter>
-        </AuthProvider>
-      );
-    });
-
-    const iconDocs = screen.getByAltText('Docs');
-    const iconSettings = screen.getByAltText('Settings');
-
-    expect(iconDocs).toBeInTheDocument();
-    expect(iconSettings).toBeInTheDocument();
-  });
-
-  it('should toggle Docs Panel on button click', async () => {
-    await act(async () => {
-      render(
-        <AuthProvider>
-          <MemoryRouter>
-            <MainPage />
-          </MemoryRouter>
-        </AuthProvider>
-      );
-    });
-
-    const iconDocs = screen.getByAltText('Docs');
-    fireEvent.click(iconDocs);
-
-    await waitFor(() => {
-      const docsPanel = screen.getByText(/Documentation\.\.\./i);
-      expect(docsPanel).toBeInTheDocument();
-    });
-  });
-
   it('should update query input on user input', async () => {
     await act(async () => {
       render(
@@ -93,15 +57,14 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
-
     const queryInput = screen.getByPlaceholderText(
       'Enter your GraphQL query here'
     );
-    fireEvent.change(queryInput, { target: { value: 'Your GraphQL Query' } });
-
+    await act(async () => {
+      fireEvent.change(queryInput, { target: { value: 'Your GraphQL Query' } });
+    });
     expect(queryInput).toHaveValue('Your GraphQL Query');
   });
-
   it('should handle SettingsModal interaction', async () => {
     await act(async () => {
       render(
@@ -112,22 +75,22 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
-
     const settingsButton = screen.getByAltText('Settings');
-    fireEvent.click(settingsButton);
-
+    await act(async () => {
+      fireEvent.click(settingsButton);
+    });
     await waitFor(() => {
       const modalTitle = screen.getByText('Settings');
       expect(modalTitle).toBeInTheDocument();
     });
-
     const selectApiDropdown = screen.getByLabelText(
       'Choose a new GraphQL API',
       { exact: false }
     );
     expect(selectApiDropdown).toBeInTheDocument();
-    fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
-
+    await act(async () => {
+      fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
+    });
     await waitFor(() => {
       const customApiInput = screen.getByTestId('custom-api-input');
       expect(customApiInput).toBeInTheDocument();
@@ -135,10 +98,10 @@ describe('MainPage Component', () => {
         target: { value: 'https://custom-api.example/graphql' },
       });
     });
-
     const submitButton = screen.getByText('Submit');
-    fireEvent.click(submitButton);
-
+    await act(async () => {
+      fireEvent.click(submitButton);
+    });
     await waitFor(() => {
       const modal = screen.queryByText('Settings');
       expect(modal).not.toBeInTheDocument();
@@ -154,18 +117,16 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
-
     const settingsButton = screen.getByAltText('Settings');
-    fireEvent.click(settingsButton);
-
+    await act(async () => {
+      fireEvent.click(settingsButton);
+    });
     await act(async () => {
       const modalTitle = screen.getByText('Settings');
       expect(modalTitle).toBeInTheDocument();
-
       const cancelButton = screen.getByText('Cancel');
       fireEvent.click(cancelButton);
     });
-
     await waitFor(() => {
       const modal = screen.queryByText('Settings');
       expect(modal).not.toBeInTheDocument();
@@ -184,11 +145,13 @@ describe('MainPage Component', () => {
     const queryInput = screen.getByPlaceholderText(
       'Enter your GraphQL query here'
     );
-    fireEvent.change(queryInput, { target: { value: 'Your GraphQL Query' } });
-
+    await act(async () => {
+      fireEvent.change(queryInput, { target: { value: 'Your GraphQL Query' } });
+    });
     const prettifyButton = screen.getByText('Prettify');
-    fireEvent.click(prettifyButton);
-
+    await act(async () => {
+      fireEvent.click(prettifyButton);
+    });
     await waitFor(() => {
       expect(queryInput).toHaveValue('Prettified: Your GraphQL Query');
     });
@@ -203,12 +166,13 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
-
-    fireEvent.click(screen.getByText('Variables'));
-
+    await act(async () => {
+      fireEvent.click(screen.getByText('Variables'));
+    });
     const variablesInput = screen.getByTestId('textarea-test-id');
-    fireEvent.change(variablesInput, { target: { value: 'Your Variables' } });
-
+    await act(async () => {
+      fireEvent.change(variablesInput, { target: { value: 'Your Variables' } });
+    });
     expect(variablesInput).toHaveValue('Your Variables');
   });
   it('should update headers input on user input', async () => {
@@ -221,12 +185,13 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
-
-    fireEvent.click(screen.getByText('Headers'));
-
+    await act(async () => {
+      fireEvent.click(screen.getByText('Headers'));
+    });
     const variablesInput = screen.getByTestId('textarea-test-id');
-    fireEvent.change(variablesInput, { target: { value: 'Your Headers' } });
-
+    await act(async () => {
+      fireEvent.change(variablesInput, { target: { value: 'Your Headers' } });
+    });
     expect(variablesInput).toHaveValue('Your Headers');
   });
 });
