@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './MainPage.module.scss';
 import iconDocs from '../../assets/img/icons_docs.png';
 import iconSettings from '../../assets/img/icons_settings.png';
@@ -7,6 +7,9 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { useQueryContext } from '../../utils/QueryContext/QueryContext';
 import SettingsModal from '../../components/SettingsModal/SettingsModal';
+import { lazy, Suspense } from 'react';
+import requestSchema from '../../utils/getSchema/getSchema';
+import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
 import Prettify from '../../components/Prettifying/Prettyfing';
 import InputEditor from '../../components/InputEditor/InputEditor';
 
@@ -32,6 +35,9 @@ const MainPage: React.FC<MainPageProps> = () => {
     setVariables,
     setHeaders,
   } = useQueryContext();
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
+
+  const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
   const toggleDocsPanel = () => {
     setDocsPanelOpen((prevDocsPanelOpen) => !prevDocsPanelOpen);
@@ -66,6 +72,7 @@ const MainPage: React.FC<MainPageProps> = () => {
 
   const handleShowSettings = () => {
     setShowSettings(true);
+    if (docsPanelOpen) toggleDocsPanel();
   };
 
   const closeSettings = () => {
@@ -97,14 +104,24 @@ const MainPage: React.FC<MainPageProps> = () => {
     await setCustomApi(event.target.value);
   };
 
+  useEffect(() => {
+    (async () => {
+      setSchema(await requestSchema(apiUrl));
+    })();
+  }, [apiUrl]);
+
   return (
     <>
       <Header />
       <main className={styles.main_page}>
         <aside className={styles.menu_wrapper}>
-          <button className={styles.menu_docs} onClick={toggleDocsPanel}>
-            <img src={iconDocs} alt="Docs" />
-          </button>
+          {schema ? (
+            <button className={styles.menu_docs} onClick={toggleDocsPanel}>
+              <img src={iconDocs} alt="Docs" />
+            </button>
+          ) : (
+            <div></div>
+          )}
           <button className={styles.menu_settings}>
             <img
               src={iconSettings}
@@ -115,14 +132,15 @@ const MainPage: React.FC<MainPageProps> = () => {
         </aside>
         <section className={styles.content_wrapper}>
           <div
-            className={`${styles.docs} ${docsPanelOpen ? styles.active : ''}`}
+            className={`${styles.docsMain} ${
+              docsPanelOpen ? styles.active : ''
+            }`}
           >
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
             <p>Documentation...</p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
-              sunt corrupti minima laudantium eveniet modi!
-            </p>
+            <Suspense fallback={<p>Loading...</p>}>
+              <Docs schema={schema} />
+            </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
             <div className={styles.query}>
