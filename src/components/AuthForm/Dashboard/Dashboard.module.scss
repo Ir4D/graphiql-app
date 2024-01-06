@@ -30,3 +30,15 @@
   background-color: $color-base;
   color: $color-neutral;
 }
+
+.user_name,
+.user_mail {
+  overflow-y: clip;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .dashboard__container {
+    font-size: 14px;
+  }
+}

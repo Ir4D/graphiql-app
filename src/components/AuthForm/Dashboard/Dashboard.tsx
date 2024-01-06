@@ -27,8 +27,12 @@ export const Dashboard = () => {
   return (
     <div className={styles.dashboard} data-testid="dashboard-component">
       <div className={styles.dashboard__container}>
-        <div data-testid="dashboard-user-name">{name}</div>
-        <div data-testid="dashboard-email">{user?.email}</div>
+        <div className={styles.user_name} data-testid="dashboard-user-name">
+          {name}
+        </div>
+        <div className={styles.user_mail} data-testid="dashboard-email">
+          {user?.email}
+        </div>
       </div>
       <button className={styles.dashboard__btn} onClick={logout}>
         Logout
