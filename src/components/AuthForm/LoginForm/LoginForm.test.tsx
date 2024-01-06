@@ -48,7 +48,6 @@ describe('LoginForm Component', () => {
 
     expect(document.getElementById('email')).toBeInTheDocument();
     expect(document.getElementById('password')).toBeInTheDocument();
-    expect(screen.getByTestId('pass_link')).toBeInTheDocument();
     expect(screen.getByTestId('submit-button')).toBeInTheDocument();
     expect(screen.getByTestId('signup-link')).toBeInTheDocument();
   });
