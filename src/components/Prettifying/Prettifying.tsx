@@ -15,14 +15,19 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
       insideParentheses = false;
     }
 
+    if (level < 0) {
+      return;
+    }
+
     if (
-      char.match(/[a-zA-Z]/) &&
-      nextChar.match(/[a-zA-Z]/) &&
+      char.match(/[a-zA-Z0-9]/) &&
+      nextChar &&
+      nextChar.match(/[a-zA-Z0-9]/) &&
       !insideCurlyParentheses
     ) {
       res.push(char, ' ');
     } else if ((char === ':' || char === ',') && insideParentheses) {
-      if (nextChar !== '{') {
+      if (nextChar && nextChar !== '{') {
         res.push(char, ' ');
       } else {
         res.push(char);
@@ -39,11 +44,14 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
         res.push(' ', char);
       }
     } else if (char === '}' && !insideParentheses) {
+      if (level <= 0) {
+        return;
+      }
       level--;
       insideCurlyParentheses = false;
       res.push('\n', '  '.repeat(level), char);
-    } else if (insideCurlyParentheses && char.match(/[a-zA-Z]/)) {
-      if (nextChar.match(/[a-zA-Z]/)) {
+    } else if (insideCurlyParentheses && char.match(/[a-zA-Z0-9]/)) {
+      if (nextChar && nextChar.match(/[a-zA-Z0-9]/)) {
         res.push(char, '\n', '  '.repeat(level));
       } else {
         res.push(char);
