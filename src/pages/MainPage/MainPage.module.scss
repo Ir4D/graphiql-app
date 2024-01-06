@@ -210,13 +210,14 @@
   }
 }
 
-.menu_docs, .menu_settings {
+.menu_docs,
+.menu_settings {
   transition: transform 0.4s ease;
 }
 .menu_docs:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
 .menu_settings:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
