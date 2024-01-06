@@ -45,4 +45,9 @@ a {
   background-image: url(../../../assets/images/logo/rss_logo.svg);
   background-repeat: no-repeat;
   background-position: center;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.05); 
+  }
 }
