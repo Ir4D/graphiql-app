@@ -8,6 +8,8 @@ import { Header } from '../../components/Layout/Header/Header';
 import { useLocalization } from '../../utils/localization/localizationContext';
 import { auth } from '../../utils/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Developer from '../../components/Developer/Developer';
+
 function WelcomePage() {
   const { locale, messages } = useLocalization();
   const [user] = useAuthState(auth);
@@ -61,49 +63,30 @@ function WelcomePage() {
         <section className={styles.team_wrapper}>
           <h3 className={styles.heading}>{messages[locale].team}</h3>
           <div className={styles.developers}>
-            <div className={styles.developer}>
-              <img src={avatarFemale1} alt="avatar" />
-              <div className={styles.info}>
-                <p className={styles.name}>
-                  <a href="https://github.com/Ir4D">
-                    {messages[locale].Irina} <br />
-                    {messages[locale].Dedova}
-                  </a>
-                </p>
-                <p className={styles.role}>{messages[locale].team_lead}</p>
-                <p className={styles.contribution}>Welcome page, Main page</p>
-              </div>
-            </div>
-            <div className={styles.developer}>
-              <img src={avatarFemale2} alt="avatar" />
-              <div className={styles.info}>
-                <p className={styles.name}>
-                  <a href="https://github.com/Yuliya0503">
-                    {messages[locale].Yuliya} <br />
-                    {messages[locale].Narkevich}
-                  </a>
-                </p>
-                <p className={styles.role}>{messages[locale].team_member}</p>
-                <p className={styles.contribution}>
-                  Sign in/ sign up page, routing, 404 page
-                </p>
-              </div>
-            </div>
-            <div className={styles.developer}>
-              <img src={avatarMale} alt="avatar" />
-              <div className={styles.info}>
-                <p className={styles.name}>
-                  <a href="https://github.com/DragonRomeo">
-                    {messages[locale].Ilya} <br />
-                    {messages[locale].Romanov}
-                  </a>
-                </p>
-                <p className={styles.role}>{messages[locale].team_member}</p>
-                <p className={styles.contribution}>
-                  Header & footer, authentication
-                </p>
-              </div>
-            </div>
+            <Developer
+              avatar={avatarFemale1}
+              firstName={messages[locale].Irina}
+              lastName={messages[locale].Dedova}
+              github="https://github.com/Ir4D"
+              role={messages[locale].team_lead}
+              contribution="Welcome page, Main page"
+            />
+            <Developer
+              avatar={avatarFemale2}
+              firstName={messages[locale].Yuliya}
+              lastName={messages[locale].Narkevich}
+              github="https://github.com/Yuliya0503"
+              role={messages[locale].team_member}
+              contribution="Sign in/ sign up page, routing, 404 page"
+            />
+            <Developer
+              avatar={avatarMale}
+              firstName={messages[locale].Ilya}
+              lastName={messages[locale].Romanov}
+              github="https://github.com/DragonRomeo"
+              role={messages[locale].team_member}
+              contribution=" Header & footer, authentication"
+            />
           </div>
         </section>
       </div>

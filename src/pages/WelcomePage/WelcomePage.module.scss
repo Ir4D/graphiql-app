@@ -128,47 +128,5 @@ section {
     max-width: 50em;
     margin: 0 auto;
     padding-bottom: 2em;
-
-    .developer {
-      width: calc(28% - 1.4em);
-      margin: 0 0.6em 1.4em;
-      padding: 0.8em;
-      background-color: $grey;
-      border-radius: 10px;
-
-      img {
-        margin: 1em auto 1em;
-        width: 90%;
-        border-radius: 50%;
-      }
-
-      .info {
-        .name {
-          font-size: 1.2em;
-          font-weight: 900;
-        }
-
-        .name a {
-          text-decoration: none;
-          color: $white_accent;
-        }
-
-        .role {
-          font-size: 1em;
-        }
-
-        .contribution {
-          font-size: 0.9em;
-        }
-      }
-
-      @media (max-width: 600px) {
-        width: 50%;
-      }
-
-      @media (max-width: 480px) {
-        width: 70%;
-      }
-    }
   }
 }

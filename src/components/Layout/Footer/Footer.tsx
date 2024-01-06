@@ -21,8 +21,6 @@ export const Footer = () => {
         <span>2024</span>
       </div>
 
-      {/* Если такая реализация линка на курс не подойдет, то можно заморочиться с SVG */}
-
       <div className={styles.rss_container}>
         <a href="https://rs.school/react/">
           <div className={styles.rss_school_img}></div>

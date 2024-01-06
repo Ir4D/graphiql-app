@@ -1,6 +1,5 @@
 @use './variables.scss' as *;
 
-/* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 :root {
@@ -16,12 +15,11 @@
   padding: 0;
 }
 
-/* LINK & <a> */
-
 .link,
 a {
   color: $color-neutral;
   text-decoration: none;
+  transition: all 0.4s ease;
 }
 
 .link:hover,
