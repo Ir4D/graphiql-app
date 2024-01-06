@@ -3,7 +3,9 @@
 
 .main {
   display: flex;
-  height: 96vh;
+  min-height: calc(90vh - 2.5em);
+  padding-top: 4em;
+  padding-bottom: 1em;
   width: 100%;
   align-items: center;
   justify-content: center;
