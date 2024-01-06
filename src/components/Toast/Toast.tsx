@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './Toast.module.scss';
 import { ToastProps } from '../../models/toast';
 
-const Toast: React.FC<ToastProps> = ({ message, duration = 4000, onClose }) => {
+const Toast: React.FC<ToastProps> = ({ message, duration = 3000, onClose }) => {
   const [toastVisible, setToastVisible] = useState(true);
 
   useEffect(() => {

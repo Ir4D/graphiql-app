@@ -10,8 +10,9 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
 import requestSchema from '../../utils/getSchema/getSchema';
 import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
-import Prettify from '../../components/Prettifying/Prettyfing';
+import Prettify from '../../components/Prettifying/Prettyfying';
 import InputEditor from '../../components/InputEditor/InputEditor';
+import Toast from '../../components/Toast/Toast';
 
 interface MainPageProps {}
 
@@ -36,6 +37,7 @@ const MainPage: React.FC<MainPageProps> = () => {
     setHeaders,
   } = useQueryContext();
   const [schema, setSchema] = useState<DocsSchema | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
@@ -64,10 +66,15 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    const newQueryInput = Prettify(queryInput);
-    setQuery(newQueryInput);
-    changeQuery(newQueryInput);
-    setQueryInput(newQueryInput);
+    const initialArray = queryInput.match(/[a-zA-Z]+|[^\s\w]/g);
+    if (!initialArray) {
+      return;
+    } else {
+      const newQueryInput = Prettify(initialArray);
+      setQuery(newQueryInput!);
+      changeQuery(newQueryInput!);
+      setQueryInput(newQueryInput!);
+    }
   };
 
   const handleShowSettings = () => {
@@ -87,7 +94,11 @@ const MainPage: React.FC<MainPageProps> = () => {
       await setApiUrl(selectedApi);
       await changeApiUrl(selectedApi);
     }
+    setQuery('');
+    changeQuery('');
+    setQueryInput('');
     setShowSettings(false);
+    setQueryResult(false);
   };
 
   const handleSelectApiChange = async (event: {
@@ -104,9 +115,17 @@ const MainPage: React.FC<MainPageProps> = () => {
     await setCustomApi(event.target.value);
   };
 
+  const handleError = () => {
+    setToastVisible(true);
+  };
+
+  const handleHideError = () => {
+    setToastVisible(false);
+  };
+
   useEffect(() => {
     (async () => {
-      setSchema(await requestSchema(apiUrl));
+      setSchema(await requestSchema(apiUrl, handleError));
     })();
   }, [apiUrl]);
 
@@ -143,6 +162,12 @@ const MainPage: React.FC<MainPageProps> = () => {
             </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
+            {toastVisible && (
+              <Toast
+                message="Unable to get this API, please check that your URL is correct"
+                onClose={handleHideError}
+              />
+            )}
             <div className={styles.query}>
               <div className={styles.query_field}>
                 <h3 className={styles.query_title}>

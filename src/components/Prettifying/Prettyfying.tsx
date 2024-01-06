@@ -1,5 +1,4 @@
-const Prettify = (inputString: string) => {
-  const initialArray = inputString.match(/[a-zA-Z]+|[^\s\w]/g);
+const Prettify = (initialArray: RegExpMatchArray | null) => {
   let level = 0;
   let insideParentheses = false;
   let insideCurlyParentheses = false;
@@ -25,6 +24,8 @@ const Prettify = (inputString: string) => {
     } else if ((char === ':' || char === ',') && insideParentheses) {
       if (nextChar !== '{') {
         res.push(char, ' ');
+      } else {
+        res.push(char);
       }
     } else if (char === '{') {
       if (!insideParentheses) {

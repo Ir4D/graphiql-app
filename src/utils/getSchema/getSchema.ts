@@ -1,6 +1,9 @@
 import { getIntrospectionQuery } from 'graphql';
 
-const requestSchema = async (url: string) => {
+const requestSchema = async (
+  url: string,
+  handleError: (error: Error) => void
+) => {
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -15,8 +18,13 @@ const requestSchema = async (url: string) => {
     const schema = result.data.__schema;
     return schema;
   } catch (error) {
-    console.error('GraphQL schema request error:', error);
-    if (error instanceof Error) alert(error);
+    if (
+      (error instanceof SyntaxError &&
+        error.message === 'Unexpected end of JSON input') ||
+      (error instanceof TypeError && error.message === 'Failed to fetch')
+    ) {
+      handleError(error);
+    }
   }
 };
 
