@@ -75,19 +75,21 @@ describe('Query component', () => {
     await act(async () => {
       await waitFor(() => {
         expect(
-          screen.getByText(/Shomethis wrong with this query/)
+          screen.getByText(/Error: Shomethig is wrong with this query/i)
         ).toBeInTheDocument();
       });
     });
 
-    const toastElement = screen.getByText(/Shomethis wrong with this query/);
+    const toastElement = screen.getByText(
+      /Error: Shomethig is wrong with this query/i
+    );
     await act(async () => {
       toastElement.click();
     });
     await act(async () => {
       await waitFor(() => {
         expect(
-          screen.queryByText(/Shomethis wrong with this query/)
+          screen.queryByText(/Error: Shomethig is wrong with this query/i)
         ).toBeNull();
       });
     });
