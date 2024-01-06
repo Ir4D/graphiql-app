@@ -156,7 +156,6 @@ const MainPage: React.FC<MainPageProps> = () => {
             }`}
           >
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
-            <p>Documentation...</p>
             <Suspense fallback={<p>Loading...</p>}>
               <Docs schema={schema} />
             </Suspense>
