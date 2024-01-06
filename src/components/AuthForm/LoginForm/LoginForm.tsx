@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../AuthForm.module.scss';
 import validationLoginSchema from './validationLoginSchema';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { IFormLoginData } from '../../../models/forms';
 import { useLocalization } from '../../../utils/localization/localizationContext';
 import {
@@ -73,9 +73,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClick }) => {
         'password',
         `${messages[locale].placeholder_password}`
       )}
-      <div className={styles.pass_link} data-testid="pass_link">
-        <Link to="/reset">{messages[locale].pass_link}</Link>
-      </div>
       <div className={styles.field}>
         <input
           type="submit"
