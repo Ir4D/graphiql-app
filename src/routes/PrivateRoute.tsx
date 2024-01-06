@@ -19,7 +19,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
         await auth.currentUser;
         setAuthChecked(true);
       } catch (error) {
-        console.error('Authentication check failed:', error);
+        alert(`Authentication check failed:', error`);
         setAuthChecked(true);
       }
     };
