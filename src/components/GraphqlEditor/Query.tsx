@@ -31,10 +31,10 @@ const Query = () => {
 
         if (!response.ok) {
           let errorMsg;
-          if (response.status === 400) {
+          if (response.status === 400 && !query) {
             errorMsg = 'Shomethis wrong with this query. Try something else';
-          } else if (response.status !== 404) {
-            errorMsg = `Can't fetch this API, please check that your URL is correct`;
+          } else if (response.status === 400) {
+            errorMsg = 'Shomethis wrong with this query. Try something else';
           }
           throw new Error(errorMsg);
         }
@@ -44,9 +44,7 @@ const Query = () => {
             error.message === 'Unexpected end of JSON input') ||
           (error instanceof TypeError && error.message === 'Failed to fetch')
         ) {
-          setError(
-            `Can't fetch this API, please check that your URL is correct`
-          );
+          return;
         } else {
           setError((error as Error).message);
         }
