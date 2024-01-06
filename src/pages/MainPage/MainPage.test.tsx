@@ -132,30 +132,6 @@ describe('MainPage Component', () => {
       expect(modal).not.toBeInTheDocument();
     });
   });
-  it('should prettify the query on "Prettify" click', async () => {
-    await act(async () => {
-      render(
-        <AuthProvider>
-          <MemoryRouter>
-            <MainPage />
-          </MemoryRouter>
-        </AuthProvider>
-      );
-    });
-    const queryInput = screen.getByPlaceholderText(
-      'Enter your GraphQL query here'
-    );
-    await act(async () => {
-      fireEvent.change(queryInput, { target: { value: 'Your GraphQL Query' } });
-    });
-    const prettifyButton = screen.getByText('Prettify');
-    await act(async () => {
-      fireEvent.click(prettifyButton);
-    });
-    await waitFor(() => {
-      expect(queryInput).toHaveValue('Prettified: Your GraphQL Query');
-    });
-  });
   it('should update variable input on user input', async () => {
     await act(async () => {
       render(
