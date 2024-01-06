@@ -194,7 +194,7 @@
 @media (max-width: $tablet_size) {
   .main_page {
     gap: 0;
-    height: 113vh;
+    height: 150vh;
   }
   .menu_wrapper {
     width: 2.5em;
@@ -218,7 +218,16 @@
     font-size: 1em;
     margin-bottom: 5px;
   }
+
+  .docs_title {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
   .editor_wrapper {
+    flex-direction: column;
+  }
+
+  .query_wrapper {
     flex-direction: column;
   }
 }
