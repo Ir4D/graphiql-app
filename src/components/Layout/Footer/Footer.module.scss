@@ -46,3 +46,13 @@ a {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+@media (max-width: 470px) {
+  span {
+    font-size: 14px;
+  }
+
+  a {
+    font-size: 14px;
+  }
+}
