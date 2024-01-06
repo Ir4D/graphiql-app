@@ -176,6 +176,15 @@
   height: 2em;
   margin-top: 0.5em;
   margin-bottom: 1em;
+  outline: none;
+  padding-left: 15px;
+  font-size: 17px;
+  border-radius: $border-container-radius;
+  background-color: $grey;
+  border: 1px solid $white;
+  border-bottom-width: 2px;
+  transition: all 0.4s ease;
+  color: $white;
 }
 
 .settings_other_api {
@@ -189,5 +198,14 @@
     height: 2em;
     margin: 0 auto;
     margin-top: 0.5em;
+    outline: none;
+    padding-left: 15px;
+    font-size: 17px;
+    border-radius: $border-container-radius;
+    background-color: $grey;
+    border: 1px solid $white;
+    border-bottom-width: 2px;
+    transition: all 0.4s ease;
+    color: $white;
   }
 }
