@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { auth } from '../../../utils/firebase/firebase';
+import { auth } from '../firebase/firebase';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import styles from './Reset.module.scss';
 

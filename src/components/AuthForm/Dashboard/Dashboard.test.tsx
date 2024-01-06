@@ -43,4 +43,18 @@ describe('Dashboard Component', () => {
 
     expect(firebaseModule.logout).toHaveBeenCalled();
   });
+
+  it('should fetch user name from Firestore and display it', async () => {
+    act(() => {
+      render(
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>
+      );
+    });
+
+    const userName = await screen.findByTestId('dashboard-user-name');
+
+    expect(userName).toBeInTheDocument();
+  });
 });

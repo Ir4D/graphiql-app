@@ -3,7 +3,7 @@ export interface Props {
   style: CSSModuleClasses;
 }
 
-interface Type {
+export interface Type {
   kind: string;
   name: null | string;
   ofType: ofType | null;
