@@ -25,14 +25,14 @@ function WelcomePage() {
               <div className={styles.links_wrapper}>
                 {user ? (
                   <div>
-                    <button className={styles.btn}>
+                    <button className={styles.welcome_btn}>
                       <Link to="/main">{messages[locale].start_btn}</Link>
                     </button>
                   </div>
                 ) : (
                   <div>
                     <p>{messages[locale].create_description}</p>
-                    <button className={styles.btn}>
+                    <button className={styles.welcome_btn}>
                       <Link to="/auth">
                         {messages[locale].Sign_in} / {messages[locale].Sign_up}
                       </Link>
@@ -71,7 +71,9 @@ function WelcomePage() {
                   </a>
                 </p>
                 <p className={styles.role}>{messages[locale].team_lead}</p>
-                <p className={styles.contribution}>Welcome page, Main page</p>
+                <p className={styles.contribution}>
+                  {messages[locale].contribution_Irina}
+                </p>
               </div>
             </div>
             <div className={styles.developer}>
@@ -85,7 +87,7 @@ function WelcomePage() {
                 </p>
                 <p className={styles.role}>{messages[locale].team_member}</p>
                 <p className={styles.contribution}>
-                  Sign in/ sign up page, routing, 404 page
+                  {messages[locale].contribution_Yuliya}
                 </p>
               </div>
             </div>
@@ -100,7 +102,7 @@ function WelcomePage() {
                 </p>
                 <p className={styles.role}>{messages[locale].team_member}</p>
                 <p className={styles.contribution}>
-                  Header & footer, authentication
+                  {messages[locale].contribution_Ilya}
                 </p>
               </div>
             </div>

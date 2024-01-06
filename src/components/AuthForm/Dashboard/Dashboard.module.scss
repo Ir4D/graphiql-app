@@ -17,6 +17,7 @@
 }
 .dashboard__btn {
   border: 2px solid $color-neutral;
+  border-radius: 8px;
   background-color: $color-neutral;
   font-family: inherit;
   font-size: 16px;
@@ -24,6 +25,10 @@
   transition:
     background-color 0.5s,
     color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .dashboard__btn:hover {

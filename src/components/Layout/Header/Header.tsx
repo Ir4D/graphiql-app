@@ -6,6 +6,8 @@ import { Dashboard } from '../../AuthForm/Dashboard/Dashboard';
 import { auth } from '../../../utils/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from '../../../utils/Auth/AuthContext';
+import graphqlLogoRow from '../../../assets/img/graphql_logo_wordmark_row.png';
+import graphqlLogoCol from '../../../assets/img/graphql_logo_wordmark_col.png';
 
 export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -33,7 +35,18 @@ export const Header = () => {
       <div className={styles.container}>
         <nav>
           <NavLink className={styles.link} to="/">
-            {messages[locale].header_navigate}
+            <img
+              className={styles.logo_link_row}
+              src={graphqlLogoRow}
+              alt="graphql logo"
+              title={messages[locale].header_navigate}
+            />
+            <img
+              className={styles.logo_link_column}
+              src={graphqlLogoCol}
+              alt="graphql logo"
+              title={messages[locale].header_navigate}
+            />
           </NavLink>
         </nav>
 

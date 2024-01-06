@@ -1,4 +1,4 @@
-@import '../../assets/styles/global.scss';
+// @import '../../assets/styles/global.scss';
 @import '../../assets/styles/variables.scss';
 
 .main_page {
@@ -40,6 +40,29 @@
   margin: 0 auto;
   min-width: 0;
   flex: 1;
+}
+
+.menu_settings,
+.menu_docs {
+  position: relative;
+
+  .menu_tooltip {
+    visibility: hidden;
+    width: 9em;
+    background-color: $grey_light;
+    color: $white_accent;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    left: 105%;
+  }
+
+  &:hover .menu_tooltip {
+    visibility: visible;
+  }
 }
 
 .docsMain {

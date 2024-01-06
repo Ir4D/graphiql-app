@@ -5,7 +5,7 @@
   "Sign_up": "Sign up",
   "welcome_heading": "Welcome to GraphiQL",
   "welcome_description": "GraphiQL is an in-browser IDE for writing, validating, and testing  GraphQL queries.",
-  "start_btn": "let's start!",
+  "start_btn": "Let's start!",
   "create_description": "Create your account or sign in here:",
   "about_course": "About the course",
   "RSS_course": "RS School React Course",
@@ -51,5 +51,10 @@
   "placeholder_name": "Name",
   "name_required": "Name is required",
   "enter_variables_placeholder": "Enter variables here",
-  "enter_headers_placeholder": "Enter headers here (one per line)"
+  "enter_headers_placeholder": "Enter headers here (one per line)",
+  "contribution_Irina": "Welcome page, Main page, code editor, response section, prettifying, endpoint Change",
+  "contribution_Yuliya": "Sign In/Sign Up page, 404 page, routing, localization, variables and headers sections, validation, tests",
+  "contribution_Ilya": "Header & footer, authentication, documentation and schema, adaptive layout",
+  "start": "Start",
+  "prettify": "Prettify"
 }
