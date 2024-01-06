@@ -1,6 +1,5 @@
 @use './variables.scss' as *;
 
-/* FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 :root {
@@ -15,8 +14,6 @@
   margin: 0;
   padding: 0;
 }
-
-/* LINK & <a> */
 
 .link,
 a {
