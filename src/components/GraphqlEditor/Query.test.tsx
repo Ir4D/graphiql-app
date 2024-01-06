@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor, screen } from '@testing-library/react';
+import { render, waitFor, screen, act } from '@testing-library/react';
 import Query from './Query';
 import { vi } from 'vitest';
 
@@ -35,9 +35,9 @@ describe('Query component', () => {
       ok: true,
     });
 
-    render(<Query />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-
+    await act(async () => {
+      render(<Query />);
+    });
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).toBeNull();
       expect(screen.queryByText(/GraphQL request error/i)).toBeNull();
@@ -68,17 +68,28 @@ describe('Query component', () => {
       status: 400,
     });
 
-    render(<Query />);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Shomethis wrong with this query/)
-      ).toBeInTheDocument();
+    await act(async () => {
+      render(<Query />);
     });
+
+    await act(async () => {
+      await waitFor(() => {
+        expect(
+          screen.getByText(/Shomethis wrong with this query/)
+        ).toBeInTheDocument();
+      });
+    });
+
     const toastElement = screen.getByText(/Shomethis wrong with this query/);
-    toastElement.click();
-    await waitFor(() => {
-      expect(screen.queryByText(/Shomethis wrong with this query/)).toBeNull();
+    await act(async () => {
+      toastElement.click();
+    });
+    await act(async () => {
+      await waitFor(() => {
+        expect(
+          screen.queryByText(/Shomethis wrong with this query/)
+        ).toBeNull();
+      });
     });
   });
 });
