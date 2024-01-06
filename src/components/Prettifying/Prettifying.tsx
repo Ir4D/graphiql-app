@@ -16,13 +16,14 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
     }
 
     if (
-      char.match(/[a-zA-Z]/) &&
-      nextChar.match(/[a-zA-Z]/) &&
+      char.match(/[a-zA-Z0-9]/) &&
+      nextChar &&
+      nextChar.match(/[a-zA-Z0-9]/) &&
       !insideCurlyParentheses
     ) {
       res.push(char, ' ');
     } else if ((char === ':' || char === ',') && insideParentheses) {
-      if (nextChar !== '{') {
+      if (nextChar && nextChar !== '{') {
         res.push(char, ' ');
       } else {
         res.push(char);
@@ -43,7 +44,7 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
       insideCurlyParentheses = false;
       res.push('\n', '  '.repeat(level), char);
     } else if (insideCurlyParentheses && char.match(/[a-zA-Z]/)) {
-      if (nextChar.match(/[a-zA-Z]/)) {
+      if (nextChar && nextChar.match(/[a-zA-Z0-9]/)) {
         res.push(char, '\n', '  '.repeat(level));
       } else {
         res.push(char);

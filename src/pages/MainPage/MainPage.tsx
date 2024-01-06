@@ -10,9 +10,10 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
 import requestSchema from '../../utils/getSchema/getSchema';
 import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
-import Prettify from '../../components/Prettifying/Prettyfying';
+import Prettify from '../../components/Prettifying/Prettifying';
 import InputEditor from '../../components/InputEditor/InputEditor';
 import Toast from '../../components/Toast/Toast';
+import PrettifyVars from '../../components/Prettifying/PrettifyingVars';
 
 interface MainPageProps {}
 
@@ -26,6 +27,8 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [isCustom, setIsCustom] = useState(false);
   const [variableInput, setVariableInput] = useState('');
   const [headersInput, setHesdersInput] = useState('');
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
   const { locale, messages } = useLocalization();
   const {
     apiUrl,
@@ -36,8 +39,6 @@ const MainPage: React.FC<MainPageProps> = () => {
     setVariables,
     setHeaders,
   } = useQueryContext();
-  const [schema, setSchema] = useState<DocsSchema | null>(null);
-  const [toastVisible, setToastVisible] = useState(false);
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
@@ -66,14 +67,17 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    const initialArray = queryInput.match(/[a-zA-Z]+|[^\s\w]/g);
-    if (!initialArray) {
-      return;
-    } else {
-      const newQueryInput = Prettify(initialArray);
+    const queryInputArr = queryInput.match(/[a-zA-Z0-9]+|[^\s\w]/g);
+    const variableInputArr = variableInput.match(/"[^"]*"+|\w+|[^\s\w]/g);
+    if (queryInputArr) {
+      const newQueryInput = Prettify(queryInputArr);
       setQuery(newQueryInput!);
       changeQuery(newQueryInput!);
       setQueryInput(newQueryInput!);
+    }
+    if (variableInputArr) {
+      const newVariableInput = PrettifyVars(variableInputArr);
+      setVariableInput(newVariableInput);
     }
   };
 
@@ -97,6 +101,8 @@ const MainPage: React.FC<MainPageProps> = () => {
     setQuery('');
     changeQuery('');
     setQueryInput('');
+    setVariableInput('');
+    setHesdersInput('');
     setShowSettings(false);
     setQueryResult(false);
   };
