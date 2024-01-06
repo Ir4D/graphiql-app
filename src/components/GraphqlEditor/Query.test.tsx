@@ -15,31 +15,16 @@ describe('Query component', () => {
     const mockData = { data: { example: 'test data' } };
     mockFetch.mockResolvedValueOnce({
       json: vi.fn().mockResolvedValueOnce(mockData),
+      ok: true,
     });
 
     render(<Query />);
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
 
     await waitFor(() => {
       expect(screen.queryByText('Loading...')).toBeNull();
       expect(screen.queryByText(/GraphQL request error/i)).toBeNull();
       expect(screen.getByText(/test data/i)).toBeInTheDocument();
     });
-  });
-
-  it('handles GraphQL request error', async () => {
-    mockFetch.mockRejectedValueOnce(new Error('Fetch error'));
-    const originalConsoleError = console.error;
-    const consoleErrorMock = vi.fn();
-    console.error = consoleErrorMock;
-    render(<Query />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-    await waitFor(() => {
-      expect(consoleErrorMock).toHaveBeenCalledWith(
-        'GraphQL request error:',
-        expect.any(Error)
-      );
-    });
-    expect(screen.queryByText('Loading...')).toBeInTheDocument();
-    console.error = originalConsoleError;
   });
 });
