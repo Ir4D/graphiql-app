@@ -69,7 +69,7 @@ function WelcomePage() {
               lastName={messages[locale].Dedova}
               github="https://github.com/Ir4D"
               role={messages[locale].team_lead}
-              contribution="Welcome page, Main page"
+              contribution="Welcome Page, Main Page, Errors from API, Functional Editor, Prettifying, Modal: Change Endpoint"
             />
             <Developer
               avatar={avatarFemale2}
@@ -77,7 +77,7 @@ function WelcomePage() {
               lastName={messages[locale].Narkevich}
               github="https://github.com/Yuliya0503"
               role={messages[locale].team_member}
-              contribution="Sign in/ sign up page, routing, 404 page"
+              contribution="Authentication Pages, Routing, 404 Page, Client-side Validation, Headers and Variables Editors, Localization, Error Boundary, Tests"
             />
             <Developer
               avatar={avatarMale}
@@ -85,7 +85,7 @@ function WelcomePage() {
               lastName={messages[locale].Romanov}
               github="https://github.com/DragonRomeo"
               role={messages[locale].team_member}
-              contribution=" Header & footer, authentication"
+              contribution=" Header & Footer, Authentication, Documentation Section, Adaptive Design"
             />
           </div>
         </section>
