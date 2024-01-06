@@ -13,8 +13,16 @@ const Query = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      let errorMsg = 'Shomethig is wrong with this query. Try something else';
       try {
-        const parsedVariables = variables ? JSON.parse(variables) : null;
+        let parsedVariables;
+        if (variables) {
+          try {
+            parsedVariables = JSON.parse(variables);
+          } catch (parseError) {
+            errorMsg = 'Variables are in wrong format';
+          }
+        }
         const headersObject = headers ? parseHeaders(headers) : {};
         if (!headersObject['Content-Type']) {
           headersObject['Content-Type'] = 'application/json';
@@ -30,12 +38,6 @@ const Query = () => {
         setLoading(false);
 
         if (!response.ok) {
-          let errorMsg;
-          if (response.status === 400 && !query) {
-            errorMsg = 'Shomethis wrong with this query. Try something else';
-          } else if (response.status === 400) {
-            errorMsg = 'Shomethis wrong with this query. Try something else';
-          }
           throw new Error(errorMsg);
         }
       } catch (error) {
@@ -45,6 +47,8 @@ const Query = () => {
           (error instanceof TypeError && error.message === 'Failed to fetch')
         ) {
           return;
+        } else if (error instanceof SyntaxError || error instanceof TypeError) {
+          setError(errorMsg);
         } else {
           setError((error as Error).message);
         }

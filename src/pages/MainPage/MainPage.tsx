@@ -29,6 +29,7 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [headersInput, setHesdersInput] = useState('');
   const [schema, setSchema] = useState<DocsSchema | null>(null);
   const [toastVisible, setToastVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('Something went wrong');
   const { locale, messages } = useLocalization();
   const {
     apiUrl,
@@ -67,18 +68,22 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    const queryInputArr = queryInput.match(/[a-zA-Z0-9]+|[^\s\w]/g);
-    const variableInputArr = variableInput.match(/"[^"]*"+|\w+|[^\s\w]/g);
-    if (queryInputArr) {
-      const newQueryInput = Prettify(queryInputArr);
-      setQuery(newQueryInput!);
-      changeQuery(newQueryInput!);
-      setQueryInput(newQueryInput!);
-    }
-    if (variableInputArr) {
-      const newVariableInput = PrettifyVars(variableInputArr);
-      setVariableInput(newVariableInput);
-    }
+    try {
+      const queryInputArr = queryInput.match(/[a-zA-Z0-9]+|[^\s\w]/g);
+      const variableInputArr = variableInput.match(/"[^"]*"+|\w+|[^\s\w]/g);
+      if (queryInputArr) {
+        const newQueryInput = Prettify(queryInputArr);
+        if (newQueryInput) {
+          setQuery(newQueryInput!);
+          changeQuery(newQueryInput!);
+          setQueryInput(newQueryInput!);
+        }
+      }
+      if (variableInputArr) {
+        const newVariableInput = PrettifyVars(variableInputArr);
+        setVariableInput(newVariableInput);
+      }
+    } catch (error) {}
   };
 
   const handleShowSettings = () => {
@@ -130,6 +135,9 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   useEffect(() => {
+    setErrorMessage(
+      'Unable to get this API, please check that your URL is correct'
+    );
     (async () => {
       setSchema(await requestSchema(apiUrl, handleError));
     })();
@@ -169,10 +177,7 @@ const MainPage: React.FC<MainPageProps> = () => {
           </div>
           <div className={styles.editor_wrapper}>
             {toastVisible && (
-              <Toast
-                message="Unable to get this API, please check that your URL is correct"
-                onClose={handleHideError}
-              />
+              <Toast message={errorMessage} onClose={handleHideError} />
             )}
             <div className={styles.query}>
               <div className={styles.query_field}>

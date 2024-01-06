@@ -15,6 +15,10 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
       insideParentheses = false;
     }
 
+    if (level < 0) {
+      return;
+    }
+
     if (
       char.match(/[a-zA-Z0-9]/) &&
       nextChar &&
@@ -40,10 +44,13 @@ const Prettify = (initialArray: RegExpMatchArray | null) => {
         res.push(' ', char);
       }
     } else if (char === '}' && !insideParentheses) {
+      if (level <= 0) {
+        return;
+      }
       level--;
       insideCurlyParentheses = false;
       res.push('\n', '  '.repeat(level), char);
-    } else if (insideCurlyParentheses && char.match(/[a-zA-Z]/)) {
+    } else if (insideCurlyParentheses && char.match(/[a-zA-Z0-9]/)) {
       if (nextChar && nextChar.match(/[a-zA-Z0-9]/)) {
         res.push(char, '\n', '  '.repeat(level));
       } else {
