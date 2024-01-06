@@ -1,5 +1,4 @@
-@import '../../assets/styles/global.scss';
-@import '../../assets/styles/variables.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .main_page {
   display: flex;
@@ -189,5 +188,37 @@
     height: 2em;
     margin: 0 auto;
     margin-top: 0.5em;
+  }
+}
+
+@media (max-width: $tablet_size) {
+  .main_page {
+    gap: 0;
+    height: 113vh;
+  }
+  .menu_wrapper {
+    width: 2.5em;
+    border-right: none;
+  }
+
+  .menu_docs {
+    width: 2em;
+  }
+
+  .menu_settings {
+    width: 2em;
+  }
+
+  .content_wrapper {
+    padding: 0;
+  }
+
+  .query_title,
+  .viewer_title {
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+  .editor_wrapper {
+    flex-direction: column;
   }
 }
