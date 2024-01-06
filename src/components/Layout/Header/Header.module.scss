@@ -105,13 +105,13 @@
   transition: width 0.35s;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet_size) {
   .container {
     font-size: 14px;
   }
 }
 
-@media (max-width: 470px) {
+@media (max-width: $mobile_size) {
   .sign_container {
     width: 8em;
   }

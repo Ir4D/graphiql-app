@@ -47,7 +47,7 @@ a {
   background-position: center;
 }
 
-@media (max-width: 470px) {
+@media (max-width: $mobile_size) {
   span {
     font-size: 14px;
   }

@@ -37,7 +37,7 @@
   text-overflow: ellipsis;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet_size) {
   .dashboard__container {
     font-size: 14px;
   }
