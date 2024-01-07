@@ -106,6 +106,27 @@
   transition: width 0.35s;
 }
 
+.logo_link_row,
+.logo_link_column {
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.logo_link_row {
+  visibility: visible;
+  width: 10em;
+  height: auto;
+}
+
+.logo_link_column {
+  visibility: hidden;
+  width: 0em;
+  height: auto;
+}
+
 @media (max-width: $tablet_size) {
   .container {
     font-size: 14px;
@@ -114,9 +135,23 @@
 
 @media (max-width: $mobile_size) {
   .sign_container {
+    flex-direction: column;
     width: 8em;
   }
+
   nav {
     width: 5em;
+  }
+
+  .logo_link_row {
+    visibility: hidden;
+    width: 0em;
+    height: 0em;
+  }
+
+  .logo_link_column {
+    visibility: visible;
+    width: 5em;
+    height: auto;
   }
 }

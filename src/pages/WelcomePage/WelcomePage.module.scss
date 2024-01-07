@@ -17,7 +17,7 @@ section {
 
 .welcome_wrapper {
   display: flex;
-  padding: 7.5em 1em;
+  padding: 7.5em 1em 4.5em;
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -61,9 +61,11 @@ section {
   }
 }
 
-.btn {
+.welcome_btn {
   height: 2.1em;
   width: 10em;
+  margin-top: 1.4em;
+  margin-bottom: 1em;
   background: $grey;
   color: $white;
   font-size: 1.3em;
@@ -95,6 +97,7 @@ section {
   .heading {
     font-size: 2.8em;
     text-align: center;
+    margin-bottom: 0.8em;
   }
 
   .text {
@@ -114,7 +117,7 @@ section {
 .team_wrapper {
   margin: 0 auto;
   text-align: center;
-  padding: 1em;
+  padding: 4.5em 1em 1em;
 
   .heading {
     font-size: 2.8em;

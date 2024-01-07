@@ -27,14 +27,14 @@ function WelcomePage() {
               <div className={styles.links_wrapper}>
                 {user ? (
                   <div>
-                    <button className={styles.btn}>
+                    <button className={styles.welcome_btn}>
                       <Link to="/main">{messages[locale].start_btn}</Link>
                     </button>
                   </div>
                 ) : (
                   <div>
                     <p>{messages[locale].create_description}</p>
-                    <button className={styles.btn}>
+                    <button className={styles.welcome_btn}>
                       <Link to="/auth">
                         {messages[locale].Sign_in} / {messages[locale].Sign_up}
                       </Link>
@@ -69,7 +69,7 @@ function WelcomePage() {
               lastName={messages[locale].Dedova}
               github="https://github.com/Ir4D"
               role={messages[locale].team_lead}
-              contribution="Welcome Page, Main Page, Errors from API, Functional Editor, Prettifying, Modal: Change Endpoint"
+              contribution={messages[locale].contribution_Irina}
             />
             <Developer
               avatar={avatarFemale2}
@@ -77,7 +77,7 @@ function WelcomePage() {
               lastName={messages[locale].Narkevich}
               github="https://github.com/Yuliya0503"
               role={messages[locale].team_member}
-              contribution="Authentication Pages, Routing, 404 Page, Client-side Validation, Headers and Variables Editors, Localization, Error Boundary, Tests"
+              contribution={messages[locale].contribution_Yuliya}
             />
             <Developer
               avatar={avatarMale}
@@ -85,7 +85,7 @@ function WelcomePage() {
               lastName={messages[locale].Romanov}
               github="https://github.com/DragonRomeo"
               role={messages[locale].team_member}
-              contribution=" Header & Footer, Authentication, Documentation Section, Adaptive Design"
+              contribution={messages[locale].contribution_Ilya}
             />
           </div>
         </section>

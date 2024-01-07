@@ -16,6 +16,20 @@
   justify-content: space-around;
   align-items: flex-start;
   height: 5em;
+
+  a {
+    display: flex;
+    gap: 8px;
+
+    img {
+      width: 1.2em;
+      height: 1.2em;
+    }
+
+    &:hover > img {
+      filter: opacity(0.4);
+    }
+  }
 }
 
 .data_container {
@@ -42,7 +56,7 @@ a {
 .rss_school_img {
   width: 100%;
   height: 100%;
-  background-image: url(../../../assets/img/logo/rss_logo.svg);
+  background-image: url(../../../assets/img/rss_logo.svg);
   background-repeat: no-repeat;
   background-position: center;
   transition: transform 0.4s ease;

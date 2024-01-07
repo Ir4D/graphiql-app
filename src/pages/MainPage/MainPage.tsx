@@ -151,6 +151,9 @@ const MainPage: React.FC<MainPageProps> = () => {
           {schema ? (
             <button className={styles.menu_docs} onClick={toggleDocsPanel}>
               <img src={iconDocs} alt="Docs" />
+              <span className={styles.menu_tooltip}>
+                {messages[locale].docs_title}
+              </span>
             </button>
           ) : (
             <div></div>
@@ -161,6 +164,9 @@ const MainPage: React.FC<MainPageProps> = () => {
               alt="Settings"
               onClick={handleShowSettings}
             />
+            <span className={styles.menu_tooltip}>
+              {messages[locale].settings_title}
+            </span>
           </button>
         </aside>
         <section className={styles.content_wrapper}>
@@ -191,8 +197,12 @@ const MainPage: React.FC<MainPageProps> = () => {
                 />
               </div>
               <div className={styles.query_btns}>
-                <button onClick={handleStartClick}>Start</button>
-                <button onClick={handlePrettifyClick}>Prettify</button>
+                <button onClick={handleStartClick}>
+                  {messages[locale].start}
+                </button>
+                <button onClick={handlePrettifyClick}>
+                  {messages[locale].prettify}
+                </button>
               </div>
               <div className={styles.query_wrapper}>
                 <div className={styles.variables}>
