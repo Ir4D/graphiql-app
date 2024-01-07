@@ -39,6 +39,10 @@
           transition: all 0.4s ease;
           color: $white;
 
+          &::placeholder {
+            font-size: 14px;
+          }
+
           &:focus {
             border-color: $accent;
           }
