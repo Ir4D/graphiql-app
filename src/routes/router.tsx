@@ -58,7 +58,7 @@ const AppRouter = () => {
                 </AuthSuspense>
               }
             />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>
