@@ -65,7 +65,7 @@ describe('MainPage Component', () => {
     });
     expect(queryInput).toHaveValue('Your GraphQL Query');
   });
-  test('should handle SettingsModal interaction', async () => {
+  it('should handle SettingsModal interaction', async () => {
     await act(async () => {
       render(
         <AuthProvider>
@@ -77,8 +77,9 @@ describe('MainPage Component', () => {
     });
 
     const settingsButton = screen.getByAltText('Settings');
-    fireEvent.click(settingsButton);
-
+    await act(async () => {
+      fireEvent.click(settingsButton);
+    });
     await waitFor(() => {
       const modal = screen.getByTestId('settings-modal');
       expect(modal).toBeInTheDocument();
@@ -88,8 +89,9 @@ describe('MainPage Component', () => {
       'Choose a new GraphQL API',
       { exact: false }
     );
-    fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
-
+    await act(async () => {
+      fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
+    });
     await waitFor(() => {
       const customApiInput = screen.getByTestId('custom-api-input');
       expect(customApiInput).toBeInTheDocument();
@@ -99,8 +101,9 @@ describe('MainPage Component', () => {
     });
 
     const submitButton = screen.getByText('Submit');
-    fireEvent.click(submitButton);
-
+    await act(async () => {
+      fireEvent.click(submitButton);
+    });
     await waitFor(() => {
       const modal = screen.queryByTestId('settings-modal');
       expect(modal).not.toBeInTheDocument();
@@ -118,16 +121,18 @@ describe('MainPage Component', () => {
     });
 
     const settingsButton = screen.getByAltText('Settings');
-    fireEvent.click(settingsButton);
-
+    await act(async () => {
+      fireEvent.click(settingsButton);
+    });
     await waitFor(() => {
       const modal = screen.getByTestId('settings-modal');
       expect(modal).toBeInTheDocument();
     });
 
     const cancelButton = screen.getByText('Cancel');
-    fireEvent.click(cancelButton);
-
+    await act(async () => {
+      fireEvent.click(cancelButton);
+    });
     await waitFor(() => {
       const modal = screen.queryByTestId('settings-modal');
       expect(modal).not.toBeInTheDocument();
