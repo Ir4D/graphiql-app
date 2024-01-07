@@ -242,6 +242,7 @@ const MainPage: React.FC<MainPageProps> = () => {
         active={showSettings}
         onSubmit={submitSettings}
         onClose={closeSettings}
+        data-testid="settings-modal"
       >
         <div className={styles.settings_current_api}>
           {messages[locale].settings_current}:<span> {apiUrl}</span>

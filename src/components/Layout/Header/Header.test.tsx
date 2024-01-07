@@ -32,7 +32,7 @@ describe('Header Component', () => {
       );
     });
 
-    const navigateLink = screen.getByText('To welcome page');
+    const navigateLink = screen.getByTestId('navigation-link');
     expect(navigateLink).toBeInTheDocument();
   });
 
@@ -57,7 +57,8 @@ describe('Header Component', () => {
       await act(async () => {
         fireEvent.click(button);
       });
-      expect(screen.getByText(expectedText)).toBeInTheDocument();
+      const elements = screen.getAllByTitle(expectedText);
+      expect(elements.length).toBeGreaterThan(1);
     };
 
     await clickButtonAndCheckText(enButton, 'To welcome page');

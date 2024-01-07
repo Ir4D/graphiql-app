@@ -34,7 +34,7 @@ export const Header = () => {
     <header className={headerClassName}>
       <div className={styles.container}>
         <nav>
-          <NavLink className={styles.link} to="/">
+          <NavLink className={styles.link} to="/" data-testid="navigation-link">
             <img
               className={styles.logo_link_row}
               src={graphqlLogoRow}
