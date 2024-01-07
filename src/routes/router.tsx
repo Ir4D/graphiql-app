@@ -6,7 +6,6 @@ import { Layout } from '../components/Layout/Layout';
 import PrivateRoute from './PrivateRoute';
 import LoadingComponent from '../components/loading/Loading';
 
-// Загружаем страницы асинхронно
 const AuthPage = React.lazy(() => import('../pages/AuthPage/AuthPage'));
 const MainPage = React.lazy(() => import('../pages/MainPage/MainPage'));
 
@@ -23,7 +22,6 @@ const AppRouter = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // Вместо этого нужно реализовать логику проверки аутентификации
       setTimeout(() => {
         setAuthLoaded(true);
       }, 3500);

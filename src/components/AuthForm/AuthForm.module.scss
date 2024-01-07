@@ -52,6 +52,11 @@
         .signup_link a {
           color: $accent;
           text-decoration: none;
+          transition: all 0.4s ease;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
@@ -59,6 +64,11 @@
       .signup_link a {
         color: $accent;
         text-decoration: none;
+        transition: all 0.4s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       .signup_link {
@@ -80,6 +90,7 @@
         padding-left: 0;
         border: 1px solid $accent;
         cursor: pointer;
+        transition: all 0.4s ease;
 
         &:hover {
           background: $accent;
@@ -90,12 +101,13 @@
       .field .disabled {
         background: $grey;
         width: 100%;
-        color: $white;
+        color: $grey_light;
         font-size: 20px;
         font-weight: 500;
         padding-left: 0;
         border: 1px solid $white;
         cursor: not-allowed;
+        transition: all 0.4s ease;
 
         &:hover {
           color: $white;

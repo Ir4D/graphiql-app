@@ -17,11 +17,11 @@
 }
 
 /* LINK & <a> */
-
 .link,
 a {
   color: $color-neutral;
   text-decoration: none;
+  transition: all 0.4s ease;
 }
 
 .link:hover,

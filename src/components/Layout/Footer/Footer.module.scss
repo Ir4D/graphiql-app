@@ -59,4 +59,19 @@ a {
   background-image: url(../../../assets/img/rss_logo.svg);
   background-repeat: no-repeat;
   background-position: center;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: $mobile_size) {
+  span {
+    font-size: 14px;
+  }
+
+  a {
+    font-size: 14px;
+  }
 }

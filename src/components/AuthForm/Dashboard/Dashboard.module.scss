@@ -16,22 +16,32 @@
   font-size: 16px;
 }
 .dashboard__btn {
+  cursor: pointer;
   border: 2px solid $color-neutral;
-  border-radius: 8px;
-  background-color: $color-neutral;
+  background-color: $color-base;
   font-family: inherit;
-  font-size: 16px;
-  padding: 3px;
+  font-size: inherit;
+  padding: 5px;
+  border-radius: 8px;
+  color: $color-neutral;
   transition:
     background-color 0.5s,
-    color 0.5s;
-
-  &:hover {
-    cursor: pointer;
-  }
+    color;
 }
 
 .dashboard__btn:hover {
-  background-color: $color-base;
-  color: $color-neutral;
+  color: $color-base;
+  background-color: $color-neutral;
+}
+
+.user_name,
+.user_mail {
+  overflow-y: clip;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: $tablet_size) {
+  .dashboard__container {
+    font-size: 14px;
+  }
 }

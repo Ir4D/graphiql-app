@@ -53,3 +53,13 @@
 .docs_defaultValue {
   color: blue;
 }
+
+@media (max-width: $mobile-size) {
+  .docs_link {
+    font-size: 16px;
+  }
+
+  .docs_type {
+    font-size: 14px;
+  }
+}
