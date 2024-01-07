@@ -51,3 +51,13 @@ a {
     transform: scale(1.05);
   }
 }
+
+@media (max-width: $mobile_size) {
+  span {
+    font-size: 14px;
+  }
+
+  a {
+    font-size: 14px;
+  }
+}

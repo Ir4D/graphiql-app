@@ -33,3 +33,15 @@
   color: $color-base;
   background-color: $color-neutral;
 }
+
+.user_name,
+.user_mail {
+  overflow-y: clip;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: $tablet_size) {
+  .dashboard__container {
+    font-size: 14px;
+  }
+}

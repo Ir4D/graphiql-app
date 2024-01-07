@@ -1,5 +1,4 @@
-@import '../../assets/styles/global.scss';
-@import '../../assets/styles/variables.scss';
+@use '../../assets/styles/variables.scss' as *;
 
 .main_page {
   display: flex;
@@ -221,3 +220,45 @@
 .menu_settings:hover {
   transform: scale(1.05);
 }
+
+@media (max-width: $tablet_size) {
+  .main_page {
+    gap: 0;
+    height: 150vh;
+  }
+  .menu_wrapper {
+    width: 2.5em;
+    border-right: none;
+  }
+
+  .menu_docs {
+    width: 2em;
+  }
+
+  .menu_settings {
+    width: 2em;
+  }
+
+  .content_wrapper {
+    padding: 0;
+  }
+
+  .query_title,
+  .viewer_title {
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+
+  .docs_title {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  .editor_wrapper {
+    flex-direction: column;
+  }
+
+  .query_wrapper {
+    flex-direction: column;
+  }
+}
+

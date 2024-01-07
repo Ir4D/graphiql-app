@@ -12,6 +12,7 @@
   font-size: 18px;
   padding: 15px;
   border-bottom: 2px solid;
+  z-index: 1000;
   transition:
     background-color 1s,
     border-bottom 0.3s,
@@ -42,7 +43,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 12em;
+  width: 14em;
 }
 
 .button {
@@ -102,4 +103,19 @@
 
 .language_item::before {
   transition: width 0.35s;
+}
+
+@media (max-width: $tablet_size) {
+  .container {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $mobile_size) {
+  .sign_container {
+    width: 8em;
+  }
+  nav {
+    width: 5em;
+  }
 }
