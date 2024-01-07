@@ -16,7 +16,7 @@ export const Dashboard = () => {
         const doc = await getDocs(q);
         const data = doc.docs[0].data();
         setName(data.name);
-      } catch (err) {
+      } catch {
         alert('An error occured while fetching user data');
       }
     };

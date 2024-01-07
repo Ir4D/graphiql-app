@@ -10,7 +10,6 @@ import { useAuth } from '../../../utils/Auth/AuthContext';
 export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const { locale, messages, changeLocale } = useLocalization();
-  /* User - по нему определяется залогинен ли пользователь */
   const [user] = useAuthState(auth);
   const { setLoginStatus } = useAuth();
 

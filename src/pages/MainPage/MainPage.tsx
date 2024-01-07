@@ -10,9 +10,10 @@ import SettingsModal from '../../components/SettingsModal/SettingsModal';
 import { lazy, Suspense } from 'react';
 import requestSchema from '../../utils/getSchema/getSchema';
 import { DocsSchema } from '../../components/GraphqlEditor/Docs/Docs';
-import Prettify from '../../components/Prettifying/Prettyfying';
+import Prettify from '../../components/Prettifying/Prettifying';
 import InputEditor from '../../components/InputEditor/InputEditor';
 import Toast from '../../components/Toast/Toast';
+import PrettifyVars from '../../components/Prettifying/PrettifyingVars';
 
 interface MainPageProps {}
 
@@ -26,6 +27,9 @@ const MainPage: React.FC<MainPageProps> = () => {
   const [isCustom, setIsCustom] = useState(false);
   const [variableInput, setVariableInput] = useState('');
   const [headersInput, setHesdersInput] = useState('');
+  const [schema, setSchema] = useState<DocsSchema | null>(null);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('Something went wrong');
   const { locale, messages } = useLocalization();
   const {
     apiUrl,
@@ -36,8 +40,6 @@ const MainPage: React.FC<MainPageProps> = () => {
     setVariables,
     setHeaders,
   } = useQueryContext();
-  const [schema, setSchema] = useState<DocsSchema | null>(null);
-  const [toastVisible, setToastVisible] = useState(false);
 
   const Docs = lazy(() => import('../../components/GraphqlEditor/Docs/Docs'));
 
@@ -66,15 +68,22 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   const handlePrettifyClick = () => {
-    const initialArray = queryInput.match(/[a-zA-Z]+|[^\s\w]/g);
-    if (!initialArray) {
-      return;
-    } else {
-      const newQueryInput = Prettify(initialArray);
-      setQuery(newQueryInput!);
-      changeQuery(newQueryInput!);
-      setQueryInput(newQueryInput!);
-    }
+    try {
+      const queryInputArr = queryInput.match(/[a-zA-Z0-9]+|[^\s\w]/g);
+      const variableInputArr = variableInput.match(/"[^"]*"+|\w+|[^\s\w]/g);
+      if (queryInputArr) {
+        const newQueryInput = Prettify(queryInputArr);
+        if (newQueryInput) {
+          setQuery(newQueryInput!);
+          changeQuery(newQueryInput!);
+          setQueryInput(newQueryInput!);
+        }
+      }
+      if (variableInputArr) {
+        const newVariableInput = PrettifyVars(variableInputArr);
+        setVariableInput(newVariableInput);
+      }
+    } catch (error) {}
   };
 
   const handleShowSettings = () => {
@@ -97,6 +106,8 @@ const MainPage: React.FC<MainPageProps> = () => {
     setQuery('');
     changeQuery('');
     setQueryInput('');
+    setVariableInput('');
+    setHesdersInput('');
     setShowSettings(false);
     setQueryResult(false);
   };
@@ -124,6 +135,9 @@ const MainPage: React.FC<MainPageProps> = () => {
   };
 
   useEffect(() => {
+    setErrorMessage(
+      'Unable to get this API, please check that your URL is correct'
+    );
     (async () => {
       setSchema(await requestSchema(apiUrl, handleError));
     })();
@@ -156,17 +170,13 @@ const MainPage: React.FC<MainPageProps> = () => {
             }`}
           >
             <h3 className={styles.docs_title}>{messages[locale].docs_title}</h3>
-            <p>Documentation...</p>
             <Suspense fallback={<p>Loading...</p>}>
               <Docs schema={schema} />
             </Suspense>
           </div>
           <div className={styles.editor_wrapper}>
             {toastVisible && (
-              <Toast
-                message="Unable to get this API, please check that your URL is correct"
-                onClose={handleHideError}
-              />
+              <Toast message={errorMessage} onClose={handleHideError} />
             )}
             <div className={styles.query}>
               <div className={styles.query_field}>
