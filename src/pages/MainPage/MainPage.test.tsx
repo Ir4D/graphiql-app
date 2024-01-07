@@ -65,7 +65,7 @@ describe('MainPage Component', () => {
     });
     expect(queryInput).toHaveValue('Your GraphQL Query');
   });
-  it('should handle SettingsModal interaction', async () => {
+  test('should handle SettingsModal interaction', async () => {
     await act(async () => {
       render(
         <AuthProvider>
@@ -75,22 +75,21 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
+
     const settingsButton = screen.getByAltText('Settings');
-    await act(async () => {
-      fireEvent.click(settingsButton);
-    });
+    fireEvent.click(settingsButton);
+
     await waitFor(() => {
-      const modalTitle = screen.getByText('Settings');
-      expect(modalTitle).toBeInTheDocument();
+      const modal = screen.getByTestId('settings-modal');
+      expect(modal).toBeInTheDocument();
     });
+
     const selectApiDropdown = screen.getByLabelText(
       'Choose a new GraphQL API',
       { exact: false }
     );
-    expect(selectApiDropdown).toBeInTheDocument();
-    await act(async () => {
-      fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
-    });
+    fireEvent.change(selectApiDropdown, { target: { value: 'other' } });
+
     await waitFor(() => {
       const customApiInput = screen.getByTestId('custom-api-input');
       expect(customApiInput).toBeInTheDocument();
@@ -98,12 +97,12 @@ describe('MainPage Component', () => {
         target: { value: 'https://custom-api.example/graphql' },
       });
     });
+
     const submitButton = screen.getByText('Submit');
-    await act(async () => {
-      fireEvent.click(submitButton);
-    });
+    fireEvent.click(submitButton);
+
     await waitFor(() => {
-      const modal = screen.queryByText('Settings');
+      const modal = screen.queryByTestId('settings-modal');
       expect(modal).not.toBeInTheDocument();
     });
   });
@@ -117,18 +116,20 @@ describe('MainPage Component', () => {
         </AuthProvider>
       );
     });
+
     const settingsButton = screen.getByAltText('Settings');
-    await act(async () => {
-      fireEvent.click(settingsButton);
-    });
-    await act(async () => {
-      const modalTitle = screen.getByText('Settings');
-      expect(modalTitle).toBeInTheDocument();
-      const cancelButton = screen.getByText('Cancel');
-      fireEvent.click(cancelButton);
-    });
+    fireEvent.click(settingsButton);
+
     await waitFor(() => {
-      const modal = screen.queryByText('Settings');
+      const modal = screen.getByTestId('settings-modal');
+      expect(modal).toBeInTheDocument();
+    });
+
+    const cancelButton = screen.getByText('Cancel');
+    fireEvent.click(cancelButton);
+
+    await waitFor(() => {
+      const modal = screen.queryByTestId('settings-modal');
       expect(modal).not.toBeInTheDocument();
     });
   });
