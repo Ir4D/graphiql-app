@@ -1,0 +1,20 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.main {
+  display: flex;
+  margin: 5em auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper {
+    display: flex;
+    overflow: hidden;
+    max-width: 300px;
+    width: max(15em, 80%);
+    padding: 30px;
+    border-radius: $border-container-radius;
+    box-shadow: 0px 25px 30px rgba(0, 0, 0, 0.4);
+  }
+}

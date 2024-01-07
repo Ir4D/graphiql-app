@@ -1,0 +1,60 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.settings_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(#000000, $alpha: 0.5);
+}
+
+.settings_content {
+  width: 25em;
+  max-width: 86%;
+  background-color: $grey;
+  border-radius: 8px;
+}
+
+.settings_header,
+.settings_footer {
+  padding: 1em;
+}
+
+.settings_body {
+  padding: 1em;
+  text-align: center;
+}
+
+.settings_header {
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: 900;
+}
+
+.settings_footer {
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    height: 2.1em;
+    width: 7.4em;
+    background: $grey;
+    color: $white;
+    font-size: 1.1em;
+    font-weight: 500;
+    border: 2px solid $white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:hover {
+      background: $white;
+      color: $grey;
+    }
+  }
+}

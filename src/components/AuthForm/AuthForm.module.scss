@@ -1,0 +1,123 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.form_container {
+  width: 100%;
+  overflow: hidden;
+
+  .form_inner {
+    display: flex;
+    width: 200%;
+
+    form {
+      width: 50%;
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+      .field {
+        height: 50px;
+        width: 100%;
+        margin-top: 18%;
+
+        .errorMess {
+          color: $white;
+          font-size: 14px;
+          width: 100%;
+          text-align: center;
+          margin-top: 4px;
+        }
+
+        input {
+          height: 100%;
+          width: 100%;
+          outline: none;
+          padding-left: 15px;
+          font-size: 17px;
+          border-radius: $border-container-radius;
+          background-color: $grey;
+          border: 1px solid $white;
+          border-bottom-width: 2px;
+          transition: all 0.4s ease;
+          color: $white;
+
+          &::placeholder {
+            font-size: 14px;
+          }
+
+          &:focus {
+            border-color: $accent;
+          }
+        }
+      }
+
+      .pass_link {
+        margin-top: 17%;
+
+        a,
+        .signup_link a {
+          color: $accent;
+          text-decoration: none;
+          transition: all 0.4s ease;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      a,
+      .signup_link a {
+        color: $accent;
+        text-decoration: none;
+        transition: all 0.4s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .signup_link {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .pass_link a:hover,
+      .signup_link a:hover {
+        color: $accent;
+      }
+
+      .field .submitButton {
+        background: $grey;
+        width: 100%;
+        color: $white;
+        font-size: 20px;
+        font-weight: 500;
+        padding-left: 0;
+        border: 1px solid $accent;
+        cursor: pointer;
+        transition: all 0.4s ease;
+
+        &:hover {
+          background: $accent;
+          color: $white_accent;
+        }
+      }
+
+      .field .disabled {
+        background: $grey;
+        width: 100%;
+        color: $grey_light;
+        font-size: 20px;
+        font-weight: 500;
+        padding-left: 0;
+        border: 1px solid $white;
+        cursor: not-allowed;
+        transition: all 0.4s ease;
+
+        &:hover {
+          color: $white;
+          background: $grey;
+        }
+      }
+    }
+  }
+}

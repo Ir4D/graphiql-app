@@ -1,0 +1,157 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.header {
+  width: 100%;
+  background-color: $color-base;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 18px;
+  padding: 15px;
+  border-bottom: 2px solid;
+  z-index: 1000;
+  transition:
+    background-color 1s,
+    border-bottom 0.3s,
+    padding 0.7s;
+}
+
+.header.sticky {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: $grey;
+  border-bottom: 0px solid;
+
+  .button {
+    background-color: $grey;
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 18px;
+}
+
+.sign_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 14em;
+}
+
+.button {
+  cursor: pointer;
+  border: 2px solid $color-neutral;
+  font-family: inherit;
+  font-size: inherit;
+  color: $color-neutral;
+  background-color: $color-base;
+  padding: 5px;
+  border-radius: 8px;
+  transition:
+    color,
+    background-color 0.5s;
+}
+
+.button:hover {
+  color: $color-base;
+  background-color: $color-neutral;
+}
+
+/* Language Switch */
+.language_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 4em;
+}
+
+.language_item {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.5s;
+  border: transparent;
+  background: transparent;
+  color: $color-neutral;
+  font-size: 16px;
+  font: inherit;
+}
+
+.language_item:hover {
+  color: $color-neutral-dark;
+}
+
+.language_item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 1.5px;
+  background-color: $color-neutral;
+}
+
+.language_item:hover:before {
+  width: 100%;
+}
+
+.language_item::before {
+  transition: width 0.35s;
+}
+
+.logo_link_row,
+.logo_link_column {
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.logo_link_row {
+  visibility: visible;
+  width: 10em;
+  height: auto;
+}
+
+.logo_link_column {
+  visibility: hidden;
+  width: 0em;
+  height: auto;
+}
+
+@media (max-width: $tablet_size) {
+  .container {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $mobile_size) {
+  .sign_container {
+    flex-direction: column;
+    width: 8em;
+  }
+
+  nav {
+    width: 5em;
+  }
+
+  .logo_link_row {
+    visibility: hidden;
+    width: 0em;
+    height: 0em;
+  }
+
+  .logo_link_column {
+    visibility: visible;
+    width: 5em;
+    height: auto;
+  }
+}

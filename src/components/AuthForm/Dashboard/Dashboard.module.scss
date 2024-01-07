@@ -1,0 +1,47 @@
+@use '../../../assets/styles/variables.scss' as *;
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.dashboard__container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+}
+.dashboard__btn {
+  cursor: pointer;
+  border: 2px solid $color-neutral;
+  background-color: $color-base;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px;
+  border-radius: 8px;
+  color: $color-neutral;
+  transition:
+    background-color 0.5s,
+    color;
+}
+
+.dashboard__btn:hover {
+  color: $color-base;
+  background-color: $color-neutral;
+}
+
+.user_name,
+.user_mail {
+  overflow-y: clip;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: $tablet_size) {
+  .dashboard__container {
+    font-size: 14px;
+  }
+}

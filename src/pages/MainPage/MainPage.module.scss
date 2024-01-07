@@ -1,0 +1,286 @@
+@use '../../assets/styles/variables.scss' as *;
+
+.main_page {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 8em;
+  padding: 0.3em;
+  border-radius: 0.6em;
+  color: $white;
+  height: 95vh;
+}
+
+.menu_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 5em;
+  border-right: 0.1em solid $grey_light;
+}
+
+.menu_wrapper > * {
+  width: 4em;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.menu_wrapper > * img {
+  width: 2.5em;
+  height: auto;
+}
+
+.content_wrapper {
+  display: flex;
+  gap: 1em;
+  margin: 0 auto;
+  min-width: 0;
+  flex: 1;
+}
+
+.menu_settings,
+.menu_docs {
+  position: relative;
+
+  .menu_tooltip {
+    visibility: hidden;
+    width: 9em;
+    background-color: $grey_light;
+    color: $white_accent;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+    left: 105%;
+  }
+
+  &:hover .menu_tooltip {
+    visibility: visible;
+  }
+}
+
+.docsMain {
+  display: none;
+}
+
+.docsMain.active {
+  display: flex;
+  padding: 0.5em;
+  min-width: 10em;
+  flex-direction: column;
+  flex: 0.333333 1 0%;
+}
+
+.docs_title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.editor_wrapper {
+  display: flex;
+  gap: 1em;
+  border: 0.6em solid $grey;
+  border-radius: 1.1em;
+  background-color: $grey;
+  max-width: 95em;
+  margin: 0 auto;
+
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.query {
+  flex: 1;
+  border: 0.3em solid $grey_dark;
+  border-radius: 0.6em;
+  background-color: $grey_dark;
+  padding: 0.5em;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: 100%;
+}
+
+.viewer {
+  flex: 1;
+  padding: 0.5em;
+  overflow: auto;
+  white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  width: 100%;
+}
+
+.query_title,
+.viewer_title {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.query_field {
+  flex-grow: 1;
+  flex-basis: 0;
+  max-height: 100em;
+  overflow: auto;
+}
+
+.query_wrapper {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  border-top: 0.1em solid $grey_light;
+}
+
+.variables,
+.headers {
+  flex: 1;
+  margin-top: 1em;
+}
+
+.query_text {
+  width: 100%;
+  min-height: 20em;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  color: $white;
+  padding: 0.3em;
+  outline: none;
+  vertical-align: top;
+  overflow: auto;
+}
+
+.query_text::placeholder {
+  color: $white;
+  opacity: 0.5;
+}
+
+.query_btns {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 0.8em;
+
+  button {
+    height: 2em;
+    width: 5em;
+    background: $grey;
+    color: $white;
+    font-size: 0.9em;
+    font-weight: 500;
+    border: 1px solid $white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:hover {
+      background: $accent;
+      color: $white_accent;
+    }
+  }
+}
+
+.settings_current_api {
+  margin-bottom: 1em;
+
+  span {
+    display: block;
+    word-break: break-all;
+    color: $accent;
+  }
+}
+
+.settings_select_api {
+  width: 60%;
+  height: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  outline: none;
+  padding-left: 15px;
+  font-size: 17px;
+  border-radius: $border-container-radius;
+  background-color: $grey;
+  border: 1px solid $white;
+  border-bottom-width: 2px;
+  transition: all 0.4s ease;
+  color: $white;
+}
+
+.settings_other_api {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+
+  input {
+    width: 60%;
+    height: 2em;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    outline: none;
+    padding-left: 15px;
+    font-size: 17px;
+    border-radius: $border-container-radius;
+    background-color: $grey;
+    border: 1px solid $white;
+    border-bottom-width: 2px;
+    transition: all 0.4s ease;
+    color: $white;
+  }
+}
+
+.menu_docs,
+.menu_settings {
+  transition: transform 0.4s ease;
+}
+.menu_docs:hover {
+  transform: scale(1.05);
+}
+
+.menu_settings:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: $tablet_size) {
+  .main_page {
+    gap: 0;
+    height: 150vh;
+  }
+  .menu_wrapper {
+    width: 2.5em;
+    border-right: none;
+  }
+
+  .menu_docs {
+    width: 2em;
+  }
+
+  .menu_settings {
+    width: 2em;
+  }
+
+  .content_wrapper {
+    padding: 0;
+  }
+
+  .query_title,
+  .viewer_title {
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+
+  .docs_title {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+  .editor_wrapper {
+    flex-direction: column;
+  }
+
+  .query_wrapper {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,135 @@
+@import '../../assets/styles/global.scss';
+@import '../../assets/styles/variables.scss';
+
+.welcome_page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  width: 88%;
+  padding: 4.5em 1em;
+  border-bottom: 3px solid $grey;
+}
+
+.welcome_wrapper {
+  display: flex;
+  padding: 7.5em 1em 4.5em;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+
+  .left_side {
+    flex: 1;
+    width: max(16em, 80%);
+  }
+
+  .heading {
+    font-size: 3.3em;
+    margin: 0.5em auto;
+    padding-top: 1em;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 2.5em;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 2.2em;
+    }
+  }
+
+  .description {
+    width: min(30em, 90%);
+    margin: 0 auto;
+  }
+
+  .right_side {
+    flex: 1;
+    text-align: center;
+  }
+
+  .right_side img {
+    width: min(20em, 70%);
+    max-width: 70%;
+    height: auto;
+    padding: 1em;
+  }
+}
+
+.welcome_btn {
+  height: 2.1em;
+  width: 10em;
+  margin-top: 1.4em;
+  margin-bottom: 1em;
+  background: $grey;
+  color: $white;
+  font-size: 1.3em;
+  font-weight: 500;
+  border: 1px solid $accent;
+  border-radius: $border-container-radius;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+
+  &:hover {
+    background: $accent;
+  }
+
+  &:hover a {
+    color: $white_accent;
+  }
+}
+
+.course_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .heading {
+    font-size: 2.8em;
+    text-align: center;
+    margin-bottom: 0.8em;
+  }
+
+  .text {
+    max-width: 45em;
+  }
+
+  .link {
+    text-decoration: none;
+    color: $accent;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.team_wrapper {
+  margin: 0 auto;
+  text-align: center;
+  padding: 4.5em 1em 1em;
+
+  .heading {
+    font-size: 2.8em;
+    margin-bottom: 1.2em;
+  }
+
+  .developers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 50em;
+    margin: 0 auto;
+    padding-bottom: 2em;
+  }
+}
